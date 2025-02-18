@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid black;
+    /* Línea de separación */
+    font-family: 'Century Gothic', sans-serif;
+    /* Fuente Century Gothic */
+    background-color: whitesmoke;
+}
+
+
+.header-text {
+    font-style: italic;
+    font-size: 25px;
+    text-align: right;
+    margin-right: 2%;
+    margin-top: 5%;
+}
+
+.imgs {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+
+.header img {
+    max-width: 200px;
+    /* Ajusta el tamaño de la imagen según sea necesario */
+    margin-right: 20px;
+    /* Ajustado el margen derecho */
+    border-radius: 10%;
+}

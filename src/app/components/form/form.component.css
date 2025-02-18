@@ -1,0 +1,90 @@
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #fafafa; /* Fondo gris muy claro para el formulario */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  h1, h2 {
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+  }
+
+  fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+  }
+
+  legend {
+    font-weight: bold;
+    color: #444;
+    padding: 0 10px;
+  }
+
+  /* Contenedor de dos columnas dentro de cada fieldset */
+  .two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+    gap: 20px; /* Espacio entre columnas y filas */
+  }
+
+  /* Agrupación para cada par de label + input */
+  .two-columns > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-top: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  /* Botón de Enviar */
+  .btn-submit {
+    display: inline-block;
+    background-color: #00008b; /* Azul oscuro/negro */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 45%;
+    
+  }
+
+  .btn-submit:hover {
+    background-color: #333; /* Oscurecer un poco al pasar el mouse */
+  }

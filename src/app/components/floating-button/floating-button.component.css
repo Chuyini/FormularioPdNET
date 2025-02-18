@@ -1,0 +1,20 @@
+.floating-button {
+    position: fixed;
+    bottom: 40px;
+    right: 5%;
+    background-color: #05056c; /* Azul oscuro */
+    color: #fff;
+    border: none;
+    border-radius: 40%;
+    padding: 20px;
+    width: 60px;
+    cursor: pointer;
+    font-size: 34px;
+    box-shadow: 0 2px 10px rgba(112, 111, 111, 0.3);
+    transition: background-color 0.6s;
+  }
+  
+  .floating-button:hover {
+    background-color: #000000; /* Azul royal */
+  }
+  
