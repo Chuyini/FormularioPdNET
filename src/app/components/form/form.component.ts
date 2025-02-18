@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-form',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
