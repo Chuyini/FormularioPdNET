@@ -10,5 +10,5 @@ import { HomePage } from './pages/home/home.page';
 })
 
 export class AppComponent {
-  title = 'FormPdnt';
+  title = 'Alta de clientes';
 }
