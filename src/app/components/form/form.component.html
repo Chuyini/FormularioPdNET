@@ -30,12 +30,13 @@
       <br>
       <div class="two-columns">
         <div>
-          <label for="razonSocial">Razón Social / Nombre</label>
+          <label for="razonSocial">Razón Social / Nombre (Obligatorio)</label>
           <input maxlength="100" placeholder="Puede poner el nombre o la razon social" type="text" id="razonSocial"
             name="rasonName" [(ngModel)]="rasonName" />
         </div>
 
         <div style="width: 100%; max-width: 400px; margin: auto;">
+          <label for="">(Obligatorio)</label>
           <ng-select [items]="regimenes" bindLabel="nombre" bindValue="id" placeholder="Selecciona un régimen fiscal"
             [(ngModel)]="regimenSeleccionado" name="regimenSeleccionado" class="custom-ng-select" [clearable]="true"
             [searchable]="true" dropdownPosition="auto">
@@ -48,7 +49,7 @@
         </div>
 
         <div>
-          <label for="rfc">RFC</label>
+          <label for="rfc">RFC (Obligatorio)</label>
           <input maxlength="50" type="text" id="rfc" name="rfc" [(ngModel)]="rfc" />
         </div>
 
@@ -104,7 +105,7 @@
           <input maxlength="20" type="text" id="zona" name="zone" [(ngModel)]="zone" />
         </div>
         <div>
-          <label for="telefono">Teléfono con lada</label>
+          <label for="telefono">Teléfono con lada (Obligatorio)</label>
           <input type="tel" id="telefono" name="telPerson" [(ngModel)]="telPerson" placeholder="Ejemplo:524443698521" />
         </div>
         <div>

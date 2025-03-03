@@ -425,10 +425,10 @@ export class FormComponent {
   Correos (EmailSelected): ${this.emailSelected}
   Celular Vendedor: ${this.celVen}
   `;
-  
+
     return textTemp;
   }
-  
+
 
 
   sendEmail(data: any, email: any) {
@@ -453,13 +453,13 @@ export class FormComponent {
     emailjs.send("service_7zmw1ej", "template_aqfj7ic", {
       message_html: data,
       to_email: email,
-    },"5zGkMGh4g0QT20ubb");
+    }, "5zGkMGh4g0QT20ubb");
   }
 
 
   public submitAll(): void {
 
-    /*if (this.rasonName == "" || this.regimenSeleccionado == "" || this.telPerson == "" || this.rfc == "" ) {
+    if (this.rasonName == "" || this.regimenSeleccionado == "" || this.telPerson == "" || this.rfc == "" ) {
 
       this.snackBar.open('Por favor, complete todos los campos obligatorios.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
@@ -468,7 +468,7 @@ export class FormComponent {
       });
       return;
 
-    }*/
+    }
 
     try {
       const data = this.templatePlainText();
