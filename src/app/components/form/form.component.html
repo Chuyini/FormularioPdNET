@@ -1,352 +1,441 @@
 <div class="container">
-   
-  
-    <h2 style="text-align: center; margin-bottom: 5%;">ALTA PARA CLIENTES</h2>
-    <form>
-      <!-- DATOS FISCALES PERSONA FISICA O MORAL -->
-      <fieldset>
-        <legend>DATOS FISCALES PERSONA FISICA O MORAL</legend>
-        <div class="two-columns">
-          <div>
-            <label for="razonSocial">Razón Social</label>
-            <input type="text" id="razonSocial" name="razonSocial">
-          </div>
-          <div>
-            <label for="rfc">RFC</label>
-            <input type="text" id="rfc" name="rfc">
-          </div>
-          <div>
-            <label for="calle">Calle</label>
-            <input type="text" id="calle" name="calle">
-          </div>
-          <div>
-            <label for="numExt">N° Ext.</label>
-            <input type="text" id="numExt" name="numExt">
-          </div>
-          <div>
-            <label for="numInt">N° Int.</label>
-            <input type="text" id="numInt" name="numInt">
-          </div>
-          <div>
-            <label for="colonia">Colonia</label>
-            <input type="text" id="colonia" name="colonia">
-          </div>
-          <div>
-            <label for="cp">C.P.</label>
-            <input type="text" id="cp" name="cp">
-          </div>
-          <div>
-            <label for="municipio">Municipio</label>
-            <input type="text" id="municipio" name="municipio">
-          </div>
-          <div>
-            <label for="estado">Estado</label>
-            <input type="text" id="estado" name="estado">
-          </div>
-          <div>
-            <label for="poblacion">Población</label>
-            <input type="text" id="poblacion" name="poblacion">
-          </div>
-          <div>
-            <label for="pais">País</label>
-            <input type="text" id="pais" name="pais">
-          </div>
-          <div>
-            <label for="clasificacion">Clasificación</label>
-            <input type="text" id="clasificacion" name="clasificacion">
-          </div>
-          <div>
-            <label for="zona">Zona</label>
-            <input type="text" id="zona" name="zona">
-          </div>
-          <div>
-            <label for="telefono">Teléfono con lada</label>
-            <input type="text" id="telefono" name="telefono">
-          </div>
-          <div>
-            <label for="ext">Ext.</label>
-            <input type="text" id="ext" name="ext">
-          </div>
-          <div>
-            <label for="correo">Correo Electrónico</label>
-            <input type="email" id="correo" name="correo">
-          </div>
-          <div>
-            <label for="paginaWeb">Página Web</label>
-            <input type="text" id="paginaWeb" name="paginaWeb">
+  <h2 style="text-align: center; margin-bottom: 5%;">ALTA PARA CLIENTES</h2>
+
+  <form>
+    <!-- INFORMACION PREELIMINAR -->
+    <fieldset style="padding: 10px; border: 2px solid #ccc; border-radius: 8px;">
+      <legend>INFORMACION PREELIMINAR</legend>
+      <div style="display: flex; justify-content: space-between; width: 100%; font-size: smaller;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px; text-align: center;">
+              <h3>EL PODER DE INTERNET</h3>
+            </td>
+            <td style="padding: 8px; text-align: center;">
+              <h3>PDI111104D92</h3>
+            </td>
+            <td style="padding: 8px; text-align: center;">
+              <h3>pagoselpoderdeinternet.mx, facturaselpoderdeinternet.mx</h3>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </fieldset>
+
+    <br>
+
+    <!-- DATOS FISCALES PERSONA FISICA O MORAL -->
+    <fieldset>
+      <legend>DATOS FISCALES PERSONA FISICA O MORAL</legend>
+      <br>
+      <div class="two-columns">
+        <div>
+          <label for="razonSocial">Razón Social / Nombre</label>
+          <input maxlength="100" placeholder="Puede poner el nombre o la razon social" type="text" id="razonSocial"
+            name="rasonName" [(ngModel)]="rasonName" />
+        </div>
+
+        <div style="width: 100%; max-width: 400px; margin: auto;">
+          <ng-select [items]="regimenes" bindLabel="nombre" bindValue="id" placeholder="Selecciona un régimen fiscal"
+            [(ngModel)]="regimenSeleccionado" name="regimenSeleccionado" class="custom-ng-select" [clearable]="true"
+            [searchable]="true" dropdownPosition="auto">
+            <ng-template #ngOptionTemplate let-item="item">
+              <div class="custom-option">
+                <span> {{ item.id }} - {{ item.nombre }}</span>
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
+
+        <div>
+          <label for="rfc">RFC</label>
+          <input maxlength="50" type="text" id="rfc" name="rfc" [(ngModel)]="rfc" />
+        </div>
+
+        <div>
+          <label for="calle">Calle</label>
+          <input maxlength="50" type="text" id="calle" name="callePerson" [(ngModel)]="callePerson" />
+        </div>
+        <div>
+          <label for="numExt">N° Ext.</label>
+          <input maxlength="20" type="text" id="numExt" name="no_extPerson" [(ngModel)]="no_extPerson" />
+        </div>
+        <div>
+          <label for="numInt">N° Int.</label>
+          <input maxlength="50" type="text" id="numInt" name="no_intPerson" [(ngModel)]="no_intPerson" />
+        </div>
+        <div>
+          <label for="colonia">Colonia</label>
+          <input maxlength="50" type="text" id="colonia" name="coloniaPerson" [(ngModel)]="coloniaPerson" />
+        </div>
+        <div>
+          <label for="cp">C.P.</label>
+          <input maxlength="10" type="text" id="cp" name="cpPerson" [(ngModel)]="cpPerson"
+            placeholder="Codigo Postal. Ejemplo: 785443" />
+        </div>
+        <div>
+          <label for="municipio">Municipio</label>
+          <input maxlength="50" type="text" id="municipio" name="municipioPerson" [(ngModel)]="municipioPerson" />
+        </div>
+        <div>
+          <div style="width: 100%; max-width: 400px; margin: auto;">
+            <ng-select [items]="local" bindLabel="nombre" bindValue="id" placeholder="Seleccione el estado"
+              [(ngModel)]="localSelected" [multiple]="false" name="localSelected" class="custom-ng-select"
+              [clearable]="true" [searchable]="true" dropdownPosition="auto">
+              <ng-template #ngOptionTemplate let-item="item">
+                <div class="custom-option">
+                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                </div>
+              </ng-template>
+            </ng-select>
           </div>
         </div>
-      </fieldset>
-  
-      <!-- DOMICILIO DE INSTALACION -->
-      <fieldset>
-        <legend>DOMICILIO DE INSTALACIÓN</legend>
-        <div class="two-columns">
-          <div>
-            <label for="calleInst">Calle</label>
-            <input type="text" id="calleInst" name="calleInst">
-          </div>
-          <div>
-            <label for="numExtInst">N° Ext.</label>
-            <input type="text" id="numExtInst" name="numExtInst">
-          </div>
-          <div>
-            <label for="numIntInst">N° Int.</label>
-            <input type="text" id="numIntInst" name="numIntInst">
-          </div>
-          <div>
-            <label for="coloniaInst">Colonia</label>
-            <input type="text" id="coloniaInst" name="coloniaInst">
-          </div>
-          <div>
-            <label for="cpInst">C.P.</label>
-            <input type="text" id="cpInst" name="cpInst">
-          </div>
-          <div>
-            <label for="municipioInst">Municipio</label>
-            <input type="text" id="municipioInst" name="municipioInst">
-          </div>
-          <div>
-            <label for="estadoInst">Estado</label>
-            <input type="text" id="estadoInst" name="estadoInst">
-          </div>
-          <div>
-            <label for="poblacionInst">Población</label>
-            <input type="text" id="poblacionInst" name="poblacionInst">
-          </div>
-          <div>
-            <label for="paisInst">País</label>
-            <input type="text" id="paisInst" name="paisInst">
-          </div>
-          <div>
-            <label for="clasificacionInst">Clasificación</label>
-            <input type="text" id="clasificacionInst" name="clasificacionInst">
-          </div>
-          <div>
-            <label for="zonaInst">Zona</label>
-            <input type="text" id="zonaInst" name="zonaInst">
-          </div>
-          <div>
-            <label for="telefonoInst">Teléfono con lada</label>
-            <input type="text" id="telefonoInst" name="telefonoInst">
-          </div>
-          <div>
-            <label for="extInst">Ext.</label>
-            <input type="text" id="extInst" name="extInst">
+        <div>
+          <label for="poblacion">Población</label>
+          <input type="text" id="poblacion" name="poblationPerson" [(ngModel)]="poblationPerson" />
+        </div>
+        <div>
+          <label for="pais">País</label>
+          <input type="text" id="pais" name="countryPerson" [(ngModel)]="countryPerson" />
+        </div>
+
+        <div>
+          <label for="zona">Zona</label>
+          <input maxlength="20" type="text" id="zona" name="zone" [(ngModel)]="zone" />
+        </div>
+        <div>
+          <label for="telefono">Teléfono con lada</label>
+          <input type="tel" id="telefono" name="telPerson" [(ngModel)]="telPerson" placeholder="Ejemplo:524443698521" />
+        </div>
+        <div>
+          <label for="ext">Ext.</label>
+          <input type="text" id="ext" name="ext" /><!--no definido en TS, se podría omitir o crear una variable -->
+        </div>
+        <div>
+          <label for="correo">Correo Electrónico</label>
+          <input type="email" id="correo" name="emailPerson" [(ngModel)]="emailPerson" />
+        </div>
+        <div>
+          <label for="paginaWeb">Página Web</label>
+          <input type="text" id="paginaWeb" name="webPage" [(ngModel)]="webPage" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- DOMICILIO DE INSTALACION -->
+    <fieldset>
+      <legend>DOMICILIO DE INSTALACIÓN</legend>
+      <div class="two-columns">
+        <div>
+          <label for="calleInst">Calle</label>
+          <input maxlength="60" type="text" id="calleInst" name="calleInst" [(ngModel)]="calleInst" />
+        </div>
+        <div>
+          <label for="numExtInst">N° Ext.</label>
+          <input maxlength="60" type="text" id="numExtInst" name="no_extInst" [(ngModel)]="no_extInst" />
+        </div>
+        <div>
+          <label for="numIntInst">N° Int.</label>
+          <input maxlength="60" type="text" id="numIntInst" name="no_intInst" [(ngModel)]="no_intInst" />
+        </div>
+        <div>
+          <label for="coloniaInst">Colonia</label>
+          <input maxlength="60" type="text" id="coloniaInst" name="coloniaInst" [(ngModel)]="coloniaInst" />
+        </div>
+        <div>
+          <label for="cpInst">C.P.</label>
+          <input maxlength="60" type="text" id="cpInst" name="cpInst" [(ngModel)]="cpInst" />
+        </div>
+        <div>
+          <label for="municipioInst">Municipio</label>
+          <input maxlength="60" type="text" id="municipioInst" name="municipioInst" [(ngModel)]="municipioInst" />
+        </div>
+        <div>
+          <label for="estadoInst">Estado</label>
+          <input maxlength="60" type="text" id="estadoInst" name="localInst" [(ngModel)]="localInst" />
+        </div>
+        <div>
+          <label for="poblacionInst">Población</label>
+          <input maxlength="60" type="text" id="poblacionInst" name="poblationInst" [(ngModel)]="poblationInst" />
+        </div>
+        <div>
+          <label for="paisInst">País</label>
+          <input maxlength="60" type="text" id="paisInst" name="countryInst" [(ngModel)]="countryInst" />
+        </div>
+
+        <div>
+          <label for="zonaInst">Zona</label>
+          <input maxlength="60" type="text" id="zonaInst" name="zoneInst" [(ngModel)]="zoneInst" />
+        </div>
+        <div>
+          <label for="telefonoInst">Teléfono con lada</label>
+          <input type="tel" id="telefonoInst" name="telInst" [(ngModel)]="telInst" />
+        </div>
+        <div>
+          <label for="extInst">Ext.</label>
+          <input maxlength="30" type="text" id="extInst" name="extInst" /><!-- no definido en TS, se podría omitir o crear
+          variable -->
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- INFORMACION PARA FACTURACION -->
+    <fieldset>
+      <legend>INFORMACIÓN PARA FACTURACIÓN</legend>
+      <div class="two-columns">
+        <div>
+          <label for="encargadoFact">Nombre del Encargado(a)</label>
+          <input maxlength="100" type="text" id="encargadoFact" name="nameFact" [(ngModel)]="nameFact" />
+        </div>
+        <div>
+          <label for="puestoFact">Puesto</label>
+          <input maxlength="60" type="text" id="puestoFact" name="puestoFact" [(ngModel)]="puestoFact" />
+        </div>
+        <div>
+          <label for="telFact">Teléfono con lada</label>
+          <input type="tel" id="telFact" name="telFact" [(ngModel)]="telFact" />
+        </div>
+        <div>
+          <label for="extFact">Ext.</label>
+          <input maxlength="60" type="text" id="extFact" name="extFact" /><!-- no definido en TS -->
+        </div>
+        <div>
+          <label for="celFact">Celular</label>
+          <input type="tel" id="celFact" name="celFact" maxlength="12" [(ngModel)]="celFact"
+            placeholder="Ejemplo: 524434623914321" />
+          <small>Numero de celular con clave lada</small>
+        </div>
+        <div>
+          <label for="correoFact">Correo Electrónico</label>
+          <input type="email" id="correoFact" name="emailFact" [(ngModel)]="emailFact" />
+        </div>
+        <div>
+          <div style="width: 100%; max-width: 400px; margin: auto;">
+            <ng-select [items]="use_cfdi" bindLabel="descripcion" bindValue="codigo" placeholder="Selecciona un CFDI"
+              [(ngModel)]="cfdiSelected" [multiple]="false" name="cfdiSelected" class="custom-ng-select"
+              [clearable]="true" [searchable]="true" dropdownPosition="auto">
+              <ng-template #ngOptionTemplate let-item="item">
+                <div class="custom-option">
+                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                </div>
+              </ng-template>
+            </ng-select>
           </div>
         </div>
-      </fieldset>
-  
-      <!-- INFORMACION PARA FACTURACION -->
-      <fieldset>
-        <legend>INFORMACIÓN PARA FACTURACIÓN</legend>
-        <div class="two-columns">
-          <div>
-            <label for="encargadoFact">Nombre del Encargado(a)</label>
-            <input type="text" id="encargadoFact" name="encargadoFact">
-          </div>
-          <div>
-            <label for="puestoFact">Puesto</label>
-            <input type="text" id="puestoFact" name="puestoFact">
-          </div>
-          <div>
-            <label for="telFact">Teléfono con lada</label>
-            <input type="text" id="telFact" name="telFact">
-          </div>
-          <div>
-            <label for="extFact">Ext.</label>
-            <input type="text" id="extFact" name="extFact">
-          </div>
-          <div>
-            <label for="celFact">Celular</label>
-            <input type="text" id="celFact" name="celFact">
-          </div>
-          <div>
-            <label for="correoFact">Correo Electrónico</label>
-            <input type="email" id="correoFact" name="correoFact">
-          </div>
-          <div>
-            <label for="usoCFDI">Uso de CFDI</label>
-            <input type="text" id="usoCFDI" name="usoCFDI">
-          </div>
-          <div>
-            <label for="formaPago">Forma de Pago</label>
-            <input type="text" id="formaPago" name="formaPago">
-          </div>
-          <div style="grid-column: 1 / span 2;">
-            <!-- Ocupamos todo el ancho (2 columnas) para este textarea -->
-            <label for="datosAdicionalesFactura">Datos adicionales para su Factura</label>
-            <textarea id="datosAdicionalesFactura" name="datosAdicionalesFactura" rows="3"></textarea>
+        <div>
+          <div style="width: 100%; max-width: 400px; margin: auto;">
+            <ng-select [items]="wayPage" bindLabel="descripcion" bindValue="id"
+              placeholder="Selecciona el Método de pago" [(ngModel)]="wayPageSelected" [multiple]="false"
+              name="wayPageSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
+              dropdownPosition="auto">
+              <ng-template #ngOptionTemplate let-item="item">
+                <div class="custom-option">
+                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                </div>
+              </ng-template>
+            </ng-select>
           </div>
         </div>
-      </fieldset>
-  
-      <!-- INFORMACION PARA COBRANZA -->
-      <fieldset>
-        <legend>INFORMACIÓN PARA COBRANZA</legend>
-        <div class="two-columns">
-          <div>
-            <label for="encargadoCob">Nombre del Encargado(a)</label>
-            <input type="text" id="encargadoCob" name="encargadoCob">
-          </div>
-          <div>
-            <label for="puestoCob">Puesto</label>
-            <input type="text" id="puestoCob" name="puestoCob">
-          </div>
-          <div>
-            <label for="telCob">Teléfono con lada</label>
-            <input type="text" id="telCob" name="telCob">
-          </div>
-          <div>
-            <label for="extCob">Ext.</label>
-            <input type="text" id="extCob" name="extCob">
-          </div>
-          <div>
-            <label for="celCob">Celular</label>
-            <input type="text" id="celCob" name="celCob">
-          </div>
-          <div>
-            <label for="correoCob">Correo Electrónico</label>
-            <input type="email" id="correoCob" name="correoCob">
+        <div style="grid-column: 1 / span 2;">
+          <label for="datosAdicionalesFactura">Datos adicionales para su Factura</label>
+          <textarea id="datosAdicionalesFactura" name="aditionalData" [(ngModel)]="aditionalData" rows="3"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- INFORMACION PARA COBRANZA -->
+    <fieldset>
+      <legend>INFORMACIÓN PARA COBRANZA</legend>
+      <div class="two-columns">
+        <div>
+          <label for="encargadoCob">Nombre del Encargado(a)</label>
+          <input maxlength="60" type="text" id="encargadoCob" name="nameCobra" [(ngModel)]="nameCobra" />
+        </div>
+        <div>
+          <label for="puestoCob">Puesto</label>
+          <input maxlength="60" type="text" id="puestoCob" name="puestoCobra" [(ngModel)]="puestoCobra" />
+        </div>
+        <div>
+          <label for="telCob">Teléfono con lada</label>
+          <input type="text" id="telCob" name="telCobra" [(ngModel)]="telCobra" />
+        </div>
+        <div>
+          <label for="extCob">Ext.</label>
+          <input maxlength="60" type="text" id="extCob" name="extCob" /><!-- no definido en TS -->
+        </div>
+        <div>
+          <label for="celCob">Celular</label>
+          <input type="tel" id="celCob" maxlength="12" name="celCobra" [(ngModel)]="celCobra" />
+        </div>
+        <div>
+          <label for="correoCob">Correo Electrónico</label>
+          <input type="email" id="correoCob" name="emailCobra" [(ngModel)]="emailCobra" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- INFORMACION BANCARIA -->
+    <fieldset>
+      <legend>INFORMACIÓN BANCARIA</legend>
+      <div class="two-columns">
+        <div>
+          <label for="numCuenta">Número de Cuenta</label>
+          <input maxlength="50" type="text" id="numCuenta" name="no_count" [(ngModel)]="no_count" />
+        </div>
+        <div>
+          <label for="numClabe">Número de Cuenta Clabe</label>
+          <input maxlength="50" type="text" id="numClabe" name="no_clabe" [(ngModel)]="no_clabe" />
+        </div>
+        <div>
+          <div style="width: 100%; max-width: 400px; margin: auto;">
+            <ng-select [items]="banks" bindLabel="nombre" bindValue="codigo" placeholder="Seleccione un Banco"
+              [(ngModel)]="bankSelected" [multiple]="false" name="bankSelected" class="custom-ng-select"
+              [clearable]="true" [searchable]="true" dropdownPosition="auto">
+              <ng-template #ngOptionTemplate let-item="item">
+                <div class="custom-option">
+                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                </div>
+              </ng-template>
+            </ng-select>
           </div>
         </div>
-      </fieldset>
-  
-      <!-- INFORMACION BANCARIA -->
-      <fieldset>
-        <legend>INFORMACIÓN BANCARIA</legend>
-        <div class="two-columns">
-          <div>
-            <label for="banco">Banco</label>
-            <input type="text" id="banco" name="banco">
-          </div>
-          <div>
-            <label for="numCuenta">Número de Cuenta</label>
-            <input type="text" id="numCuenta" name="numCuenta">
-          </div>
-          <div>
-            <label for="numClabe">Número de Cuenta Clabe</label>
-            <input type="text" id="numClabe" name="numClabe">
+      </div>
+      <p><em>NOTA: Favor de anexar copia de carátula bancaria</em></p>
+    </fieldset>
+
+    <!-- INFORMACION ADICIONAL PARA REALIZAR PAGOS -->
+    <fieldset>
+      <legend>INFORMACIÓN ADICIONAL PARA REALIZAR PAGOS</legend>
+      <h4>Pago en Efectivo</h4>
+      <p>Banco Mercantil del Norte S.A</p>
+      <p>Se realiza directamente en ventanilla bancaria. Cuenta CEP: 2948</p>
+      <p>Referencia N° 1: Número de Cliente</p>
+      <p>Referencia N° 2: Nombre de Cliente</p>
+      <p>Forma de Pago: 01 - Efectivo</p>
+
+      <h4>Pago en Transferencia Bancaria</h4>
+      <p>Número de Cuenta: 0807 58 4141</p>
+      <p>Cuenta Clabe: 072 700 00807584141 4</p>
+
+      <p>
+        <strong>Estimado cliente:</strong> Recuerde que para brindar un mejor servicio y evitar cortes, es
+        indispensable referenciar sus pagos.
+      </p>
+    </fieldset>
+
+    <!-- CONTACTO DE SITIO -->
+    <fieldset>
+      <legend>CONTACTO DE SITIO</legend>
+      <div class="two-columns">
+        <div>
+          <label for="ubicacion">Ubicación</label>
+          <input type="text" id="ubicacion" name="ubicationSite" [(ngModel)]="ubicationSite" />
+        </div>
+        <div>
+          <label for="coordenadas">Coordenadas</label>
+          <input type="text" id="coordenadas" name="coordenadasSite" [(ngModel)]="coordenadasSite"
+            placeholder="Ejemplo: 20.1823,-16.834" />
+        </div>
+        <div>
+          <label for="contactoSitio">Nombre del Contacto en Sitio</label>
+          <input type="text" id="contactoSitio" name="nameSite" [(ngModel)]="nameSite" />
+        </div>
+        <div>
+          <label for="telSitio">Teléfono con lada</label>
+          <input type="text" id="telSitio" name="telSite" [(ngModel)]="telSite" />
+        </div>
+        <div>
+          <label for="celSitio">Celular</label>
+          <input type="tel" maxlength="12" id="celSitio" name="celSite" [(ngModel)]="celSite" />
+        </div>
+        <div>
+          <label for="departamentoSitio">Departamento (Ingeniero encargado)</label>
+          <input type="text" id="departamentoSitio" name="depSite" [(ngModel)]="depSite" />
+        </div>
+        <div>
+          <label for="horarioAtencion">Horario de atención</label>
+          <input type="time" id="horarioAtencion" name="timeSite" [(ngModel)]="timeSite" />
+          <small><i>Seleccione el horario en que desea que esta disponible para la atención</i></small>
+        </div>
+        <div>
+          <label for="megasAprox">Megas Aproximados</label>
+          <input type="text" id="megasAprox" name="megasSite" [(ngModel)]="megasSite" />
+        </div>
+        <div>
+          <label for="numEnlaces">Número de Enlaces</label>
+          <input type="text" id="numEnlaces" name="noEnlace_sit" [(ngModel)]="noEnlace_sit" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- DOCUMENTACION SOLICITADA -->
+    <fieldset>
+      <legend>DOCUMENTACIÓN SOLICITADA</legend>
+      <p>
+        El presente formato deberá ser acompañado por la siguiente documentación como requisito de Alta
+        (En copias o correo electrónico proporcionado por el vendedor):
+      </p>
+      <ul>
+        <li>
+          <strong>Persona Física</strong>
+          <ul>
+            <li>Cédula Fiscal (En caso de requerir Factura)</li>
+            <li>Comprobante de domicilio</li>
+            <li>Identificación Oficial (INE)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Persona Moral</strong>
+          <ul>
+            <li>Acta Constitutiva</li>
+            <li>Protocolización de acta (En caso de haber)</li>
+            <li>Identificación del Representante Legal</li>
+            <li>Cédula Fiscal</li>
+            <li>Opinión de cumplimiento (Actual)</li>
+            <li>Carátula de Estado de Cuenta</li>
+            <li>Comprobante de domicilio (Menor a 3 meses)</li>
+            <li>Folio Mercantil</li>
+          </ul>
+        </li>
+      </ul>
+    </fieldset>
+
+    <!-- DATOS DEL VENDEDOR -->
+    <fieldset>
+      <legend>DATOS DEL VENDEDOR</legend>
+      <div class="two-columns">
+        <div>
+          <label for="nombreVendedor">Nombre del vendedor</label>
+          <input type="text" id="nombreVendedor" name="nameVen" [(ngModel)]="nameVen" />
+        </div>
+        <div>
+          <label for="oficina">Oficina</label>
+          <input type="text" id="oficina" name="oficinaVen" [(ngModel)]="oficinaVen" />
+        </div>
+        <div>
+          <div style="width: 100%; max-width: 400px; margin: auto;">
+            <ng-select [items]="emailsPdnt" bindLabel="email" bindValue="id"
+              placeholder="Selecciona uno o varios correos " [(ngModel)]="emailSelected" [multiple]="true"
+              name="emailSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
+              dropdownPosition="auto">
+              <ng-template #ngOptionTemplate let-item="item">
+                <div class="custom-option">
+                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                </div>
+              </ng-template>
+            </ng-select>
           </div>
         </div>
-        <p><em>NOTA: Favor de anexar copia de carátula bancaria</em></p>
-      </fieldset>
-  
-      <!-- INFORMACION ADICIONAL PARA REALIZAR PAGOS -->
-      <fieldset>
-        <legend>INFORMACIÓN ADICIONAL PARA REALIZAR PAGOS</legend>
-        <h4>Pago en Efectivo</h4>
-        <p>Banco Mercantil del Norte S.A</p>
-        <p>Se realiza directamente en ventanilla bancaria. Cuenta CEP: 2948</p>
-        <p>Referencia N° 1: Número de Cliente</p>
-        <p>Referencia N° 2: Nombre de Cliente</p>
-        <p>Forma de Pago: 01 - Efectivo</p>
-  
-        <h4>Pago en Transferencia Bancaria</h4>
-        <p>Número de Cuenta: 0807 58 4141</p>
-        <p>Cuenta Clabe: 072 700 00807584141 4</p>
-  
-        <p><strong>Estimado cliente:</strong> Recuerde que para brindar un mejor servicio y evitar cortes, es indispensable referenciar sus pagos.</p>
-      </fieldset>
-  
-      <!-- CONTACTO DE SITIO -->
-      <fieldset>
-        <legend>CONTACTO DE SITIO</legend>
-        <div class="two-columns">
-          <div>
-            <label for="ubicacion">Ubicación</label>
-            <input type="text" id="ubicacion" name="ubicacion">
-          </div>
-          <div>
-            <label for="coordenadas">Coordenadas</label>
-            <input type="text" id="coordenadas" name="coordenadas">
-          </div>
-          <div>
-            <label for="contactoSitio">Nombre del Contacto en Sitio</label>
-            <input type="text" id="contactoSitio" name="contactoSitio">
-          </div>
-          <div>
-            <label for="telSitio">Teléfono con lada</label>
-            <input type="text" id="telSitio" name="telSitio">
-          </div>
-          <div>
-            <label for="celSitio">Celular</label>
-            <input type="text" id="celSitio" name="celSitio">
-          </div>
-          <div>
-            <label for="departamentoSitio">Departamento (Ingeniero encargado)</label>
-            <input type="text" id="departamentoSitio" name="departamentoSitio">
-          </div>
-          <div>
-            <label for="horarioAtencion">Horario de atención</label>
-            <input type="text" id="horarioAtencion" name="horarioAtencion">
-          </div>
-          <div>
-            <label for="megasAprox">Megas Aproximados</label>
-            <input type="text" id="megasAprox" name="megasAprox">
-          </div>
-          <div>
-            <label for="numEnlaces">Número de Enlaces</label>
-            <input type="text" id="numEnlaces" name="numEnlaces">
-          </div>
+        <div>
+          <label for="celVendedor">Celular</label>
+          <input type="tel" id="celVendedor" maxlength="12" name="celVen" [(ngModel)]="celVen" />
         </div>
-      </fieldset>
-  
-      <!-- DOCUMENTACION SOLICITADA -->
-      <fieldset>
-        <legend>DOCUMENTACIÓN SOLICITADA</legend>
-        <p>
-          El presente formato deberá ser acompañado por la siguiente documentación como requisito de Alta 
-          (En copias o correo electrónico proporcionado por el vendedor):
-        </p>
-        <ul>
-          <li><strong>Persona Física</strong>
-            <ul>
-              <li>Cédula Fiscal (En caso de requerir Factura)</li>
-              <li>Comprobante de domicilio</li>
-              <li>Identificación Oficial (INE)</li>
-            </ul>
-          </li>
-          <li><strong>Persona Moral</strong>
-            <ul>
-              <li>Acta Constitutiva</li>
-              <li>Protocolización de acta (En caso de haber)</li>
-              <li>Identificación del Representante Legal</li>
-              <li>Cédula Fiscal</li>
-              <li>Opinión de cumplimiento (Actual)</li>
-              <li>Carátula de Estado de Cuenta</li>
-              <li>Comprobante de domicilio (Menor a 3 meses)</li>
-              <li>Folio Mercantil</li>
-            </ul>
-          </li>
-        </ul>
-      </fieldset>
-  
-      <!-- DATOS DEL VENDEDOR -->
-      <fieldset>
-        <legend>DATOS DEL VENDEDOR</legend>
-        <div class="two-columns">
-          <div>
-            <label for="nombreVendedor">Nombre del vendedor</label>
-            <input type="text" id="nombreVendedor" name="nombreVendedor">
-          </div>
-          <div>
-            <label for="oficina">Oficina</label>
-            <input type="text" id="oficina" name="oficina">
-          </div>
-          <div>
-            <label for="correoVendedor">Correo Electrónico</label>
-            <input type="email" id="correoVendedor" name="correoVendedor">
-          </div>
-          <div>
-            <label for="celVendedor">Celular</label>
-            <input type="text" id="celVendedor" name="celVendedor">
-          </div>
-        </div>
-      </fieldset>
-  
-      <!-- Botón de envío -->
-      <button type="button" routerLink="/gratitude" class="btn-submit">Enviar</button>
-  
-    </form>
-  </div>
+      </div>
+    </fieldset>
+
+    <!-- Botón de envío -->
+    <button type="button"  (click)="submitAll()" class="btn-submit">
+      Enviar
+    </button>
+  </form>
+</div>

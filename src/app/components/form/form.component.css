@@ -64,6 +64,8 @@ input[type="text"],
 input[type="email"],
 input[type="number"],
 select,
+
+
 textarea {
     width: 100%;
     padding: 8px;
@@ -99,4 +101,8 @@ textarea {
 .btn-submit:hover {
     background-color: #333;
     /* Oscurecer un poco al pasar el mouse */
+}
+
+::placeholder {
+    font-style: italic;
 }
