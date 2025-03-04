@@ -25,7 +25,7 @@ export class FormComponent {
   callePerson: any = "";
   no_intPerson: number = 0;
   coloniaPerson: any = "";
-  cpPerson: number = 0;
+  cpPerson: any = "";
   municipioPerson: any = "";
   localSelected: any = ""; // Estado seleccionado
   poblationPerson: any = "";
