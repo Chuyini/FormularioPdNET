@@ -15,7 +15,7 @@
               <h3>PDI111104D92</h3>
             </td>
             <td style="padding: 8px; text-align: center;">
-              <h3>pagoselpoderdeinternet.mx, facturaselpoderdeinternet.mx</h3>
+              <h3>pagos&#64;elpoderdeinternet.mx, facturaselpoder&#64;deinternet.mx</h3>
             </td>
           </tr>
         </table>
@@ -113,7 +113,7 @@
           <input type="text" id="ext" name="ext" /><!--no definido en TS, se podría omitir o crear una variable -->
         </div>
         <div>
-          <label for="correo">Correo Electrónico</label>
+          <label for="correo">Correo Electrónico (Obligatorio)</label>
           <input type="email" id="correo" name="emailPerson" [(ngModel)]="emailPerson" />
         </div>
         <div>
@@ -201,13 +201,13 @@
           <input maxlength="60" type="text" id="extFact" name="extFact" /><!-- no definido en TS -->
         </div>
         <div>
-          <label for="celFact">Celular</label>
+          <label for="celFact">Celular (Obligatorio)</label>
           <input type="tel" id="celFact" name="celFact" maxlength="12" [(ngModel)]="celFact"
             placeholder="Ejemplo: 524434623914321" />
           <small>Numero de celular con clave lada</small>
         </div>
         <div>
-          <label for="correoFact">Correo Electrónico</label>
+          <label for="correoFact">Correo Electrónico (Obligatorio)</label>
           <input type="email" id="correoFact" name="emailFact" [(ngModel)]="emailFact" />
         </div>
         <div>
@@ -265,11 +265,11 @@
           <input maxlength="60" type="text" id="extCob" name="extCob" /><!-- no definido en TS -->
         </div>
         <div>
-          <label for="celCob">Celular</label>
+          <label for="celCob">Celular (Obligatorio) </label>
           <input type="tel" id="celCob" maxlength="12" name="celCobra" [(ngModel)]="celCobra" />
         </div>
         <div>
-          <label for="correoCob">Correo Electrónico</label>
+          <label for="correoCob">Correo Electrónico (Obligatorio)</label>
           <input type="email" id="correoCob" name="emailCobra" [(ngModel)]="emailCobra" />
         </div>
       </div>
@@ -302,6 +302,18 @@
         </div>
       </div>
       <p><em>NOTA: Favor de anexar copia de carátula bancaria</em></p>
+
+      <div class="file-upload">
+        <small><i>Subir archivo comprimido puede usar .ZIP o .WIN etc... </i></small>
+        <label for="fileInput" class="file-label">Subir Carátula Bancaria</label>
+        <input type="file" id="fileInput" class="file-input" (change)="onFileSelected($event, 'bankFile')">
+        <span class="file-name">{{ bankFileName || 'Ningún archivo seleccionado' }}</span>
+      </div>
+
+
+
+
+
     </fieldset>
 
     <!-- INFORMACION ADICIONAL PARA REALIZAR PAGOS -->
@@ -399,6 +411,13 @@
           </ul>
         </li>
       </ul>
+
+      <div class="file-upload">
+        <label for="zipInput" class="file-label">Subir Archivo Comprimido</label>
+        <input type="file" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
+        <span class="file-name">{{ zipFileName || 'Ningún archivo seleccionado' }}</span>
+      </div>
+
     </fieldset>
 
     <!-- DATOS DEL VENDEDOR -->
@@ -435,7 +454,7 @@
     </fieldset>
 
     <!-- Botón de envío -->
-    <button type="button"  (click)="submitAll()" class="btn-submit">
+    <button type="button" (click)="submitAll()" class="btn-submit">
       Enviar
     </button>
   </form>

@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
-import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
+import emailjs from 'emailjs-com';
 import { environment } from '../../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form',
-  imports: [RouterLink, NgFor, NgSelectModule, FormsModule, ReactiveFormsModule],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
@@ -154,7 +154,8 @@ export class FormComponent {
     { id: 4, email: "deysimar.jimenez@elpoderdeinternet.mx" },
     { id: 5, email: "administracion@elpoderdeinternet.mx" },
     { id: 6, email: "ventas@elpoderdeinternet.mx" },
-    { id: 7, email: "jmlr231201@gmail.com" }
+    { id: 7, email: "jorge.ceron@elpoderdeinternet.mx" },
+    { id: 8, email: "jmlr231201@gmail.com" }
   ];
 
 
@@ -351,7 +352,7 @@ export class FormComponent {
   DATOS FISCALES
   -----------------------------------------
   Razón Social / Nombre: ${this.rasonName}
-  Régimen Fiscal: ${this.regimenSeleccionado}
+  Régimen Fiscal:  ${this.regimenSeleccionado} ${this.regimenes[this.regimenSeleccionado].nombre}
   RFC: ${this.rfc}
   Calle: ${this.callePerson}
   N° Int: ${this.no_intPerson}
@@ -457,9 +458,36 @@ export class FormComponent {
   }
 
 
+
+
+  bankFileName: string = '';
+  zipFileName: string = '';
+
+  onFileSelected(event: Event, fileType: string): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      if (fileType === 'bankFile') {
+        this.bankFileName = input.files[0].name;
+      } else if (fileType === 'zipFile') {
+        this.zipFileName = input.files[0].name;
+      }
+    } else {
+      if (fileType === 'bankFile') {
+        this.bankFileName = 'Ningún archivo seleccionado';
+      } else if (fileType === 'zipFile') {
+        this.zipFileName = 'Ningún archivo seleccionado';
+      }
+    }
+  }
+
+
+
   public submitAll(): void {
 
-    if (this.rasonName == "" || this.regimenSeleccionado == "" || this.telPerson == "" || this.rfc == "") {
+    if (this.rasonName == "" || this.regimenSeleccionado == ""
+      || this.telPerson == "" || this.rfc == ""
+      || this.emailPerson == "" || this.emailFact == "",
+      this.celFact == "", this.celCobra == "" || this.emailCobra == "") {
 
       this.snackBar.open('Por favor, complete todos los campos obligatorios.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
