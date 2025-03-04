@@ -148,10 +148,10 @@ export class FormComponent {
 
 
   emailsPdnt = [
-    { id: 1, email: "suemy.avila@elpoderdeinternet" },
-    { id: 2, email: "carlos.escalona@elpoderdeinterntet" },
-    { id: 3, email: "genesis.mercado@elpoderdeinternet" },
-    { id: 4, email: "deysimar.jimenez" },
+    { id: 1, email: "suemy.avila@elpoderdeinternet.mx" },
+    { id: 2, email: "carlos.escalona@elpoderdeinterntet.mx" },
+    { id: 3, email: "genesis.mercado@elpoderdeinternet.mx" },
+    { id: 4, email: "deysimar.jimenez@elpoderdeinternet.mx" },
     { id: 5, email: "administracion@elpoderdeinternet.mx" },
     { id: 6, email: "ventas@elpoderdeinternet.mx" },
     { id: 7, email: "jmlr231201@gmail.com" }
@@ -482,7 +482,7 @@ export class FormComponent {
         if (emails) {
           this.sendEmail(data, emails);
           console.log("Exito al mandar el correo ", id);
-          this.router.navigate(["/gratitude"]);
+          this.router.navigate(['/gratitude']);
         }
       }
     } catch (error) {
