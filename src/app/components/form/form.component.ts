@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
 import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FormComponent {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private router: Router) { }
   //************************DATOS FISCALES**********************************
 
   rasonName: any = ""; // nombre (Obligatorio)
@@ -459,7 +459,7 @@ export class FormComponent {
 
   public submitAll(): void {
 
-    if (this.rasonName == "" || this.regimenSeleccionado == "" || this.telPerson == "" || this.rfc == "" ) {
+    if (this.rasonName == "" || this.regimenSeleccionado == "" || this.telPerson == "" || this.rfc == "") {
 
       this.snackBar.open('Por favor, complete todos los campos obligatorios.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
@@ -482,6 +482,7 @@ export class FormComponent {
         if (emails) {
           this.sendEmail(data, emails);
           console.log("Exito al mandar el correo ", id);
+          this.router.navigate(["/gratitude"]);
         }
       }
     } catch (error) {
