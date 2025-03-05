@@ -68,9 +68,9 @@ label {
     align-items: center;
     text-align: center;
     margin-top: 20px;
-  }
-  
-  .file-label {
+}
+
+.file-label {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -78,25 +78,26 @@ label {
     cursor: pointer;
     font-weight: bold;
     transition: background 0.3s;
-  }
-  
-  .file-label:hover {
+}
+
+.file-label:hover {
     background-color: #0056b3;
-  }
-  
-  .file-input {
-    display: none; /* Ocultamos el input */
-  }
-  
-  .file-name {
+}
+
+.file-input {
+    display: none;
+    /* Ocultamos el input */
+}
+
+.file-name {
     margin-top: 10px;
     font-size: 14px;
     color: #555;
     font-style: italic;
-  }
-  
-  
-  
+}
+
+
+
 
 
 
@@ -146,6 +147,61 @@ select {
         margin-left: 35%;
     }
 }
+
+/* Estilos globales */
+.pre {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pre,
+tr,
+td {
+    padding: 8px;
+    text-align: center;
+    padding-left: 50px;
+
+}
+
+
+
+/* Media query para pantallas con un ancho máximo de 500px */
+@media (max-width: 420px) {
+    .pre {
+        width: 10px;
+        /* Ajusta el ancho de la tabla */
+        font-size: 12px;
+        /* Ajusta el tamaño del texto en la tabla */
+    }
+
+    .pre,
+    tr,
+    td {
+        padding: 8px;
+        text-align: left;
+        font-size: 5px;
+    }
+}
+
+/* Media query para pantallas con un ancho entre 450px y 500px */
+@media (min-width: 421px) and (max-width: 550px) {
+    .pre {
+        width: 10px;
+        /* Ajusta el ancho de la tabla */
+        font-size: 12px;
+        /* Ajusta el tamaño del texto en la tabla */
+    }
+
+    .pre,
+    tr,
+    td {
+        padding: 8px;
+        text-align: left;
+        font-size: 8px;
+    }
+}
+
+
 
 .btn-submit:hover {
     background-color: #333;
