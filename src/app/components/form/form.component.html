@@ -37,7 +37,7 @@
 
         <div style="width: 100%; max-width: 400px; margin: auto;">
           <label for="">(Obligatorio)</label>
-          <ng-select [items]="regimenes" bindLabel="nombre" bindValue="id" placeholder="Selecciona un régimen fiscal"
+          <ng-select [items]="regimenes" bindLabel="nombre" placeholder="Selecciona un régimen fiscal"
             [(ngModel)]="regimenSeleccionado" name="regimenSeleccionado" class="custom-ng-select" [clearable]="true"
             [searchable]="true" dropdownPosition="auto">
             <ng-template #ngOptionTemplate let-item="item">
@@ -80,9 +80,9 @@
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="local" bindLabel="nombre" bindValue="id" placeholder="Seleccione el estado"
-              [(ngModel)]="localSelected" [multiple]="false" name="localSelected" class="custom-ng-select"
-              [clearable]="true" [searchable]="true" dropdownPosition="auto">
+            <ng-select [items]="local" bindLabel="nombre" placeholder="Seleccione el estado" [(ngModel)]="localSelected"
+              [multiple]="false" name="localSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
+              dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
                   <span> {{ item.id }} - {{ item.nombre }}</span>
@@ -126,6 +126,8 @@
     <!-- DOMICILIO DE INSTALACION -->
     <fieldset>
       <legend>DOMICILIO DE INSTALACIÓN</legend>
+
+      <p><i><strong>Llenar solo si la direccion es diferente a la de instalación</strong></i></p>
       <div class="two-columns">
         <div>
           <label for="calleInst">Calle</label>
@@ -212,7 +214,7 @@
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="use_cfdi" bindLabel="descripcion" bindValue="codigo" placeholder="Selecciona un CFDI"
+            <ng-select [items]="use_cfdi" bindLabel="descripcion" placeholder="Selecciona un CFDI"
               [(ngModel)]="cfdiSelected" [multiple]="false" name="cfdiSelected" class="custom-ng-select"
               [clearable]="true" [searchable]="true" dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
@@ -225,10 +227,9 @@
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="wayPage" bindLabel="descripcion" bindValue="id"
-              placeholder="Selecciona el Método de pago" [(ngModel)]="wayPageSelected" [multiple]="false"
-              name="wayPageSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
-              dropdownPosition="auto">
+            <ng-select [items]="wayPage" bindLabel="descripcion" placeholder="Selecciona el Método de pago"
+              [(ngModel)]="wayPageSelected" [multiple]="false" name="wayPageSelected" class="custom-ng-select"
+              [clearable]="true" [searchable]="true" dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
                   <span> {{ item.id }} - {{ item.nombre }}</span>
@@ -289,9 +290,9 @@
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="banks" bindLabel="nombre" bindValue="codigo" placeholder="Seleccione un Banco"
-              [(ngModel)]="bankSelected" [multiple]="false" name="bankSelected" class="custom-ng-select"
-              [clearable]="true" [searchable]="true" dropdownPosition="auto">
+            <ng-select [items]="banks" bindLabel="nombre" placeholder="Seleccione un Banco" [(ngModel)]="bankSelected"
+              [multiple]="false" name="bankSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
+              dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
                   <span> {{ item.id }} - {{ item.nombre }}</span>
@@ -304,9 +305,9 @@
       <p><em>NOTA: Favor de anexar copia de carátula bancaria</em></p>
 
       <div class="file-upload">
-        <small><i>Subir archivo comprimido puede usar .ZIP o .WIN etc... </i></small>
+        <small><i> Usar .PDF </i></small>
         <label for="fileInput" class="file-label">Subir Carátula Bancaria</label>
-        <input type="file" id="fileInput" class="file-input" (change)="onFileSelected($event, 'bankFile')">
+        <input type="file" accept="pdf" id="fileInput" class="file-input" (change)="onFileSelected($event, 'bankFile')">
         <span class="file-name">{{ bankFileName || 'Ningún archivo seleccionado' }}</span>
       </div>
 
@@ -413,8 +414,15 @@
       </ul>
 
       <div class="file-upload">
+        <small>Adjunte los archivos en un folder y luego comprimalos</small>
+        <small>
+          <p>Solo formato .ZIP</p>
+        </small>
+        <small>
+          <p>Que no pase de 10 MegaBytes</p>
+        </small>
         <label for="zipInput" class="file-label">Subir Archivo Comprimido</label>
-        <input type="file" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
+        <input type="file" accept="zip" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
         <span class="file-name">{{ zipFileName || 'Ningún archivo seleccionado' }}</span>
       </div>
 
@@ -434,10 +442,9 @@
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="emailsPdnt" bindLabel="email" bindValue="id"
-              placeholder="Selecciona uno o varios correos " [(ngModel)]="emailSelected" [multiple]="true"
-              name="emailSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
-              dropdownPosition="auto">
+            <ng-select [items]="emailsPdnt" bindLabel="email" placeholder="Selecciona uno o varios correos "
+              [(ngModel)]="emailSelected" [multiple]="true" name="emailSelected" class="custom-ng-select"
+              [clearable]="true" [searchable]="true" dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
                   <span> {{ item.id }} - {{ item.nombre }}</span>
@@ -455,6 +462,7 @@
 
     <!-- Botón de envío -->
     <button type="button" (click)="submitAll()" class="btn-submit">
+
       Enviar
     </button>
   </form>

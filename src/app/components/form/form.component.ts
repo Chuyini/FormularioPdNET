@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import emailjs from 'emailjs-com';
 import { environment } from '../../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import axios from 'axios';
 
 @Component({
   selector: 'app-form',
@@ -16,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FormComponent {
 
-  constructor(private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private snackBar: MatSnackBar, private router: Router,) { }
   //************************DATOS FISCALES**********************************
 
   rasonName: any = ""; // nombre (Obligatorio)
@@ -91,8 +92,15 @@ export class FormComponent {
 
   nameVen: any = "";
   oficinaVen: any = "";
-  emailSelected: number[] = [];
+  emailSelected: any[] = [];
   celVen: any = "";
+
+  //*****************************ARCHIVS**********************************
+  bankFileName: string = '';
+  zipFileName: string = '';
+
+  fileBank: File | null = null;
+  fileZip: File | null = null;
 
 
 
@@ -460,16 +468,16 @@ export class FormComponent {
 
 
 
-  bankFileName: string = '';
-  zipFileName: string = '';
 
   onFileSelected(event: Event, fileType: string): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       if (fileType === 'bankFile') {
         this.bankFileName = input.files[0].name;
+        this.fileBank = input.files[0];
       } else if (fileType === 'zipFile') {
         this.zipFileName = input.files[0].name;
+        this.fileZip = input.files[0];
       }
     } else {
       if (fileType === 'bankFile') {
@@ -480,6 +488,166 @@ export class FormComponent {
     }
   }
 
+
+  public useNodeMailer(email: string) {
+    console.log("Desde la funcion useNodeMailer: ", email);
+
+
+
+    // Variables para almacenar base64 de PDF y ZIP
+    let base64Pdf: string | null = null;
+    let base64Zip: string | null = null;
+
+    // Crearemos dos FileReader, pero solo si existen los archivos
+    let readerPdf: FileReader | null = null;
+    let readerZip: FileReader | null = null;
+
+    // Función para INTENTAR enviar el correo cuando tengamos la info necesaria
+    const trySendEmail = () => {
+      // Construir el array de attachments
+      const attachmentsArray = [];
+
+      if (base64Pdf) {
+        attachmentsArray.push({
+          filename: 'CaratulaBancariaCliente.pdf',
+          content: base64Pdf,
+          encoding: 'base64'
+        });
+      }
+      if (base64Zip) {
+        attachmentsArray.push({
+          filename: 'DocumentosComprimidos.zip',
+          content: base64Zip,
+          encoding: 'base64'
+        });
+      }
+
+      // Construir el body con ambos adjuntos
+      const body = {
+        to: email,
+        subject: 'ALTA DE CLIENTES',
+        text: '¡Hola! Alta de clientes adjunto archivos (PDF y/o ZIP)',
+        attachments: attachmentsArray,
+        variables: [
+          {
+            "datos_fiscales": {
+              "razon_social": this.rasonName,
+              "regimen_fiscal": {
+                "id": this.regimenSeleccionado.id,
+                "nombre": this.regimenSeleccionado.nombre
+              },
+              "rfc": this.rfc,
+              "calle": this.callePerson,
+              "numero_interior": this.no_intPerson,
+              "numero_exterior": this.no_extPerson,
+              "colonia": this.coloniaPerson,
+              "codigo_postal": this.cpPerson,
+              "municipio": this.municipioPerson,
+              "estado": this.localSelected.nombre,
+              "poblacion": this.poblationPerson,
+              "pais": this.countryPerson,
+              "zona": this.zone,
+              "telefono": this.telPerson,
+              "correo_electronico": this.emailPerson,
+              "pagina_web": this.webPage
+            },
+            "domicilio_instalacion": {
+              "calle": this.calleInst,
+              "numero_exterior": this.no_extInst,
+              "numero_interior": this.no_intInst,
+              "colonia": this.coloniaInst,
+              "codigo_postal": this.cpInst,
+              "municipio": this.municipioInst,
+              "estado": this.localInst,
+              "poblacion": this.poblationInst,
+              "pais": this.countryInst,
+              "zona": this.zoneInst,
+              "telefono": this.telInst
+            },
+            "informacion_facturacion": {
+              "nombre_encargado": this.nameFact,
+              "puesto": this.puestoFact,
+              "telefono": this.telFact,
+              "celular": this.celFact,
+              "correo_electronico": this.emailFact,
+              "cfdi": this.cfdiSelected.descripcion,
+              "metodo_pago": this.wayPageSelected.descripcion,
+              "datos_adicionales": this.aditionalData
+            },
+            "informacion_cobranza": {
+              "nombre_encargado": this.nameCobra,
+              "puesto": this.puestoCobra,
+              "telefono": this.telCobra,
+              "celular": this.celCobra,
+              "correo_electronico": this.emailCobra
+            },
+            "informacion_bancaria": {
+              "numero_cuenta": this.no_count,
+              "numero_cuenta_clabe": this.no_clabe,
+              "banco": this.bankSelected.nombre
+            },
+            "contacto_sitio": {
+              "ubicacion": this.ubicationSite,
+              "coordenadas": this.coordenadasSite,
+              "nombre_contacto_sitio": this.nameSite,
+              "telefono": this.telSite,
+              "celular": this.celSite,
+              "departamento": this.depSite,
+              "horario_atencion": this.timeSite,
+              "megas_aproximados": this.megasSite,
+              "numero_enlaces": this.noEnlace_sit
+            },
+            "datos_vendedor": {
+              "nombre_vendedor": this.nameVen,
+              "oficina": this.oficinaVen,
+              "correos": this.emailSelected.map(item => item.email).join(", "),
+              "celular_vendedor": this.celVen
+            }
+          }
+        ]
+      };
+
+      // Enviar la petición al servidor
+      axios.post('https://email-own.vercel.app/send-email', body)
+        .then(response => {
+          console.log('Archivos enviados exitosamente:', response);
+        })
+        .catch(error => {
+          console.error('Error al enviar los archivos', error);
+        });
+    };
+
+    // Lógica para leer el PDF (si existe)
+    if (this.fileBank) {
+      readerPdf = new FileReader();
+      readerPdf.onload = () => {
+        base64Pdf = (readerPdf!.result as string).split(',')[1];
+        // Verificamos si no hay ZIP o si ZIP ya está listo
+        if (!this.fileZip || base64Zip !== null) {
+          trySendEmail();
+        }
+      };
+      readerPdf.readAsDataURL(this.fileBank);
+    }
+
+    // Lógica para leer el ZIP (si existe)
+    if (this.fileZip) {
+      readerZip = new FileReader();
+      readerZip.onload = () => {
+        base64Zip = (readerZip!.result as string).split(',')[1];
+        // Verificamos si no hay PDF o si PDF ya está listo
+        if (!this.fileBank || base64Pdf !== null) {
+          trySendEmail();
+        }
+      };
+      readerZip.readAsDataURL(this.fileZip);
+    }
+
+    // Si no hay PDF ni ZIP, enviamos sin adjuntos
+    if (!this.fileBank && !this.fileZip) {
+      trySendEmail();
+    }
+  }
 
 
   public submitAll(): void {
@@ -498,21 +666,77 @@ export class FormComponent {
 
     }
 
-    try {
-      const data = this.templatePlainText();
+    // Validar extensión .pdf si fileBank está definido
+    if (this.fileBank) {
+      const pdfOk = this.fileBank.name.toLowerCase().endsWith('.pdf');
+      if (!pdfOk) {
+        this.snackBar.open('El archivo de Carátula debe ser PDF.', 'Cerrar', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center'
+        });
+        return;
+      }
+    }
 
-      for (const id of this.emailSelected) {
-        const emails = this.emailsPdnt[id - 1].email;
+    if ((this.fileBank?.size ?? 0) > 5 * 1048576 || (this.fileZip?.size ?? 0) > 10 * 1048576) {
+      this.snackBar.open('El archivo debe ser un PDF y el ZIP debe tener un tamaño máximo de 10MB.', 'Cerrar', {
+        duration: 3000, // Duración en milisegundos
+        verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
+        horizontalPosition: 'center' // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
+      });
+      return;
+    }
+    
+
+
+    // Validar extensión .zip si fileZip está definido
+    if (this.fileZip) {
+      const zipOk = this.fileZip.name.toLowerCase().endsWith('.zip');
+      if (!zipOk) {
+        this.snackBar.open('El archivo ZIP debe tener extensión .zip.', 'Cerrar', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center'
+        });
+        return;
+      }
+    }
+
+
+    try {
+
+      if (this.emailSelected.length < 1) {
+
+        this.snackBar.open('Seleccione al menos un correo.', 'Cerrar', {
+          duration: 3000, // Duración en milisegundos
+          verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
+          horizontalPosition: 'center'
+          // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
+        });
+
+        return;
+
+
+      }
+
+
+      for (const object of this.emailSelected) {
+
+
+        const email = object.email;
         // this.printAllData();
-        console.log("Deberia imprimir: ", this.emailsPdnt[id - 1])
-        console.log("El id es: ", this.emailSelected);
-        console.log("Correo selccionado: ", emails);
-        if (emails) {
-          this.sendEmail(data, emails);
-          console.log("Exito al mandar el correo ", id);
+        console.log("Deberia imprimir: ", email)
+        console.log("El id es: ", email.id);
+        console.log("Correo selccionado: ", email);
+        if (email) {
           this.router.navigate(['/gratitude']);
+          this.useNodeMailer(email);
+          console.log("Exito al mandar el correo ", object.id);
+
         }
       }
+
     } catch (error) {
       console.log("Ocurrio el siguiente error: ", error);
 
