@@ -163,7 +163,6 @@ export class FormComponent {
     { id: 5, email: "administracion@elpoderdeinternet.mx" },
     { id: 6, email: "ventas@elpoderdeinternet.mx" },
     { id: 7, email: "jorge.ceron@elpoderdeinternet.mx" },
-    { id: 8, email: "jmlr231201@gmail.com" }
   ];
 
 
