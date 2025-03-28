@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
 import emailjs from 'emailjs-com';
@@ -163,7 +163,7 @@ export class FormComponent {
     { id: 5, email: "administracion@elpoderdeinternet.mx" },
     { id: 6, email: "ventas@elpoderdeinternet.mx" },
     { id: 7, email: "jorge.ceron@elpoderdeinternet.mx" },
-   
+
   ];
 
 
@@ -611,6 +611,7 @@ export class FormComponent {
       axios.post('https://email-own.vercel.app/send-email', body)
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
+          this.router.navigate(['/gratitude']);
         })
         .catch(error => {
           console.error('Error al enviar los archivos', error);
@@ -679,15 +680,14 @@ export class FormComponent {
       }
     }
 
-    if ((this.fileBank?.size ?? 0) > 5 * 1048576 || (this.fileZip?.size ?? 0) > 10 * 1048576) {
-      this.snackBar.open('El archivo debe ser un PDF y el ZIP debe tener un tamaño máximo de 10MB.', 'Cerrar', {
+    if ((this.fileZip?.size ?? 0) > 70 * 1048576) {
+      this.snackBar.open('El archivo debe ser un PDF y el ZIP debe tener un tamaño máximo de 70MB.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
         verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
         horizontalPosition: 'center' // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
       });
       return;
     }
-
 
 
     // Validar extensión .zip si fileZip está definido
@@ -730,7 +730,7 @@ export class FormComponent {
         console.log("El id es: ", email.id);
         console.log("Correo selccionado: ", email);
         if (email) {
-          this.router.navigate(['/gratitude']);
+          this.router.navigate(['/load']);
           this.useNodeMailer(email);
           console.log("Exito al mandar el correo ", object.id);
 
