@@ -610,7 +610,7 @@ export class FormComponent {
       // Enviar la petición al servidor 
 
       //https://email-own.vercel.app/send-email
-      axios.post('https://emailown-production.up.railway.app/', body)
+      axios.post('https://emailown-production.up.railway.app/send-email', body)
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
           this.router.navigate(['/gratitude']);
