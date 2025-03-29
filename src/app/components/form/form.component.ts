@@ -8,8 +8,6 @@ import emailjs from 'emailjs-com';
 import { environment } from '../../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
-import zlib from 'zlib';
-
 
 @Component({
   selector: 'app-form',
@@ -493,30 +491,22 @@ export class FormComponent {
 
   public useNodeMailer(email: string) {
     console.log("Desde la funcion useNodeMailer: ", email);
-  
+
+
+
     // Variables para almacenar base64 de PDF y ZIP
     let base64Pdf: string | null = null;
     let base64Zip: string | null = null;
-  
-    // Función para comprimir y codificar en Base64
-    const compressAndEncode = (file: File): Promise<string> => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const buffer = Buffer.from(reader.result as ArrayBuffer);
-          const compressed = zlib.gzipSync(buffer);
-          const base64Data = compressed.toString('base64');
-          resolve(base64Data);
-        };
-        reader.onerror = reject;
-        reader.readAsArrayBuffer(file);
-      });
-    };
-  
+
+    // Crearemos dos FileReader, pero solo si existen los archivos
+    let readerPdf: FileReader | null = null;
+    let readerZip: FileReader | null = null;
+
     // Función para INTENTAR enviar el correo cuando tengamos la info necesaria
     const trySendEmail = () => {
+      // Construir el array de attachments
       const attachmentsArray = [];
-  
+
       if (base64Pdf) {
         attachmentsArray.push({
           filename: 'CaratulaBancariaCliente.pdf',
@@ -526,20 +516,98 @@ export class FormComponent {
       }
       if (base64Zip) {
         attachmentsArray.push({
-          filename: 'DocumentosComprimidos.zip.gz',
+          filename: 'DocumentosComprimidos.zip',
           content: base64Zip,
           encoding: 'base64'
         });
       }
-  
+
+      // Construir el body con ambos adjuntos
       const body = {
         to: email,
         subject: 'ALTA DE CLIENTES',
         text: '¡Hola! Alta de clientes adjunto archivos (PDF y/o ZIP)',
         attachments: attachmentsArray,
-        variables: [ /* Variables existentes */ ]
+        variables: [
+          {
+            "datos_fiscales": {
+              "razon_social": this.rasonName,
+              "regimen_fiscal": {
+                "id": this.regimenSeleccionado.id,
+                "nombre": this.regimenSeleccionado.nombre
+              },
+              "rfc": this.rfc,
+              "calle": this.callePerson,
+              "numero_interior": this.no_intPerson,
+              "numero_exterior": this.no_extPerson,
+              "colonia": this.coloniaPerson,
+              "codigo_postal": this.cpPerson,
+              "municipio": this.municipioPerson,
+              "estado": this.localSelected.nombre,
+              "poblacion": this.poblationPerson,
+              "pais": this.countryPerson,
+              "zona": this.zone,
+              "telefono": this.telPerson,
+              "correo_electronico": this.emailPerson,
+              "pagina_web": this.webPage
+            },
+            "domicilio_instalacion": {
+              "calle": this.calleInst,
+              "numero_exterior": this.no_extInst,
+              "numero_interior": this.no_intInst,
+              "colonia": this.coloniaInst,
+              "codigo_postal": this.cpInst,
+              "municipio": this.municipioInst,
+              "estado": this.localInst,
+              "poblacion": this.poblationInst,
+              "pais": this.countryInst,
+              "zona": this.zoneInst,
+              "telefono": this.telInst
+            },
+            "informacion_facturacion": {
+              "nombre_encargado": this.nameFact,
+              "puesto": this.puestoFact,
+              "telefono": this.telFact,
+              "celular": this.celFact,
+              "correo_electronico": this.emailFact,
+              "cfdi": this.cfdiSelected.descripcion,
+              "metodo_pago": this.wayPageSelected.descripcion,
+              "datos_adicionales": this.aditionalData
+            },
+            "informacion_cobranza": {
+              "nombre_encargado": this.nameCobra,
+              "puesto": this.puestoCobra,
+              "telefono": this.telCobra,
+              "celular": this.celCobra,
+              "correo_electronico": this.emailCobra
+            },
+            "informacion_bancaria": {
+              "numero_cuenta": this.no_count,
+              "numero_cuenta_clabe": this.no_clabe,
+              "banco": this.bankSelected.nombre
+            },
+            "contacto_sitio": {
+              "ubicacion": this.ubicationSite,
+              "coordenadas": this.coordenadasSite,
+              "nombre_contacto_sitio": this.nameSite,
+              "telefono": this.telSite,
+              "celular": this.celSite,
+              "departamento": this.depSite,
+              "horario_atencion": this.timeSite,
+              "megas_aproximados": this.megasSite,
+              "numero_enlaces": this.noEnlace_sit
+            },
+            "datos_vendedor": {
+              "nombre_vendedor": this.nameVen,
+              "oficina": this.oficinaVen,
+              "correos": this.emailSelected.map(item => item.email).join(", "),
+              "celular_vendedor": this.celVen
+            }
+          }
+        ]
       };
-  
+
+      // Enviar la petición al servidor
       axios.post('https://email-own.vercel.app/send-email', body)
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
@@ -549,35 +617,39 @@ export class FormComponent {
           console.error('Error al enviar los archivos', error);
         });
     };
-  
-    // Procesar PDF
+
+    // Lógica para leer el PDF (si existe)
     if (this.fileBank) {
-      const readerPdf = new FileReader();
+      readerPdf = new FileReader();
       readerPdf.onload = () => {
-        base64Pdf = (readerPdf.result as string).split(',')[1];
+        base64Pdf = (readerPdf!.result as string).split(',')[1];
+        // Verificamos si no hay ZIP o si ZIP ya está listo
         if (!this.fileZip || base64Zip !== null) {
           trySendEmail();
         }
       };
       readerPdf.readAsDataURL(this.fileBank);
     }
-  
-    // Procesar ZIP con compresión
+
+    // Lógica para leer el ZIP (si existe)
     if (this.fileZip) {
-      compressAndEncode(this.fileZip).then(compressedZip => {
-        base64Zip = compressedZip;
+      readerZip = new FileReader();
+      readerZip.onload = () => {
+        base64Zip = (readerZip!.result as string).split(',')[1];
+        // Verificamos si no hay PDF o si PDF ya está listo
         if (!this.fileBank || base64Pdf !== null) {
           trySendEmail();
         }
-      }).catch(error => console.error('Error al comprimir el ZIP:', error));
+      };
+      readerZip.readAsDataURL(this.fileZip);
     }
-  
-    // Si no hay PDF ni ZIP
+
+    // Si no hay PDF ni ZIP, enviamos sin adjuntos
     if (!this.fileBank && !this.fileZip) {
       trySendEmail();
     }
   }
-  
+
 
   public submitAll(): void {
 
@@ -608,7 +680,7 @@ export class FormComponent {
       }
     }
 
-    if ((this.fileZip?.size ?? 0) > 70 * 1048576) {
+    if ((this.fileBank?.size ?? 0) > 5 * 1048576 || (this.fileZip?.size ?? 0) > 70 * 1048576) {
       this.snackBar.open('El archivo debe ser un PDF y el ZIP debe tener un tamaño máximo de 70MB.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
         verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
@@ -674,18 +746,4 @@ export class FormComponent {
 
   }
 
-}
-
-function compressAndEncode(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const buffer = Buffer.from(reader.result as ArrayBuffer);
-      const compressed = zlib.gzipSync(buffer);
-      const base64Data = compressed.toString('base64');
-      resolve(base64Data);
-    };
-    reader.onerror = reject;
-    reader.readAsArrayBuffer(file);
-  });
 }
