@@ -493,76 +493,77 @@ export class FormComponent {
 
   
 
-  public useNodeMailer(email: string) {
-    console.log("Desde la funcion useNodeMailer: ", email);
-  
-    let base64Pdf: string | null = null;
-    let base64Zip: string | null = null;
-    let readerPdf: FileReader | null = null;
-    let readerZip: FileReader | null = null;
-  
-    const trySendEmail = () => {
-      const attachmentsArray = [];
-  
-      if (base64Pdf) {
-        attachmentsArray.push({
-          filename: 'CaratulaBancariaCliente.pdf',
-          content: base64Pdf,
-          encoding: 'base64'
-        });
-      }
-      if (base64Zip) {
-        attachmentsArray.push({
-          filename: 'DocumentosComprimidos.zip.gz',
-          content: base64Zip,
-          encoding: 'base64'
-        });
-      }
-  
-      const body = {
-        to: email,
-        subject: 'ALTA DE CLIENTES',
-        text: '¡Hola! Alta de clientes adjunto archivos (PDF y/o ZIP)',
-        attachments: attachmentsArray
-      };
-  
-      axios.post('https://email-own.vercel.app/send-email', body)
-        .then(response => {
-          console.log('Archivos enviados exitosamente:', response);
-        })
-        .catch(error => {
-          console.error('Error al enviar los archivos', error);
-        });
+ 
+public useNodeMailer(email: string) {
+  console.log("Desde la funcion useNodeMailer: ", email);
+
+  let base64Pdf: string | null = null;
+  let base64Zip: string | null = null;
+  let readerPdf: FileReader | null = null;
+  let readerZip: FileReader | null = null;
+
+  const trySendEmail = () => {
+    const attachmentsArray = [];
+
+    if (base64Pdf) {
+      attachmentsArray.push({
+        filename: 'CaratulaBancariaCliente.pdf',
+        content: base64Pdf,
+        encoding: 'base64'
+      });
+    }
+    if (base64Zip) {
+      attachmentsArray.push({
+        filename: 'DocumentosComprimidos.zip.gz',
+        content: base64Zip,
+        encoding: 'base64'
+      });
+    }
+
+    const body = {
+      to: email,
+      subject: 'ALTA DE CLIENTES',
+      text: '¡Hola! Alta de clientes adjunto archivos (PDF y/o ZIP)',
+      attachments: attachmentsArray
     };
-  
-    if (this.fileBank) {
-      readerPdf = new FileReader();
-      readerPdf.onload = () => {
-        base64Pdf = (readerPdf!.result as string).split(',')[1];
-        if (!this.fileZip || base64Zip !== null) {
-          trySendEmail();
-        }
-      };
-      readerPdf.readAsDataURL(this.fileBank);
-    }
-  
-    if (this.fileZip) {
-      readerZip = new FileReader();
-      readerZip.onload = () => {
-        const arrayBuffer = readerZip!.result as ArrayBuffer;
-        const compressedData = pako.gzip(new Uint8Array(arrayBuffer));
-        base64Zip = btoa(String.fromCharCode(...compressedData));
-        if (!this.fileBank || base64Pdf !== null) {
-          trySendEmail();
-        }
-      };
-      readerZip.readAsArrayBuffer(this.fileZip);
-    }
-  
-    if (!this.fileBank && !this.fileZip) {
-      trySendEmail();
-    }
+
+    axios.post('https://email-own.vercel.app/send-email', body)
+      .then(response => {
+        console.log('Archivos enviados exitosamente:', response);
+      })
+      .catch(error => {
+        console.error('Error al enviar los archivos', error);
+      });
+  };
+
+  if (this.fileBank) {
+    readerPdf = new FileReader();
+    readerPdf.onload = () => {
+      base64Pdf = (readerPdf!.result as string).split(',')[1];
+      if (!this.fileZip || base64Zip !== null) {
+        trySendEmail();
+      }
+    };
+    readerPdf.readAsDataURL(this.fileBank);
   }
+
+  if (this.fileZip) {
+    readerZip = new FileReader();
+    readerZip.onload = () => {
+      const arrayBuffer = readerZip!.result as ArrayBuffer;
+      const compressedData = pako.gzip(new Uint8Array(arrayBuffer));
+      base64Zip = arrayBufferToBase64(compressedData.buffer);
+      if (!this.fileBank || base64Pdf !== null) {
+        trySendEmail();
+      }
+    };
+    readerZip.readAsArrayBuffer(this.fileZip);
+  }
+
+  if (!this.fileBank && !this.fileZip) {
+    trySendEmail();
+  }
+}
   
 
   public submitAll(): void {
@@ -662,3 +663,15 @@ export class FormComponent {
 
 }
 
+const arrayBufferToBase64 = (buffer: ArrayBuffer) => {
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  const chunkSize = 8192; // Evitar exceder la pila
+
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    const chunk = bytes.subarray(i, i + chunkSize);
+    binary += String.fromCharCode.apply(null, chunk as any);
+  }
+
+  return btoa(binary);
+};
