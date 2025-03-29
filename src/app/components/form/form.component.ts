@@ -8,7 +8,7 @@ import emailjs from 'emailjs-com';
 import { environment } from '../../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
-import zlib from 'zlib';
+import * as pako from 'pako';
 
 
 @Component({
@@ -491,29 +491,16 @@ export class FormComponent {
   }
 
 
+  
+
   public useNodeMailer(email: string) {
     console.log("Desde la funcion useNodeMailer: ", email);
   
-    // Variables para almacenar base64 de PDF y ZIP
     let base64Pdf: string | null = null;
     let base64Zip: string | null = null;
+    let readerPdf: FileReader | null = null;
+    let readerZip: FileReader | null = null;
   
-    // Función para comprimir y codificar en Base64
-    const compressAndEncode = (file: File): Promise<string> => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const buffer = Buffer.from(reader.result as ArrayBuffer);
-          const compressed = zlib.gzipSync(buffer);
-          const base64Data = compressed.toString('base64');
-          resolve(base64Data);
-        };
-        reader.onerror = reject;
-        reader.readAsArrayBuffer(file);
-      });
-    };
-  
-    // Función para INTENTAR enviar el correo cuando tengamos la info necesaria
     const trySendEmail = () => {
       const attachmentsArray = [];
   
@@ -536,25 +523,22 @@ export class FormComponent {
         to: email,
         subject: 'ALTA DE CLIENTES',
         text: '¡Hola! Alta de clientes adjunto archivos (PDF y/o ZIP)',
-        attachments: attachmentsArray,
-        variables: [ /* Variables existentes */ ]
+        attachments: attachmentsArray
       };
   
       axios.post('https://email-own.vercel.app/send-email', body)
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
-          this.router.navigate(['/gratitude']);
         })
         .catch(error => {
           console.error('Error al enviar los archivos', error);
         });
     };
   
-    // Procesar PDF
     if (this.fileBank) {
-      const readerPdf = new FileReader();
+      readerPdf = new FileReader();
       readerPdf.onload = () => {
-        base64Pdf = (readerPdf.result as string).split(',')[1];
+        base64Pdf = (readerPdf!.result as string).split(',')[1];
         if (!this.fileZip || base64Zip !== null) {
           trySendEmail();
         }
@@ -562,17 +546,19 @@ export class FormComponent {
       readerPdf.readAsDataURL(this.fileBank);
     }
   
-    // Procesar ZIP con compresión
     if (this.fileZip) {
-      compressAndEncode(this.fileZip).then(compressedZip => {
-        base64Zip = compressedZip;
+      readerZip = new FileReader();
+      readerZip.onload = () => {
+        const arrayBuffer = readerZip!.result as ArrayBuffer;
+        const compressedData = pako.gzip(new Uint8Array(arrayBuffer));
+        base64Zip = btoa(String.fromCharCode(...compressedData));
         if (!this.fileBank || base64Pdf !== null) {
           trySendEmail();
         }
-      }).catch(error => console.error('Error al comprimir el ZIP:', error));
+      };
+      readerZip.readAsArrayBuffer(this.fileZip);
     }
   
-    // Si no hay PDF ni ZIP
     if (!this.fileBank && !this.fileZip) {
       trySendEmail();
     }
@@ -676,16 +662,3 @@ export class FormComponent {
 
 }
 
-function compressAndEncode(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const buffer = Buffer.from(reader.result as ArrayBuffer);
-      const compressed = zlib.gzipSync(buffer);
-      const base64Data = compressed.toString('base64');
-      resolve(base64Data);
-    };
-    reader.onerror = reject;
-    reader.readAsArrayBuffer(file);
-  });
-}
