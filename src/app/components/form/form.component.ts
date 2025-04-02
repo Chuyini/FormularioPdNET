@@ -682,7 +682,7 @@ export class FormComponent {
       }
     }
 
-    if ( (this.fileZip?.size ?? 0) > 17 * 1048576) {
+    if ( (this.fileZip?.size ?? 0) > 50 * 1048576) {
       this.snackBar.open('El archivo debe ser un PDF y el ZIP debe tener un tamaño máximo de 17MB.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
         verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
