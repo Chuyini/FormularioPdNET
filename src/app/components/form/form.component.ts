@@ -657,8 +657,8 @@ export class FormComponent {
 
     if (this.rasonName == "" || this.regimenSeleccionado == ""
       || this.telPerson == "" || this.rfc == ""
-      || this.emailPerson == "" || this.emailFact == "",
-      this.celFact == "", this.celCobra == "" || this.emailCobra == "") {
+      || this.emailPerson == "" || this.emailFact == "" ||
+      this.celFact == "" || this.celCobra == "" || this.emailCobra == "") {
 
       this.snackBar.open('Por favor, complete todos los campos obligatorios.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
@@ -682,7 +682,7 @@ export class FormComponent {
       }
     }
 
-    if ( (this.fileZip?.size ?? 0) > 50 * 1048576) {
+    if ((this.fileZip?.size ?? 0) > 50 * 1048576) {
       this.snackBar.open('El archivo debe ser un PDF y el ZIP debe tener un tamaño máximo de 17MB.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
         verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
