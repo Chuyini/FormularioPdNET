@@ -30,13 +30,13 @@
       <br>
       <div class="two-columns">
         <div>
-          <label for="razonSocial">Razón Social / Nombre (Obligatorio)</label>
+          <label for="razonSocial">Razón Social / Nombre (Obligatorio)<span style="color: red;">*</span></label>
           <input maxlength="50" placeholder="Puede poner el nombre o la razon social" type="text" id="razonSocial"
             name="rasonName" [(ngModel)]="rasonName" />
         </div>
 
         <div style="width: 100%; max-width: 400px; margin: auto;">
-          <label for="">(Obligatorio)</label>
+          <label for="">(Obligatorio)<span style="color: red;">*</span></label>
           <ng-select [items]="regimenes" bindLabel="nombre" placeholder="Selecciona un régimen fiscal"
             [(ngModel)]="regimenSeleccionado" name="regimenSeleccionado" class="custom-ng-select" [clearable]="true"
             [searchable]="true" dropdownPosition="auto">
@@ -105,7 +105,7 @@
           <input maxlength="20" type="text" id="zona" name="zone" [(ngModel)]="zone" />
         </div>
         <div>
-          <label for="telefono">Teléfono con lada (Obligatorio)</label>
+          <label for="telefono">Teléfono con lada (Obligatorio)<span style="color: red;">*</span></label>
           <input type="tel" id="telefono" name="telPerson" [(ngModel)]="telPerson" placeholder="Ejemplo:524443698521" />
         </div>
         <div>
@@ -113,7 +113,7 @@
           <input type="text" id="ext" name="ext" /><!--no definido en TS, se podría omitir o crear una variable -->
         </div>
         <div>
-          <label for="correo">Correo Electrónico (Obligatorio)</label>
+          <label for="correo">Correo Electrónico (Obligatorio) <span style="color: red;">*</span></label>
           <input type="email" id="correo" name="emailPerson" [(ngModel)]="emailPerson" />
         </div>
         <div>
@@ -203,13 +203,13 @@
           <input maxlength="60" type="text" id="extFact" name="extFact" /><!-- no definido en TS -->
         </div>
         <div>
-          <label for="celFact">Celular (Obligatorio)</label>
+          <label for="celFact">Celular (Obligatorio)<span style="color: red;">*</span></label>
           <input type="tel" id="celFact" name="celFact" maxlength="12" [(ngModel)]="celFact"
             placeholder="Ejemplo: 524434623914321" />
           <small>Numero de celular con clave lada</small>
         </div>
         <div>
-          <label for="correoFact">Correo Electrónico (Obligatorio)</label>
+          <label for="correoFact">Correo Electrónico (Obligatorio)<span style="color: red;">*</span></label>
           <input type="email" id="correoFact" name="emailFact" [(ngModel)]="emailFact" />
         </div>
         <div>
@@ -266,11 +266,11 @@
           <input maxlength="60" type="text" id="extCob" name="extCob" /><!-- no definido en TS -->
         </div>
         <div>
-          <label for="celCob">Celular (Obligatorio) </label>
+          <label for="celCob">Celular (Obligatorio)<span style="color: red;">*</span> </label>
           <input type="tel" id="celCob" maxlength="12" name="celCobra" [(ngModel)]="celCobra" />
         </div>
         <div>
-          <label for="correoCob">Correo Electrónico (Obligatorio)</label>
+          <label for="correoCob">Correo Electrónico (Obligatorio)<span style="color: red;">*</span></label>
           <input type="email" id="correoCob" name="emailCobra" [(ngModel)]="emailCobra" />
         </div>
       </div>
