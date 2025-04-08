@@ -157,7 +157,7 @@ export class FormComponent {
 
   emailsPdnt = [
     { id: 1, email: "suemy.avila@elpoderdeinternet.mx" },
-    { id: 2, email: "carlos.escalona@elpoderdeinterntet.mx" },
+    { id: 2, email: "carlos.escalona@elpoderdeinternet.mx" },
     { id: 3, email: "genesis.mercado@elpoderdeinternet.mx" },
     { id: 4, email: "deysimar.jimenez@elpoderdeinternet.mx" },
     { id: 5, email: "administracion@elpoderdeinternet.mx" },
