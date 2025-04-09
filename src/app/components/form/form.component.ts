@@ -489,8 +489,8 @@ export class FormComponent {
   }
 
 
-  public useNodeMailer(email: string) {
-    console.log("Desde la funcion useNodeMailer: ", email);
+  public useNodeMailer(emails: any) {
+    console.log("Desde la funcion useNodeMailer: ", emails);
 
 
 
@@ -524,7 +524,7 @@ export class FormComponent {
 
       // Construir el body con ambos adjuntos
       const body = {
-        to: email,
+        to: emails,
         subject: 'ALTA DE CLIENTES',
         text: '¡Hola! Alta de clientes adjunto archivos (PDF y/o ZIP)',
         attachments: attachmentsArray,
@@ -722,11 +722,22 @@ export class FormComponent {
 
       }
 
+      const emails = this.emailSelected;
 
-      for (const object of this.emailSelected) {
+      console.log("Correos selecionados ", emails);
 
 
-        const email = object.email;
+      if (emails) {
+        this.router.navigate(['/load']);
+        this.useNodeMailer(emails);
+        console.log("Exito al mandar el correo ");
+
+      }
+
+      /*for (const object of this.emailSelected) {//consjunto de emails seleccionados
+
+
+        const email = object.email;//<-- es un objeto
         // this.printAllData();
         console.log("Deberia imprimir: ", email)
         console.log("El id es: ", email.id);
@@ -737,7 +748,7 @@ export class FormComponent {
           console.log("Exito al mandar el correo ", object.id);
 
         }
-      }
+      }*/
 
     } catch (error) {
       console.log("Ocurrio el siguiente error: ", error);
