@@ -6,7 +6,18 @@
     font-family: 'Century Gothic', sans-serif; /* Fuente Century Gothic */
     background-color: whitesmoke;
     align-items: center; /* Alinea los elementos verticalmente en el centro */
+    animation: fadeIn 3s ease;
   }
+  @keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
   
   .header-text {
     font-style: italic;

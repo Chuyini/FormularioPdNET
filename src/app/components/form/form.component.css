@@ -7,6 +7,18 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+
+    from {
+        margin-top: 100%;
+    }
+
+    to {
+        margin-top: 0%;
+    }
 }
 
 h1,
