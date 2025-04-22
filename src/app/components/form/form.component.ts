@@ -25,7 +25,7 @@ export class FormComponent {
   localSelected: any = { id: 0, nombre: "No seleccionado" };
   cfdiSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
   wayPageSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
-  bankSelected: any = { id: 0, nombre: "No seleccionado" };
+  bankSelected: any = { id: 0, nombre: "No seleccionado" }; 
 
   rasonName: any = ""; // nombre (Obligatorio)
   rfc: any = ""; // (Obligatorio)
