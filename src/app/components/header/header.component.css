@@ -1,68 +1,75 @@
 .header {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    border-bottom: 2px solid black; /* Línea de separación */
-    font-family: 'Century Gothic', sans-serif; /* Fuente Century Gothic */
-    background-color: whitesmoke;
-    align-items: center; /* Alinea los elementos verticalmente en el centro */
-    animation: fadeIn 3s ease;
-  }
-  @keyframes fadeIn {
-
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 2px solid black;
+  /* Línea de separación */
+  font-family: 'Century Gothic', sans-serif;
+  /* Fuente Century Gothic */
+  background-color: whitesmoke;
+  align-items: center;
+  /* Alinea los elementos verticalmente en el centro */
+  animation: fadeIn 6s ease;
 }
-  
-  .header-text {
-    font-style: italic;
-    font-size: 25px;
-    text-align: right;
-    margin-right: 2%;
-    margin-top: 5%;
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
   }
-  
-  .imgs {
-    width: 200px;
-    height: 200px;
-    margin: 20px;
+
+  to {
+    opacity: 1;
   }
-  
+}
+
+.header-text {
+  font-style: italic;
+  font-size: 25px;
+  text-align: right;
+  margin-right: 2%;
+  margin-top: 5%;
+}
+
+.imgs {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+}
+
+.header img {
+  max-width: 200px;
+  /* Ajusta el tamaño de la imagen según sea necesario */
+  margin-right: 20px;
+  /* Ajustado el margen derecho */
+  border-radius: 10%;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    /* Cambia la dirección a columna en pantallas pequeñas */
+    align-items: center;
+  }
+
   .header img {
-    max-width: 200px; /* Ajusta el tamaño de la imagen según sea necesario */
-    margin-right: 20px; /* Ajustado el margen derecho */
-    border-radius: 10%;
+    margin-right: 0;
+    margin-bottom: 10px;
+    /* Añade margen inferior para separación en columna */
   }
-  
-  /* Media Queries para Responsividad */
-  @media (max-width: 768px) {
-    .header {
-      flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
-      align-items: center;
-    }
-  
-    .header img {
-      margin-right: 0;
-      margin-bottom: 10px; /* Añade margen inferior para separación en columna */
-    }
-  
-    .header-text {
-      font-size: 20px;
-      text-align: center;
-      margin-top: 50px;
-      margin-right: 0;
-    }
-  
-    .imgs {
-      width: 150px;
-      height: 150px;
-      text-align: center;
-      margin-right: 15%
-    }
+
+  .header-text {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 50px;
+    margin-right: 0;
   }
-  
+
+  .imgs {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    margin-right: 15%
+  }
+}

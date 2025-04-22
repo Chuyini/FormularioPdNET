@@ -20,15 +20,20 @@ export class FormComponent {
   constructor(private snackBar: MatSnackBar, private router: Router,) { }
   //************************DATOS FISCALES**********************************
 
+  // Valores iniciales para los dropdowns
+  regimenSeleccionado: any = { id: 0, nombre: "No seleccionado" };
+  localSelected: any = { id: 0, nombre: "No seleccionado" };
+  cfdiSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
+  wayPageSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
+  bankSelected: any = { id: 0, nombre: "No seleccionado" };
+
   rasonName: any = ""; // nombre (Obligatorio)
-  regimenSeleccionado: any = ""; // Aquí se guardará el valor seleccionado (Obligatorio)
   rfc: any = ""; // (Obligatorio)
   callePerson: any = "";
   no_intPerson: number = 0;
   coloniaPerson: any = "";
   cpPerson: any = "";
   municipioPerson: any = "";
-  localSelected: any = ""; // Estado seleccionado
   poblationPerson: any = "";
   countryPerson: any = "";
   zone: any = "";
@@ -58,8 +63,7 @@ export class FormComponent {
   telFact: any = "";
   celFact: any = "";
   emailFact: any = "";
-  cfdiSelected: any = "";
-  wayPageSelected: any = "";
+  
   aditionalData: any = "";
 
   //***************************INFORMACION COBRANZAS*****************************
@@ -74,7 +78,6 @@ export class FormComponent {
 
   no_count: any = "";
   no_clabe: any = "";
-  bankSelected: any = "";
 
   //****************************CONTACTO DE SITIO**************************
 
