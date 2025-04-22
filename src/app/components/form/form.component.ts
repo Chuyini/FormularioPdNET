@@ -63,7 +63,7 @@ export class FormComponent {
   telFact: any = "";
   celFact: any = "";
   emailFact: any = "";
-
+  
   aditionalData: any = "";
 
   //***************************INFORMACION COBRANZAS*****************************
@@ -659,7 +659,7 @@ export class FormComponent {
   public submitAll(): void {
 
     if (this.rasonName == "" || this.regimenSeleccionado == ""
-      || this.telPerson == ""
+      || this.telPerson == "" 
       || this.emailPerson == "" || this.emailFact == "" ||
       this.celFact == "" || this.celCobra == "" || this.emailCobra == "") {
 
