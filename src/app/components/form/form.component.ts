@@ -363,7 +363,7 @@ export class FormComponent {
   DATOS FISCALES
   -----------------------------------------
   Razón Social / Nombre: ${this.rasonName}
-  Régimen Fiscal:  ${this.regimenSeleccionado} ${this.regimenes[this.regimenSeleccionado].nombre}
+  Régimen Fiscal:  ${this.regimenSeleccionado.id} ${this.regimenSeleccionado.nombre}
   RFC: ${this.rfc}
   Calle: ${this.callePerson}
   N° Int: ${this.no_intPerson}
