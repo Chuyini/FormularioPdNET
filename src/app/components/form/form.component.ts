@@ -537,7 +537,7 @@ export class FormComponent {
       const body = {
         to: emails,
         subject: 'ALTA DE CLIENTES',
-        text: '¡Hola!te entrego el Alta de clientes 😊👌',
+        text: '¡Hola! te entrego el Alta de clientes 😊👌 ➡️',
         attachments: attachmentsArray,
         variables: [
           {
