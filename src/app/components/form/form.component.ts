@@ -25,7 +25,7 @@ export class FormComponent {
 
   constructor(private snackBar: MatSnackBar, private router: Router,) {
 
-   }
+  }
   //************************DATOS FISCALES**********************************
 
   // Valores iniciales para los dropdowns
@@ -33,7 +33,7 @@ export class FormComponent {
   localSelected: any = { id: 0, nombre: "No seleccionado" };
   cfdiSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
   wayPageSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
-  bankSelected: any = { id: 0, nombre: "No seleccionado" }; 
+  bankSelected: any = { id: 0, nombre: "No seleccionado" };
 
   rasonName: any = ""; // nombre (Obligatorio)
   rfc: any = ""; // (Obligatorio)
@@ -71,7 +71,7 @@ export class FormComponent {
   telFact: any = "";
   celFact: any = "";
   emailFact: any = "";
-  
+
   aditionalData: any = "";
 
   //***************************INFORMACION COBRANZAS*****************************
@@ -665,13 +665,13 @@ export class FormComponent {
     }
   }
 
-  
-  
+
+
 
   public submitAll(): void {
 
     if (this.rasonName == "" || this.regimenSeleccionado == ""
-      || this.telPerson == "" 
+      || this.telPerson == ""
       || this.emailPerson == "" || this.emailFact == "" ||
       this.celFact == "" || this.celCobra == "" || this.emailCobra == "") {
 
@@ -776,20 +776,20 @@ export class FormComponent {
   generatePDF() {
     const doc = new jsPDF();
     let y = 10; // posición vertical inicial
-  
+
     const addLine = (text: string, space = 10) => {
       doc.text(text, 10, y);
       y += space;
     };
-  
+
     // Sección: Encabezado
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     addLine('ALTA DE CLIENTES');
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
-    addLine('¡Hola! Alta de clientes adjunto archivos (PDF y/o ZIP)');
-  
+    addLine(`Hola ${this.rasonName}`);
+
     // Datos Fiscales
     addLine('Datos Fiscales', 12);
     addLine(`Razón Social: ${this.rasonName}`);
@@ -798,43 +798,43 @@ export class FormComponent {
     addLine(`Domicilio: ${this.callePerson} ${this.no_extPerson || ''} ${this.no_intPerson || ''}, ${this.coloniaPerson}, ${this.municipioPerson}, ${this.localSelected?.nombre}, ${this.poblationPerson}, C.P. ${this.cpPerson}`);
     addLine(`País: ${this.countryPerson}, Zona: ${this.zone}`);
     addLine(`Teléfono: ${this.telPerson}, Correo Electrónico: ${this.emailPerson}`);
-  
+
     // Domicilio de Instalación
     addLine('Domicilio de Instalación', 12);
     addLine(`Calle: ${this.calleInst}, No. Exterior: ${this.no_extInst}, No. Interior: ${this.no_intInst}`);
     addLine(`Colonia: ${this.coloniaInst}, C.P. ${this.cpInst}, Municipio: ${this.municipioInst}, Estado: ${this.localInst}`);
     addLine(`País: ${this.countryInst}, Zona: ${this.zoneInst}, Teléfono: ${this.telInst}`);
-  
+
     // Información de Facturación
     addLine('Información de Facturación', 12);
     addLine(`Nombre Encargado: ${this.nameFact}, Puesto: ${this.puestoFact}`);
     addLine(`Teléfono: ${this.telFact}, Celular: ${this.celFact}, Correo Electrónico: ${this.emailFact}`);
     addLine(`CFDI: ${this.cfdiSelected?.descripcion}, Método de Pago: ${this.wayPageSelected?.descripcion}`);
     addLine(`Datos Adicionales: ${this.aditionalData}`);
-  
+
     // Información de Cobranza
     addLine('Información de Cobranza', 12);
     addLine(`Nombre Encargado: ${this.nameCobra}, Puesto: ${this.puestoCobra}`);
     addLine(`Teléfono: ${this.telCobra}, Celular: ${this.celCobra}, Correo Electrónico: ${this.emailCobra}`);
-  
+
     // Información Bancaria
     addLine('Información Bancaria', 12);
     addLine(`Número de Cuenta: ${this.no_count}, CLABE: ${this.no_clabe}, Banco: ${this.bankSelected?.nombre}`);
-  
+
     // Contacto del Sitio
     addLine('Contacto del Sitio', 12);
     addLine(`Ubicación: ${this.ubicationSite}, Coordenadas: ${this.coordenadasSite}`);
     addLine(`Nombre Contacto: ${this.nameSite}, Teléfono: ${this.telSite}, Celular: ${this.celSite}`);
     addLine(`Departamento: ${this.depSite}, Horario de Atención: ${this.timeSite}`);
     addLine(`Megas Aproximados: ${this.megasSite}, Número de Enlaces: ${this.noEnlace_sit}`);
-  
+
     // Datos del Vendedor
     addLine('Datos del Vendedor', 12);
     addLine(`Nombre Vendedor: ${this.nameVen}, Oficina: ${this.oficinaVen}`);
     addLine(`Correos: ${this.emailSelected?.map(item => item.email).join(', ')}`);
     addLine(`Celular: ${this.celVen}`);
-  
-    doc.save('alta_clientes.pdf');
+
+    doc.save(`${this.rasonName}_Alta_Pdnt.pdf`);
   }
 
 }
