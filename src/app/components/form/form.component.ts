@@ -834,7 +834,7 @@ export class FormComponent {
     addLine(`Correos: ${this.emailSelected?.map(item => item.email).join(', ')}`);
     addLine(`Celular: ${this.celVen}`);
 
-    doc.save(`Alta_Pdnt.pdf`);
+    doc.save('Alta_Pdnt.pdf');
   }
 
 }
