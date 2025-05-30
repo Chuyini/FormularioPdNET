@@ -134,7 +134,8 @@ export class FormComponent {
     { id: 623, nombre: "Opcional para Grupos de Sociedades" },
     { id: 624, nombre: "Coordinados" },
     { id: 625, nombre: "Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas" },
-    { id: 626, nombre: "Régimen Simplificado de Confianza" }
+    { id: 626, nombre: "Régimen Simplificado de Confianza" },
+    { id: 627, nombre: "Publico General" }
   ]
 
   use_cfdi = [
@@ -289,7 +290,7 @@ export class FormComponent {
     { "id": 32, "c_Estado": "ZAC", "c_Pais": "MEX", "nombre": "Zacatecas" }
   ]
 
-
+ 
   public printAllData(): void {
     console.log('*************** DATOS FISCALES ***************');
     console.log('rasonName:', this.rasonName);
