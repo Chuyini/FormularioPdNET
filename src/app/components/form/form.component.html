@@ -309,7 +309,13 @@
         <small><i> Usar .PDF </i></small>
         <label for="fileInput" class="file-label">Subir Carátula Bancaria</label>
         <input type="file" accept="pdf" id="fileInput" class="file-input" (change)="onFileSelected($event, 'bankFile')">
-        <span class="file-name">{{ bankFileName || 'Ningún archivo seleccionado' }}</span>
+        <span class="file-name" style="color: green" *ngIf="bankFileName">{{bankFileName}}</span>
+
+
+        <span class="file-name" style="color: red; font-size:medium;" *ngIf="bankFileName === ''">*Ningún archivo
+          seleccionado</span>
+        <br>
+
       </div>
 
 
@@ -425,7 +431,14 @@
         </small>
         <label for="zipInput" class="file-label">Subir Archivo Comprimido</label>
         <input type="file" accept="zip" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
-        <span class="file-name">{{ zipFileName || 'Ningún archivo seleccionado' }}</span>
+        <span class="file-name" style="color: green" *ngIf="zipFileName">{{zipFileName}}</span>
+
+
+        <span class="file-name" style="color: red; font-size:medium;" *ngIf="zipFileName === ''">*Ningún archivo
+          seleccionado</span>
+        <br>
+
+
       </div>
 
     </fieldset>

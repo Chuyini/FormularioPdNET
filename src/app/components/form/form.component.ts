@@ -9,6 +9,8 @@ import { environment } from '../../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import jsPDF from 'jspdf';
+import { CommonModule } from '@angular/common';
+
 
 
 
@@ -16,7 +18,7 @@ import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-form',
-  imports: [NgSelectModule, FormsModule, ReactiveFormsModule],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
@@ -684,6 +686,8 @@ export class FormComponent {
       return;
 
     }
+
+    
 
     // Validar extensión .pdf si fileBank está definido
     if (this.fileBank) {
