@@ -21,4 +21,8 @@ export class FloatingButtonComponent {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
+
+  navegationPoderNet() {
+    window.open('http://elpoderdeinternet.mx/', '_blank');
+  }
 }
