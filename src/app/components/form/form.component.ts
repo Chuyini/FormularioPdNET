@@ -621,7 +621,7 @@ export class FormComponent {
         ]
       };
 
-      this.generatePDF();
+      
 
       // Enviar la petición al servidor 
 
@@ -629,10 +629,12 @@ export class FormComponent {
       axios.post('https://emailown-production.up.railway.app/send-email', body)
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
+          this.generatePDF();
           this.router.navigate(['/gratitude']);
         })
         .catch(error => {
           console.error('Error al enviar los archivos', error);
+          this.generatePDF();
         });
     };
 
