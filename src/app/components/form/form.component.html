@@ -260,7 +260,7 @@
         </div>
         <div>
           <label for="telCob">Teléfono con lada</label>
-          <input type="text" id="telCob" name="telCobra" [(ngModel)]="telCobra" />
+          <input type="text" id="telCob" name="telCobra" [(ngModel)]="telCobra" maxlength="12"/>
         </div>
         <div>
           <label for="extCob">Ext.</label>
@@ -351,20 +351,20 @@
       <div class="two-columns">
         <div>
           <label for="ubicacion">Ubicación</label>
-          <input type="text" id="ubicacion" name="ubicationSite" [(ngModel)]="ubicationSite" />
+          <input type="text" id="ubicacion" name="ubicationSite" [(ngModel)]="ubicationSite" maxlength="400"/>
         </div>
         <div>
           <label for="coordenadas">Coordenadas</label>
-          <input type="text" id="coordenadas" name="coordenadasSite" [(ngModel)]="coordenadasSite"
+          <input type="text" id="coordenadas" name="coordenadasSite" [(ngModel)]="coordenadasSite" maxlength="40"
             placeholder="Ejemplo: 20.1823,-16.834" />
         </div>
         <div>
           <label for="contactoSitio">Nombre del Contacto en Sitio</label>
-          <input type="text" id="contactoSitio" name="nameSite" [(ngModel)]="nameSite" />
+          <input type="text" id="contactoSitio" name="nameSite" [(ngModel)]="nameSite" maxlength="200"/>
         </div>
         <div>
           <label for="telSitio">Teléfono con lada</label>
-          <input type="text" id="telSitio" name="telSite" [(ngModel)]="telSite" />
+          <input type="text" id="telSitio" name="telSite" [(ngModel)]="telSite" maxlength="12"/>
         </div>
         <div>
           <label for="celSitio">Celular</label>
@@ -372,7 +372,7 @@
         </div>
         <div>
           <label for="departamentoSitio">Departamento (Ingeniero encargado)</label>
-          <input type="text" id="departamentoSitio" name="depSite" [(ngModel)]="depSite" />
+          <input type="text" id="departamentoSitio" name="depSite" [(ngModel)]="depSite" maxlength="600" />
         </div>
         <div>
           <label for="horarioAtencion">Horario de atención</label>
@@ -381,11 +381,11 @@
         </div>
         <div>
           <label for="megasAprox">Megas Aproximados</label>
-          <input type="text" id="megasAprox" name="megasSite" [(ngModel)]="megasSite" />
+          <input type="text" id="megasAprox" name="megasSite" [(ngModel)]="megasSite" maxlength="20" />
         </div>
         <div>
           <label for="numEnlaces">Número de Enlaces</label>
-          <input type="text" id="numEnlaces" name="noEnlace_sit" [(ngModel)]="noEnlace_sit" />
+          <input type="text" id="numEnlaces" name="noEnlace_sit" [(ngModel)]="noEnlace_sit"  maxlength="10"/>
         </div>
       </div>
     </fieldset>
@@ -449,11 +449,11 @@
       <div class="two-columns">
         <div>
           <label for="nombreVendedor">Nombre del vendedor</label>
-          <input type="text" id="nombreVendedor" name="nameVen" [(ngModel)]="nameVen" />
+          <input type="text" id="nombreVendedor" maxlength="60" name="nameVen" [(ngModel)]="nameVen" />
         </div>
         <div>
           <label for="oficina">Oficina</label>
-          <input type="text" id="oficina" name="oficinaVen" [(ngModel)]="oficinaVen" />
+          <input type="text" id="oficina" name="oficinaVen" [(ngModel)]="oficinaVen"  maxlength="70"/>
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">

@@ -292,7 +292,7 @@ export class FormComponent {
     { "id": 32, "c_Estado": "ZAC", "c_Pais": "MEX", "nombre": "Zacatecas" }
   ]
 
- 
+
   public printAllData(): void {
     console.log('*************** DATOS FISCALES ***************');
     console.log('rasonName:', this.rasonName);
@@ -621,7 +621,7 @@ export class FormComponent {
         ]
       };
 
-      
+
 
       // Enviar la petición al servidor 
 
@@ -634,7 +634,15 @@ export class FormComponent {
         })
         .catch(error => {
           console.error('Error al enviar los archivos', error);
-          this.generatePDF();
+
+          // Mostrar mensaje emergente al cliente
+          const mensaje = error instanceof Error
+            ? `Error: ${error.message}\nStack: ${error.stack}`
+            : `Error inesperado: ${JSON.stringify(error)}`;
+
+          window.alert(mensaje);
+
+          this.generatePDF();  // Acción alternativa
         });
     };
 
@@ -689,7 +697,7 @@ export class FormComponent {
 
     }
 
-    
+
 
     // Validar extensión .pdf si fileBank está definido
     if (this.fileBank) {
