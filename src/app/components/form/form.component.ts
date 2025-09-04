@@ -10,7 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
-let itsAllOK = false;
 
 
 
@@ -506,6 +505,7 @@ export class FormComponent {
 
   public async useNodeMailer(emails: any) {
     console.log("Desde la funcion useNodeMailer: ", emails);
+    let itsAllOK = false;
 
     this.router.navigate(['/load']);
 
@@ -519,6 +519,7 @@ export class FormComponent {
 
     // Función para INTENTAR enviar el correo cuando tengamos la info necesaria
     const trySendEmail = () => {
+
       // Construir el array de attachments
       const attachmentsArray = [];
 
@@ -679,6 +680,7 @@ export class FormComponent {
 
   public async submitAll(): Promise<void> {
 
+
     if (this.rasonName == "" || this.regimenSeleccionado == ""
       || this.telPerson == ""
       || this.emailPerson == "" || this.emailFact == "" ||
@@ -757,12 +759,7 @@ export class FormComponent {
       if (emails) {
 
         await this.useNodeMailer(emails);
-        console.log("Todo esta bien :", itsAllOK);
-        if (itsAllOK === true) {
-          console.log("Exito al mandar el correo ");
-          this.router.navigate(['/gratitude']);
-          itsAllOK = false;//regresamos a falso para la siguiente vez
-        }
+
 
 
 
