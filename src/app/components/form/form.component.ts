@@ -646,9 +646,9 @@ export class FormComponent {
           this.generatePDF();  // Acción alternativa
           this.router.navigate(['/error']);
         }).finally(() => {
+          
           this.generatePDF(); 
-          console.log("Finalizo el proceso");
-          this.router.navigate(['/error']);
+         
         });
     };
 
