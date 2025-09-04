@@ -507,7 +507,7 @@ export class FormComponent {
   public async useNodeMailer(emails: any) {
     console.log("Desde la funcion useNodeMailer: ", emails);
 
-
+    this.router.navigate(['/load']);
 
     // Variables para almacenar base64 de PDF y ZIP
     let base64Pdf: string | null = null;
@@ -651,7 +651,7 @@ export class FormComponent {
         }).finally(() => {
 
           this.generatePDF();
-          if(itsAllOK === true){
+          if (itsAllOK === true) {
             this.router.navigate(['/gratitude']);
             itsAllOK = false;//regresamos a falso para la siguiente vez
           }
@@ -762,7 +762,7 @@ export class FormComponent {
 
     }
 
-    this.router.navigate(['/load']);
+
     try {
 
 
@@ -774,13 +774,13 @@ export class FormComponent {
       if (emails) {
 
         await this.useNodeMailer(emails);
-        console.log("Todo esta bien :", itsAllOK);  
+        console.log("Todo esta bien :", itsAllOK);
         if (itsAllOK === true) {
           console.log("Exito al mandar el correo ");
           this.router.navigate(['/gratitude']);
           itsAllOK = false;//regresamos a falso para la siguiente vez
         }
-        
+
 
 
       }
