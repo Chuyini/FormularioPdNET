@@ -774,6 +774,7 @@ export class FormComponent {
       if (emails) {
 
         await this.useNodeMailer(emails);
+        console.log("Todo esta bien :", itsAllOK);  
         if (itsAllOK === true) {
           console.log("Exito al mandar el correo ");
           this.router.navigate(['/gratitude']);
