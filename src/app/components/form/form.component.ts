@@ -503,7 +503,7 @@ export class FormComponent {
   }
 
 
-  public async useNodeMailer(emails: any) {
+  public useNodeMailer(emails: any) {
     console.log("Desde la funcion useNodeMailer: ", emails);
     let itsAllOK = false;
 
@@ -748,44 +748,40 @@ export class FormComponent {
     }
 
 
-    try {
-
-
-      const emails = this.emailSelected;
-
-      console.log("Correos selecionados ", emails);
-
-
-      if (emails) {
-
-        await this.useNodeMailer(emails);
 
 
 
+    const emails = this.emailSelected;
 
-      }
-
-      /*for (const object of this.emailSelected) {//consjunto de emails seleccionados
+    console.log("Correos selecionados ", emails);
 
 
-        const email = object.email;//<-- es un objeto
-        // this.printAllData();
-        console.log("Deberia imprimir: ", email)
-        console.log("El id es: ", email.id);
-        console.log("Correo selccionado: ", email);
-        if (email) {
-          this.router.navigate(['/load']);
-          this.useNodeMailer(email);
-          console.log("Exito al mandar el correo ", object.id);
+    if (emails) {
 
-        }
-      }*/
+      this.useNodeMailer(emails);
 
-    } catch (error) {
-      console.log("Ocurrio el siguiente error: ", error);
-      this.router.navigate(['/error']);
+
+
 
     }
+
+    /*for (const object of this.emailSelected) {//consjunto de emails seleccionados
+
+
+      const email = object.email;//<-- es un objeto
+      // this.printAllData();
+      console.log("Deberia imprimir: ", email)
+      console.log("El id es: ", email.id);
+      console.log("Correo selccionado: ", email);
+      if (email) {
+        this.router.navigate(['/load']);
+        this.useNodeMailer(email);
+        console.log("Exito al mandar el correo ", object.id);
+
+      }
+    }*/
+
+
 
     console.log("No termina");
 
