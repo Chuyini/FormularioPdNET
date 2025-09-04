@@ -641,18 +641,16 @@ export class FormComponent {
       axios.post('https://emailown-production.up.railway.app/send-email', body)
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
-          itsAllOK = true;
+          this.router.navigate(['/gratitude']);
+
         })
         .catch(error => {
           console.error('Error al enviar los archivos', error);
-          itsAllOK = false;
-          window.alert('Error al enviar. Revisa tu conexión o intenta más tarde.');
+          this.router.navigate(['/error']);
         })
         .finally(() => {
           this.generatePDF();
-          this.router.navigate([itsAllOK ? '/gratitude' : '/error']);
         });
-
 
 
     }
@@ -678,7 +676,7 @@ export class FormComponent {
         zipReady = true;
         checkAndSend();
       };
-      
+
       readerZip.readAsDataURL(this.fileZip);
     } else {
       zipReady = true;
