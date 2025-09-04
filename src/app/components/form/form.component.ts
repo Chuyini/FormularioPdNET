@@ -639,10 +639,16 @@ export class FormComponent {
           const mensaje = error instanceof Error
             ? `Error: ${error.message}\nStack: ${error.stack}`
             : `Error inesperado: ${JSON.stringify(error)}`;
+            
 
-          window.alert(mensaje);
+          
 
           this.generatePDF();  // Acción alternativa
+          this.router.navigate(['/error']);
+        }).finally(() => {
+          this.generatePDF(); 
+          console.log("Finalizo el proceso");
+          this.router.navigate(['/error']);
         });
     };
 
