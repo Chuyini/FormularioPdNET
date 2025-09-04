@@ -517,6 +517,16 @@ export class FormComponent {
     let readerPdf: FileReader | null = null;
     let readerZip: FileReader | null = null;
 
+    let pdfReady = false;
+    let zipReady = false;
+
+    const checkAndSend = () => {
+      if ((this.fileBank && !pdfReady) || (this.fileZip && !zipReady)) return;
+      trySendEmail();
+    };
+
+
+
     // Función para INTENTAR enviar el correo cuando tengamos la info necesaria
     const trySendEmail = () => {
 
@@ -643,36 +653,35 @@ export class FormComponent {
           this.router.navigate([itsAllOK ? '/gratitude' : '/error']);
         });
 
-      // Lógica para leer el PDF (si existe)
-      if (this.fileBank) {
-        readerPdf = new FileReader();
-        readerPdf.onload = () => {
-          base64Pdf = (readerPdf!.result as string).split(',')[1];
-          // Verificamos si no hay ZIP o si ZIP ya está listo
-          if (!this.fileZip || base64Zip !== null) {
-            trySendEmail();
-          }
-        };
-        readerPdf.readAsDataURL(this.fileBank);
-      }
 
-      // Lógica para leer el ZIP (si existe)
-      if (this.fileZip) {
-        readerZip = new FileReader();
-        readerZip.onload = () => {
-          base64Zip = (readerZip!.result as string).split(',')[1];
-          // Verificamos si no hay PDF o si PDF ya está listo
-          if (!this.fileBank || base64Pdf !== null) {
-            trySendEmail();
-          }
-        };
-        readerZip.readAsDataURL(this.fileZip);
-      }
 
-      // Si no hay PDF ni ZIP, enviamos sin adjuntos
-      if (!this.fileBank && !this.fileZip) {
-        trySendEmail();
-      }
+    }
+    if (this.fileBank) {
+      readerPdf = new FileReader();
+      readerPdf.onload = () => {
+        base64Pdf = (readerPdf!.result as string).split(',')[1];
+        pdfReady = true;
+        checkAndSend();
+      };
+      readerPdf.readAsDataURL(this.fileBank);
+    } else {
+      pdfReady = true;
+    }
+
+    if (this.fileZip) {
+      readerZip = new FileReader();
+      readerZip.onload = () => {
+        base64Zip = (readerZip!.result as string).split(',')[1];
+        zipReady = true;
+        checkAndSend();
+      };
+      readerZip.readAsDataURL(this.fileZip);
+    } else {
+      zipReady = true;
+    }
+    // Si no hay PDF ni ZIP, enviamos sin adjuntos
+    if (!this.fileBank && !this.fileZip) {
+      trySendEmail();
     }
   }
 
