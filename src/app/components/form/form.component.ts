@@ -651,6 +651,10 @@ export class FormComponent {
         }).finally(() => {
 
           this.generatePDF();
+          if(itsAllOK === true){
+            this.router.navigate(['/gratitude']);
+            itsAllOK = false;//regresamos a falso para la siguiente vez
+          }
 
         });
     };
