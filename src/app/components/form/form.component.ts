@@ -632,7 +632,7 @@ export class FormComponent {
           console.log('Archivos enviados exitosamente:', response);
           this.router.navigate(['/gratitude']);
           itsAllOK = true;
-          
+
 
         })
         .catch(error => {
@@ -642,16 +642,16 @@ export class FormComponent {
           const mensaje = error instanceof Error
             ? `Error: ${error.message}\nStack: ${error.stack}`
             : `Error inesperado: ${JSON.stringify(error)}`;
-            itsAllOK = false;
-            
+          itsAllOK = false;
 
-          
+
+
 
           this.router.navigate(['/error']);
         }).finally(() => {
 
-          this.generatePDF(); 
-         
+          this.generatePDF();
+
         });
     };
 
@@ -744,22 +744,23 @@ export class FormComponent {
       }
     }
 
+    if (this.emailSelected.length < 1) {
 
+      this.snackBar.open('Seleccione al menos un correo.', 'Cerrar', {
+        duration: 3000, // Duración en milisegundos
+        verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
+        horizontalPosition: 'center'
+        // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
+      });
+
+      return;
+
+
+    }
+
+    this.router.navigate(['/load']);
     try {
 
-      if (this.emailSelected.length < 1) {
-
-        this.snackBar.open('Seleccione al menos un correo.', 'Cerrar', {
-          duration: 3000, // Duración en milisegundos
-          verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
-          horizontalPosition: 'center'
-          // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
-        });
-
-        return;
-
-
-      }
 
       const emails = this.emailSelected;
 
@@ -767,13 +768,15 @@ export class FormComponent {
 
 
       if (emails) {
-        this.router.navigate(['/load']);
+
         await this.useNodeMailer(emails);
-        if(itsAllOK === true){
+        if (itsAllOK === true) {
+          console.log("Exito al mandar el correo ");
           this.router.navigate(['/gratitude']);
           itsAllOK = false;//regresamos a falso para la siguiente vez
         }
         
+
 
       }
 
@@ -795,6 +798,7 @@ export class FormComponent {
 
     } catch (error) {
       console.log("Ocurrio el siguiente error: ", error);
+      this.router.navigate(['/error']);
 
     }
 
