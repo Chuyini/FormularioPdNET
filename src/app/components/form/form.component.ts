@@ -503,7 +503,7 @@ export class FormComponent {
   }
 
 
-  public useNodeMailer(emails: any) {
+  public async useNodeMailer(emails: any) {
     console.log("Desde la funcion useNodeMailer: ", emails);
     let itsAllOK = false;
 
@@ -520,15 +520,15 @@ export class FormComponent {
     let pdfReady = false;
     let zipReady = false;
 
-    const checkAndSend = () => {
+    const checkAndSend = async () => {
       if ((this.fileBank && !pdfReady) || (this.fileZip && !zipReady)) return;
-      trySendEmail();
+      await trySendEmail();
     };
 
 
 
     // Función para INTENTAR enviar el correo cuando tengamos la info necesaria
-    const trySendEmail = () => {
+    const trySendEmail = async () => {
 
       // Construir el array de attachments
       const attachmentsArray = [];
@@ -638,19 +638,16 @@ export class FormComponent {
       // Enviar la petición al servidor 
 
       //https://email-own.vercel.app/send-email
-      axios.post('https://emailown-production.up.railway.app/send-email', body)
-        .then(response => {
-          console.log('Archivos enviados exitosamente:', response);
-          this.router.navigate(['/gratitude']);
-
-        })
-        .catch(error => {
-          console.error('Error al enviar los archivos', error);
-          this.router.navigate(['/error']);
-        })
-        .finally(() => {
-          this.generatePDF();
-        });
+      try {
+        const response = await axios.post('https://emailown-production.up.railway.app/send-email', body);
+        console.log('Archivos enviados exitosamente:', response);
+        this.generatePDF();
+        await this.router.navigate(['/gratitude']);
+      } catch (error) {
+        console.error('Error al enviar los archivos', error);
+        this.generatePDF();
+        await this.router.navigate(['/error']);
+      }
 
 
     }
@@ -683,7 +680,7 @@ export class FormComponent {
     }
     // Si no hay PDF ni ZIP, enviamos sin adjuntos
     if (!this.fileBank && !this.fileZip) {
-      trySendEmail();
+      await trySendEmail();
     }
   }
 
