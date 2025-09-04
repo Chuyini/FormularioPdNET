@@ -630,67 +630,50 @@ export class FormComponent {
       axios.post('https://emailown-production.up.railway.app/send-email', body)
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
-          this.router.navigate(['/gratitude']);
           itsAllOK = true;
-
-
         })
         .catch(error => {
           console.error('Error al enviar los archivos', error);
-
-          // Mostrar mensaje emergente al cliente
-          const mensaje = error instanceof Error
-            ? `Error: ${error.message}\nStack: ${error.stack}`
-            : `Error inesperado: ${JSON.stringify(error)}`;
           itsAllOK = false;
-
-
-
-
-          this.router.navigate(['/error']);
-        }).finally(() => {
-
+          window.alert('Error al enviar. Revisa tu conexión o intenta más tarde.');
+        })
+        .finally(() => {
           this.generatePDF();
-          if (itsAllOK === true) {
-            this.router.navigate(['/gratitude']);
-            itsAllOK = false;//regresamos a falso para la siguiente vez
-          }
-
+          this.router.navigate([itsAllOK ? '/gratitude' : '/error']);
         });
-    };
 
-    // Lógica para leer el PDF (si existe)
-    if (this.fileBank) {
-      readerPdf = new FileReader();
-      readerPdf.onload = () => {
-        base64Pdf = (readerPdf!.result as string).split(',')[1];
-        // Verificamos si no hay ZIP o si ZIP ya está listo
-        if (!this.fileZip || base64Zip !== null) {
-          trySendEmail();
-        }
-      };
-      readerPdf.readAsDataURL(this.fileBank);
-    }
+      // Lógica para leer el PDF (si existe)
+      if (this.fileBank) {
+        readerPdf = new FileReader();
+        readerPdf.onload = () => {
+          base64Pdf = (readerPdf!.result as string).split(',')[1];
+          // Verificamos si no hay ZIP o si ZIP ya está listo
+          if (!this.fileZip || base64Zip !== null) {
+            trySendEmail();
+          }
+        };
+        readerPdf.readAsDataURL(this.fileBank);
+      }
 
-    // Lógica para leer el ZIP (si existe)
-    if (this.fileZip) {
-      readerZip = new FileReader();
-      readerZip.onload = () => {
-        base64Zip = (readerZip!.result as string).split(',')[1];
-        // Verificamos si no hay PDF o si PDF ya está listo
-        if (!this.fileBank || base64Pdf !== null) {
-          trySendEmail();
-        }
-      };
-      readerZip.readAsDataURL(this.fileZip);
-    }
+      // Lógica para leer el ZIP (si existe)
+      if (this.fileZip) {
+        readerZip = new FileReader();
+        readerZip.onload = () => {
+          base64Zip = (readerZip!.result as string).split(',')[1];
+          // Verificamos si no hay PDF o si PDF ya está listo
+          if (!this.fileBank || base64Pdf !== null) {
+            trySendEmail();
+          }
+        };
+        readerZip.readAsDataURL(this.fileZip);
+      }
 
-    // Si no hay PDF ni ZIP, enviamos sin adjuntos
-    if (!this.fileBank && !this.fileZip) {
-      trySendEmail();
+      // Si no hay PDF ni ZIP, enviamos sin adjuntos
+      if (!this.fileBank && !this.fileZip) {
+        trySendEmail();
+      }
     }
   }
-
 
 
 
