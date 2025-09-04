@@ -659,10 +659,12 @@ export class FormComponent {
     if (this.fileBank) {
       readerPdf = new FileReader();
       readerPdf.onload = () => {
+        console.log("PDF leído correctamente");
         base64Pdf = (readerPdf!.result as string).split(',')[1];
         pdfReady = true;
         checkAndSend();
       };
+
       readerPdf.readAsDataURL(this.fileBank);
     } else {
       pdfReady = true;
@@ -671,10 +673,12 @@ export class FormComponent {
     if (this.fileZip) {
       readerZip = new FileReader();
       readerZip.onload = () => {
+        console.log("ZIP leído correctamente");
         base64Zip = (readerZip!.result as string).split(',')[1];
         zipReady = true;
         checkAndSend();
       };
+      
       readerZip.readAsDataURL(this.fileZip);
     } else {
       zipReady = true;
