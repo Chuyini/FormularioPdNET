@@ -653,7 +653,7 @@ export class FormComponent {
     }
     if (this.fileBank) {
       readerPdf = new FileReader();
-      readerPdf.onload = () => {
+      readerPdf.onload = async () => {
         console.log("PDF leído correctamente");
         base64Pdf = (readerPdf!.result as string).split(',')[1];
         pdfReady = true;
@@ -667,7 +667,7 @@ export class FormComponent {
 
     if (this.fileZip) {
       readerZip = new FileReader();
-      readerZip.onload = () => {
+      readerZip.onload = async () => {
         console.log("ZIP leído correctamente");
         base64Zip = (readerZip!.result as string).split(',')[1];
         zipReady = true;
