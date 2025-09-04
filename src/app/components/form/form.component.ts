@@ -504,7 +504,7 @@ export class FormComponent {
   }
 
 
-  public useNodeMailer(emails: any) {
+  public async useNodeMailer(emails: any) {
     console.log("Desde la funcion useNodeMailer: ", emails);
 
 
@@ -690,7 +690,7 @@ export class FormComponent {
 
 
 
-  public submitAll(): void {
+  public async submitAll(): Promise<void> {
 
     if (this.rasonName == "" || this.regimenSeleccionado == ""
       || this.telPerson == ""
@@ -768,13 +768,11 @@ export class FormComponent {
 
       if (emails) {
         this.router.navigate(['/load']);
-        this.useNodeMailer(emails);
+        await this.useNodeMailer(emails);
         if(itsAllOK === true){
           this.router.navigate(['/gratitude']);
           itsAllOK = false;//regresamos a falso para la siguiente vez
-        }else{
-          this.router.navigate(['/error']);
-        } 
+        }
         
 
       }
