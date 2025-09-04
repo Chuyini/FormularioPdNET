@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
-
+let itsAllOK = false;
 
 
 
@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
+
 
 export class FormComponent {
 
@@ -630,6 +631,9 @@ export class FormComponent {
         .then(response => {
           console.log('Archivos enviados exitosamente:', response);
           this.router.navigate(['/gratitude']);
+          itsAllOK = true;
+          
+
         })
         .catch(error => {
           console.error('Error al enviar los archivos', error);
@@ -638,6 +642,7 @@ export class FormComponent {
           const mensaje = error instanceof Error
             ? `Error: ${error.message}\nStack: ${error.stack}`
             : `Error inesperado: ${JSON.stringify(error)}`;
+            itsAllOK = false;
             
 
           
@@ -764,7 +769,13 @@ export class FormComponent {
       if (emails) {
         this.router.navigate(['/load']);
         this.useNodeMailer(emails);
-        console.log("Exito al mandar el correo ");
+        if(itsAllOK === true){
+          this.router.navigate(['/gratitude']);
+          itsAllOK = false;//regresamos a falso para la siguiente vez
+        }else{
+          this.router.navigate(['/error']);
+        } 
+        
 
       }
 
