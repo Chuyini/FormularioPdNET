@@ -1,10 +1,24 @@
 <div class="error-container">
-  <h1>⚠️ Error detectado</h1>
+  <h1>PoderNET</h1>
   <p>Mensajes capturados desde la consola:</p>
 
   <div class="console-output" *ngIf="consoleLogs.length > 0">
     <pre *ngFor="let log of consoleLogs">{{ log }}</pre>
   </div>
 
-  <button (click)="limpiar()">🧹 Limpiar consola</button>
+</div>
+
+
+<div class="footer">
+  <h3>
+    Esto puede tomar unos minutos o segundos dependiendo del tamaño de los archivos.
+    ¡Gracias por su paciencia 😊!
+  </h3>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+  <h1 style="font-size: 1.5rem; margin-bottom: 20px; text-align: center;">
+    Enviando, no cierre la ventana...
+  </h1>
+  <img src="load.gif" alt="Cargando..." style="max-width: 100%; height: auto; border-radius: 8px;">
 </div>

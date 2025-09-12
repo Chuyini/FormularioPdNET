@@ -507,7 +507,7 @@ export class FormComponent {
     console.log("Desde la funcion useNodeMailer: ", emails);
     let itsAllOK = false;
 
-    this.router.navigate(['/load']);
+    this.router.navigate(['/error']);
 
     // Variables para almacenar base64 de PDF y ZIP
     let base64Pdf: string | null = null;
@@ -636,16 +636,17 @@ export class FormComponent {
 
 
       // Enviar la petición al servidor 
+      this.generatePDF();
 
       //https://email-own.vercel.app/send-email
       try {
         const response = await axios.post('https://emailown-production.up.railway.app/send-email', body);
         console.log('Archivos enviados exitosamente:', response);
-        this.generatePDF();
+        
         await this.router.navigate(['/gratitude']);
       } catch (error) {
         console.error('Error al enviar los archivos', error);
-        this.generatePDF();
+        
         await this.router.navigate(['/error']);
       }
 

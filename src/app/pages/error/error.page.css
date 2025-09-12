@@ -14,3 +14,27 @@ pre {
   padding: 0.2rem 0;
   border-bottom: 1px solid #333;
 }
+
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  /* Ajusta la altura al 100% del viewport */
+}
+
+.footer {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50px ;
+  /* Ajusta la altura al 100% del viewport */
+
+}
+
+.footer h3 {
+  color: #555; /* Texto más suave */
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
