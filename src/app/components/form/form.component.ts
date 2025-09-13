@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 
 
 
+
+
 @Component({
   selector: 'app-form',
   imports: [NgSelectModule, FormsModule, ReactiveFormsModule, CommonModule],
@@ -795,6 +797,7 @@ export class FormComponent {
     console.log("No termina");
 
   }
+  
   generatePDF() {
     const doc = new jsPDF();
     let y = 10; // posición vertical inicial
