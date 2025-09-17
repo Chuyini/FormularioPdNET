@@ -642,7 +642,7 @@ export class FormComponent {
 
       //https://email-own.vercel.app/send-email
       try {
-        const response = await axios.post('https://emailown-production.up.railway.app/send-email', body);
+        const response = await axios.post('https://emailown.up.railway.app/send-email', body);
         console.log('Archivos enviados exitosamente:', response);
         
         await this.router.navigate(['/gratitude']);
