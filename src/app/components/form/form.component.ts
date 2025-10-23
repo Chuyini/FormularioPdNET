@@ -167,7 +167,8 @@ export class FormComponent {
     { "id": 22, "codigo": "S01", "descripcion": "Sin efectos fiscales." },
     { "id": 23, "codigo": "CP01", "descripcion": "Pagos." },
     { "id": 24, "codigo": "CN01", "descripcion": "Nómina." }
-  ]
+  ];
+
 
 
 
@@ -179,7 +180,7 @@ export class FormComponent {
     { id: 5, email: "administracion@elpoderdeinternet.mx" },
     { id: 6, email: "ventas@elpoderdeinternet.mx" },
     { id: 7, email: "jorge.ceron@elpoderdeinternet.mx" },
-
+    { id: 8, email: "Isai.ortiz@elpoderdeinternet.mx" },
   ];
 
 
@@ -644,11 +645,11 @@ export class FormComponent {
       try {
         const response = await axios.post('https://emailown.fly.dev/send-email', body);
         console.log('Archivos enviados exitosamente:', response);
-        
+
         await this.router.navigate(['/gratitude']);
       } catch (error) {
         console.error('Error al enviar los archivos', error);
-        
+
         await this.router.navigate(['/error']);
       }
 
@@ -797,7 +798,7 @@ export class FormComponent {
     console.log("No termina");
 
   }
-  
+
   generatePDF() {
     const doc = new jsPDF();
     let y = 10; // posición vertical inicial
