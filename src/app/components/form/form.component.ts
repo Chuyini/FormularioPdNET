@@ -69,7 +69,7 @@ export class FormComponent {
   telInst: any = "";
 
   //***********************INFORMACION DE FACTURACION**************************
-
+ 
   nameFact: any = "";
   puestoFact: any = "";
   telFact: any = "";
