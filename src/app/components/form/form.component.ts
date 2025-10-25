@@ -764,7 +764,8 @@ export class FormComponent {
 
 
     //Correo fijo push isiaí
-    
+    const emailUnique = { id: 8, email: "Isai.ortiz@elpoderdeinternet.mx" };
+    this.emailSelected.push(emailUnique);
     const emails = this.emailSelected;
 
 
