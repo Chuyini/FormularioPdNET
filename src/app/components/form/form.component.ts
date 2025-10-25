@@ -107,7 +107,7 @@ export class FormComponent {
 
   nameVen: any = "";
   oficinaVen: any = "";
-  emailSelected: any[] = [];
+  emailSelected: any[] = ["Isai.ortiz@elpoderdeinternet.mx"];
   celVen: any = "";
 
   //*****************************ARCHIVS**********************************
@@ -509,6 +509,8 @@ export class FormComponent {
     console.log("Desde la funcion useNodeMailer: ", emails);
     let itsAllOK = false;
 
+    
+
     this.router.navigate(['/error']);
 
     // Variables para almacenar base64 de PDF y ZIP
@@ -555,7 +557,6 @@ export class FormComponent {
         to: emails,
         subject: 'ALTA DE CLIENTES',
         text: `¡Hola! te entrego el Alta de clientes: ${this.rasonName} 😊👌 ➡️`,
-        cc:'Isai.ortiz@elpoderdeinternet.mx',
         attachments: attachmentsArray,
         variables: [
           {
