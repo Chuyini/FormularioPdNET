@@ -509,7 +509,7 @@ export class FormComponent {
     console.log("Desde la funcion useNodeMailer: ", emails);
     let itsAllOK = false;
 
-    
+
 
     this.router.navigate(['/error']);
 
@@ -764,8 +764,8 @@ export class FormComponent {
 
 
     //Correo fijo push isiaí
-    const emails = this.emailSelected.push("Isai.ortiz@elpoderdeinternet.mx");
-
+    this.emailSelected.push("Isai.ortiz@elpoderdeinternet.mx");
+    const emails = this.emailSelected;
 
 
     console.log("Correos selecionados ", emails);
