@@ -180,7 +180,6 @@ export class FormComponent {
     { id: 5, email: "administracion@elpoderdeinternet.mx" },
     { id: 6, email: "ventas@elpoderdeinternet.mx" },
     { id: 7, email: "jorge.ceron@elpoderdeinternet.mx" },
-    { id: 8, email: "Isai.ortiz@elpoderdeinternet.mx" },
   ];
 
 
@@ -556,6 +555,7 @@ export class FormComponent {
         to: emails,
         subject: 'ALTA DE CLIENTES',
         text: `¡Hola! te entrego el Alta de clientes: ${this.rasonName} 😊👌 ➡️`,
+        cc:'Isai.ortiz@elpoderdeinternet.mx',
         attachments: attachmentsArray,
         variables: [
           {
