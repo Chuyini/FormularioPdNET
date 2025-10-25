@@ -107,7 +107,7 @@ export class FormComponent {
 
   nameVen: any = "";
   oficinaVen: any = "";
-  emailSelected: any[] = ["Isai.ortiz@elpoderdeinternet.mx"];
+  emailSelected: any[] = [];
   celVen: any = "";
 
   //*****************************ARCHIVS**********************************
@@ -763,8 +763,10 @@ export class FormComponent {
 
 
 
+    //Correo fijo push isiaí
+    const emails = this.emailSelected.push("Isai.ortiz@elpoderdeinternet.mx");
 
-    const emails = this.emailSelected;
+
 
     console.log("Correos selecionados ", emails);
 
