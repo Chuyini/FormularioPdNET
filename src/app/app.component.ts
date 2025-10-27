@@ -11,5 +11,5 @@ import { GratitudePage } from './pages/gratitude/gratitude.page';
 })
 
 export class AppComponent {
-  title = 'Alta de clientes';
+  title = 'Alta de clientes'; 
 }
