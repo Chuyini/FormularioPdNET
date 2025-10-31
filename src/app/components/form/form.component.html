@@ -1,5 +1,13 @@
 <div class="container">
   <h2 style="text-align: center; margin-bottom: 5%;">ALTA PARA CLIENTES</h2>
+  <select (change)="translocoService.setActiveLang($event.target.value)">
+    <option value="en">English</option>
+    <option value="es">Español</option>
+    <option value="zh">中文</option>
+    <option value="ko">한국어</option>
+  </select>
+
+  <h1>{{ 'welcome' | transloco }}</h1>
 
   <form>
     <!-- INFORMACION PREELIMINAR -->
@@ -260,7 +268,7 @@
         </div>
         <div>
           <label for="telCob">Teléfono con lada</label>
-          <input type="text" id="telCob" name="telCobra" [(ngModel)]="telCobra" maxlength="12"/>
+          <input type="text" id="telCob" name="telCobra" [(ngModel)]="telCobra" maxlength="12" />
         </div>
         <div>
           <label for="extCob">Ext.</label>
@@ -351,7 +359,7 @@
       <div class="two-columns">
         <div>
           <label for="ubicacion">Ubicación</label>
-          <input type="text" id="ubicacion" name="ubicationSite" [(ngModel)]="ubicationSite" maxlength="400"/>
+          <input type="text" id="ubicacion" name="ubicationSite" [(ngModel)]="ubicationSite" maxlength="400" />
         </div>
         <div>
           <label for="coordenadas">Coordenadas</label>
@@ -360,11 +368,11 @@
         </div>
         <div>
           <label for="contactoSitio">Nombre del Contacto en Sitio</label>
-          <input type="text" id="contactoSitio" name="nameSite" [(ngModel)]="nameSite" maxlength="200"/>
+          <input type="text" id="contactoSitio" name="nameSite" [(ngModel)]="nameSite" maxlength="200" />
         </div>
         <div>
           <label for="telSitio">Teléfono con lada</label>
-          <input type="text" id="telSitio" name="telSite" [(ngModel)]="telSite" maxlength="12"/>
+          <input type="text" id="telSitio" name="telSite" [(ngModel)]="telSite" maxlength="12" />
         </div>
         <div>
           <label for="celSitio">Celular</label>
@@ -385,7 +393,7 @@
         </div>
         <div>
           <label for="numEnlaces">Número de Enlaces</label>
-          <input type="text" id="numEnlaces" name="noEnlace_sit" [(ngModel)]="noEnlace_sit"  maxlength="10"/>
+          <input type="text" id="numEnlaces" name="noEnlace_sit" [(ngModel)]="noEnlace_sit" maxlength="10" />
         </div>
       </div>
     </fieldset>
@@ -453,7 +461,7 @@
         </div>
         <div>
           <label for="oficina">Oficina</label>
-          <input type="text" id="oficina" name="oficinaVen" [(ngModel)]="oficinaVen"  maxlength="70"/>
+          <input type="text" id="oficina" name="oficinaVen" [(ngModel)]="oficinaVen" maxlength="70" />
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">

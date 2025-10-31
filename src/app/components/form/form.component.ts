@@ -10,16 +10,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
-
-
-
+import { TranslocoConfig, TranslocoModule } from '@ngneat/transloco';
 
 
 
 
 @Component({
   selector: 'app-form',
-  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, CommonModule, TranslocoModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
@@ -27,9 +25,12 @@ import { CommonModule } from '@angular/common';
 
 export class FormComponent {
 
-  constructor(private snackBar: MatSnackBar, private router: Router,) {
+  constructor(private snackBar: MatSnackBar, private router: Router, lenguajes: TranslocoConfig) {
 
   }
+
+
+
   //************************DATOS FISCALES**********************************
 
   // Valores iniciales para los dropdowns
