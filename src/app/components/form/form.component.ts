@@ -28,6 +28,9 @@ export class FormComponent {
   constructor(private snackBar: MatSnackBar, private router: Router, private translocoService: TranslocoService) {
 
   }
+  public changeLang(lang: string) {
+    this.translocoService.setActiveLang(lang);
+  }
 
 
 
