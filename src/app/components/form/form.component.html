@@ -1,12 +1,11 @@
 <div class="container">
   <h2 style="text-align: center; margin-bottom: 5%;">ALTA PARA CLIENTES</h2>
-  <select (change)="changeLang($event.target.value)">
+  <select (change)="changeLang($event)">
     <option value="en">English</option>
     <option value="es">Español</option>
     <option value="zh">中文</option>
     <option value="ko">한국어</option>
   </select>
-
   <h1>{{ 'welcome' | transloco }}</h1>
 
   <form>
