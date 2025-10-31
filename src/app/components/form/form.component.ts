@@ -25,7 +25,7 @@ import { TranslocoConfig, TranslocoModule } from '@ngneat/transloco';
 
 export class FormComponent {
 
-  constructor(private snackBar: MatSnackBar, private router: Router, lenguajes: TranslocoConfig) {
+  constructor(private snackBar: MatSnackBar, private router: Router) {
 
   }
 
