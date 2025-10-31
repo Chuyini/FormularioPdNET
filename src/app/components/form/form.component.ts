@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
-import { TranslocoConfig, TranslocoModule } from '@ngneat/transloco';
+import { TranslocoConfig, TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 
 
@@ -25,7 +25,7 @@ import { TranslocoConfig, TranslocoModule } from '@ngneat/transloco';
 
 export class FormComponent {
 
-  constructor(private snackBar: MatSnackBar, private router: Router) {
+  constructor(private snackBar: MatSnackBar, private router: Router, private translocoService: TranslocoService) {
 
   }
 
