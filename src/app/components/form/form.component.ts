@@ -28,11 +28,7 @@ export class FormComponent {
   constructor(private snackBar: MatSnackBar, private router: Router, private translocoService: TranslocoService) {
 
   }
-  changeLang(event: Event): void {
-    const lang = (event.target as HTMLSelectElement).value;
-    this.translocoService.setActiveLang(lang);
-
-  }
+  
 
 
 
@@ -214,23 +210,19 @@ export class FormComponent {
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
   public translatedWayPage: any[] = [];
-
-  ngOnInit(): void {
-    // Traduce al cargar el componente
-    this.translateWayPage();
-
-    // Traduce automáticamente si el idioma cambia
-    this.translocoService.langChanges$.subscribe(() => {
-      this.translateWayPage();
-    });
-  }
-
   private translateWayPage(): void {
     this.translatedWayPage = this.wayPage.map(item => ({
       ...item,
       descripcion: this.translocoService.translate(item.descripcion)
     }));
   }
+  changeLang(event: Event): void {
+    const lang = (event.target as HTMLSelectElement).value;
+    this.translateWayPage();
+    this.translocoService.setActiveLang(lang);
+
+  }
+  
 
 
 
