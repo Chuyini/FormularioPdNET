@@ -213,11 +213,26 @@ export class FormComponent {
     { "id": 21, "codigo": "31", "descripcion": "Intermediario pagos" },
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
-  public translatedWayPage = this.wayPage.map(item => ({
-    id: item.id,
-    codigo: item.codigo,
-    descripcion: this.translocoService.getTranslation(item.descripcion)
-  }));
+  public translatedWayPage: any[] = [];
+
+  ngOnInit(): void {
+    // Traduce al cargar el componente
+    this.translateWayPage();
+
+    // Traduce automáticamente si el idioma cambia
+    this.translocoService.langChanges$.subscribe(() => {
+      this.translateWayPage();
+    });
+  }
+
+  private translateWayPage(): void {
+    this.translatedWayPage = this.wayPage.map(item => ({
+      ...item,
+      descripcion: this.translocoService.translate(item.descripcion)
+    }));
+  }
+
+
 
 
 
