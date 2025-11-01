@@ -216,7 +216,7 @@ export class FormComponent {
   public translatedWayPage = this.wayPage.map(item => ({
     id: item.id,
     codigo: item.codigo,
-    descripcion: this.translocoService.translate(item.descripcion)
+    descripcion: this.translocoService.getTranslation(item.descripcion)
   }));
 
 
