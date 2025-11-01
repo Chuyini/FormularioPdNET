@@ -210,18 +210,23 @@ export class FormComponent {
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
   public translatedWayPage: any[] = [];
-  private translateWayPage(lang: string): void {
-    this.translatedWayPage = this.wayPage.map(item => ({
-      ...item,
-      descripcion: this.translocoService.translate(item.descripcion, { value: lang })
-    }));
-  }
-  changeLang(event: Event): void {
-    const lang = (event.target as HTMLSelectElement).value;
-    this.translocoService.setActiveLang(lang);
-    this.translateWayPage(lang);
 
-  }
+changeLang(event: Event): void {
+  const lang = (event.target as HTMLSelectElement).value;
+
+  // setActiveLang es síncrono, pero para asegurar que el idioma esté activo antes de traducir:
+  this.translocoService.setActiveLang(lang);
+
+  // Espera un tick para que Transloco actualice internamente
+  setTimeout(() => this.translateWayPage(), 0);
+}
+
+private translateWayPage(): void {
+  this.translatedWayPage = this.wayPage.map(item => ({
+    ...item,
+    descripcion: this.translocoService.translate(item.descripcion)
+  }));
+}
 
 
 
