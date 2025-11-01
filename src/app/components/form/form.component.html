@@ -242,11 +242,7 @@
               placeholder="{{ 'Selecciona el Método de pago' | transloco }}" [(ngModel)]="wayPageSelected"
               [multiple]="false" name="wayPageSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
               dropdownPosition="auto">
-              <ng-template #ngOptionTemplate let-item="item">
-                <div class="custom-option">
-                  <span> {{ item.descripcion | transloco }}</span>
-                </div>
-              </ng-template>
+              
             </ng-select>
           </div>
         </div>
