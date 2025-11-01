@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-floating-button',
@@ -8,6 +8,7 @@ import { TranslocoModule } from '@ngneat/transloco';
   styleUrl: './floating-button.component.css'
 })
 export class FloatingButtonComponent {
+  constructor(private translocoService: TranslocoService) { }
   isAtTop = true;
 
   @HostListener('window:scroll', [])
