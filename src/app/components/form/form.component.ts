@@ -216,7 +216,6 @@ export class FormComponent {
   ]
   public translatedWayPage = this.wayPage.map(item => ({
     ...item,
-    descripcion: this.translocoService.translate(item.descripcion)
   }));
   public translatedCfdi: any[] = this.use_cfdi.map(item => ({
     ...item,
