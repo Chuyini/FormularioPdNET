@@ -218,7 +218,7 @@ export class FormComponent {
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
     this.translocoService.setActiveLang(lang);
-    console.log("Lenguaje arreglo a: ", this.translocoService.translate(this.wayPage[0].descripcion));
+    console.log("Lenguaje arreglo a: ", this.translocoService.translate("Efectivo"));
 
     this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
       this.translateWayPage();
