@@ -26,7 +26,7 @@ import { take } from 'rxjs/operators';
 export class FormComponent {
 
   constructor(private snackBar: MatSnackBar, private router: Router, private translocoService: TranslocoService) {
-
+    this.translateWayPage(this.translocoService.getActiveLang());
   }
 
 
@@ -210,9 +210,7 @@ export class FormComponent {
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
   public translatedWayPage: any[] = [];
-  onInit(): void {  
-    this.translateWayPage(this.translocoService.getActiveLang());
-  }
+
 
 
   changeLang(event: Event): void {
