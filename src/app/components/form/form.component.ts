@@ -210,6 +210,9 @@ export class FormComponent {
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
   public translatedWayPage: any[] = [];
+  onInit(): void {  
+    this.translateWayPage(this.translocoService.getActiveLang());
+  }
 
 
   changeLang(event: Event): void {
