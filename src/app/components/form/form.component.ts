@@ -40,11 +40,11 @@ export class FormComponent {
   //************************DATOS FISCALES**********************************
 
   // Valores iniciales para los dropdowns
-  regimenSeleccionado: any = {};
-  localSelected: any = {};
-  cfdiSelected: any = {};
-  wayPageSelected: any = {};
-  bankSelected: any = {};
+  regimenSeleccionado: any = { id: 0, nombre: "No seleccionado" };
+  localSelected: any = { id: 0, nombre: "No seleccionado" };
+  cfdiSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
+  wayPageSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
+  bankSelected: any = { id: 0, nombre: "No seleccionado" };
 
   rasonName: any = ""; // nombre (Obligatorio)
   rfc: any = ""; // (Obligatorio)
@@ -239,14 +239,22 @@ export class FormComponent {
         ...item,
         descripcion: this.translocoService.translate(item.descripcion)
       }));
+
       this.translatedCfdi = this.use_cfdi.map(item => ({
         ...item,
         descripcion: this.translocoService.translate(item.descripcion)
       }));
+
       this.translatedRegimenes = this.regimenes.map(item => ({
         ...item,
         nombre: this.translocoService.translate(item.nombre)
       }));
+
+      this.regimenSeleccionado = { id: 0, nombre: this.translocoService.translate('No seleccionado') };
+      this.localSelected = { id: 0, nombre: this.translocoService.translate('No seleccionado') };
+      this.cfdiSelected = { id: 0, codigo: 'N/A', descripcion: this.translocoService.translate('No seleccionado') };
+      this.wayPageSelected = { id: 0, codigo: 'N/A', descripcion: this.translocoService.translate('No seleccionado') };
+      this.bankSelected = { id: 0, nombre: this.translocoService.translate('No seleccionado') };
     }, 300);
 
   }
