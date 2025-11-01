@@ -27,7 +27,7 @@ import { Observable } from 'rxjs';
 export class FormComponent {
 
   constructor(private snackBar: MatSnackBar, private router: Router, private translocoService: TranslocoService) {
-    
+
     this.translocoService.setDefaultLang('es');
     this.translatedWayPage = this.wayPage.map(item => ({
       ...item,
@@ -223,11 +223,14 @@ export class FormComponent {
     this.translocoService.setActiveLang(lang);
 
 
-    this.translatedWayPage = this.wayPage.map(item => ({
-      ...item,
-      descripcion: this.translocoService.translate(item.descripcion)
-    }));
-    window.location.reload(); 
+    
+
+    setTimeout(() => {
+      this.translatedWayPage = this.wayPage.map(item => ({
+        ...item,
+        descripcion: this.translocoService.translate(item.descripcion)
+      }));
+    }, 3);
 
   }
 
