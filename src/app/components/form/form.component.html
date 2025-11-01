@@ -238,13 +238,12 @@
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="wayPage" bindLabel="descripcion"
-              placeholder="{{ 'Selecciona el Método de pago' | transloco }}" [(ngModel)]="wayPageSelected"
-              [multiple]="false" name="wayPageSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
-              dropdownPosition="auto">
+            <ng-select [items]="wayPage" bindLabel="label" [(ngModel)]="wayPageSelected" [multiple]="false"
+              [clearable]="true" [searchable]="true" dropdownPosition="auto" name="wayPageSelected"
+              class="custom-ng-select" placeholder="{{ 'Selecciona el Método de pago' | transloco }}">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
-                  <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
+                  <span>{{ item.id }} - {{ item.descripcion | transloco }}</span>
                 </div>
               </ng-template>
             </ng-select>
