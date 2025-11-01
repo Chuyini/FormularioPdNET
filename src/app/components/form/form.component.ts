@@ -211,26 +211,23 @@ export class FormComponent {
   ]
   public translatedWayPage: any[] = [];
 
-  ngOnInit(): void {
-    this.translateWayPage();
-  }
 
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
     this.translocoService.setActiveLang(lang);
-    console.log("Lenguaje arreglo a: ", this.translocoService.translate('Efectivo', {}, lang));
+
 
     this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
-      this.translateWayPage();
+      this.translateWayPage(lang);
     });
   }
 
-  
 
-  private translateWayPage(): void {
+
+  private translateWayPage(lang: any): void {
     this.translatedWayPage = this.wayPage.map(item => ({
       ...item,
-      descripcion: this.translocoService.translate(item.descripcion)
+      descripcion: this.translocoService.translate(item.descripcion, {}, lang)
     }));
   }
 
