@@ -28,7 +28,7 @@ export class FormComponent {
   constructor(private snackBar: MatSnackBar, private router: Router, private translocoService: TranslocoService) {
 
   }
-  
+
 
 
 
@@ -210,19 +210,19 @@ export class FormComponent {
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
   public translatedWayPage: any[] = [];
-  private translateWayPage(): void {
+  private translateWayPage(lang: string): void {
     this.translatedWayPage = this.wayPage.map(item => ({
       ...item,
-      descripcion: this.translocoService.getTranslation(item.descripcion)
+      descripcion: this.translocoService.translate(item.descripcion, {}, lang)
     }));
   }
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
-    this.translateWayPage();
+    this.translateWayPage(lang);
     this.translocoService.setActiveLang(lang);
 
   }
-  
+
 
 
 
