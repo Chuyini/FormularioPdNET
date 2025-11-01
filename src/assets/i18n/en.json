@@ -89,5 +89,8 @@
   "Nombre del vendedor": "Seller Name",
   "Oficina": "Office",
   "Selecciona uno o varios correos": "Select one or several emails",
-  "Enviar": "Send"
+  "Enviar": "Send",
+  "Adjunte los archivos en un folder y luego comprímalos": "Attach the files in a folder and then compress them",
+  "(Obligatorio)": "(Required)",
+  "No seleccionado": "not selected"
 }

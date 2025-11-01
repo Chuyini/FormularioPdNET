@@ -1,8 +1,8 @@
 <div class="container">
   <h2 style="text-align: center; margin-bottom: 5%;">ALTA PARA CLIENTES</h2>
   <select (change)="changeLang($event)">
-    <option value="en">English</option>
     <option value="es">Español</option>
+    <option value="en">English</option>
     <option value="zh">中文</option>
     <option value="ko">한국어</option>
   </select>
@@ -319,7 +319,7 @@
 
       <div class="file-upload">
         <small><i> {{'Usar .PDF' | transloco }} </i></small>
-        <label for="fileInput" class="file-label">'{{'Subir Carátula Bancaria' | transloco}}'</label>
+        <label for="fileInput" class="file-label">{{'Subir Carátula Bancaria' | transloco}}</label>
         <input type="file" accept="pdf" id="fileInput" class="file-input" (change)="onFileSelected($event, 'bankFile')">
         <span class="file-name" style="color: green" *ngIf="bankFileName">{{bankFileName}}</span>
 
