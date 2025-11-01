@@ -11,23 +11,27 @@
 }
 
 .language-select {
-    padding: 8px 12px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    color: #333;
+    padding: 10px 14px;
+    font-size: 17px;
+    font-family: 'Segoe UI', 'Poppins', 'Roboto', sans-serif;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 2px solid #00bfff;
+    background-color: #fefefe;
+    color: #222;
     outline: none;
-    transition: border-color 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.6);
+    transition: all 0.3s ease;
 }
 
 .language-select:hover {
-    border-color: #888;
+    border-color: #1e90ff;
+    box-shadow: 0 0 12px rgba(30, 144, 255, 0.7);
 }
 
 .language-select:focus {
     border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 14px rgba(0, 123, 255, 0.8);
 }
 
 @keyframes fadeIn {
