@@ -236,19 +236,15 @@
             </ng-select>
           </div>
         </div>
-        <div>
-          <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="wayPage" bindLabel="descripcion"
-              placeholder="{{ 'Selecciona el Método de pago' | transloco }}" [(ngModel)]="wayPageSelected"
-              [multiple]="false" name="wayPageSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
-              dropdownPosition="auto">
-              <ng-template #ngOptionTemplate let-item="item">
-                <span>{{ item.descripcion | transloco }}</span>
-              </ng-template>
-
-
-            </ng-select>
-          </div>
+        <div style="width: 100%; max-width: 400px; margin: auto;">
+          <ng-select [items]="translatedWayPage" bindLabel="descripcion" bindValue="codigo"
+            [(ngModel)]="wayPageSelected" placeholder="{{ 'Selecciona el Método de pago' | transloco }}"
+            [multiple]="false" [clearable]="true" [searchable]="true" dropdownPosition="auto" name="wayPageSelected"
+            class="custom-ng-select">
+            <ng-template ng-option-tmp let-item="item">
+              <span>{{ item.descripcion }}</span>
+            </ng-template>
+          </ng-select>
         </div>
         <div style="grid-column: 1 / span 2;">
           <label for="datosAdicionalesFactura">{{ 'Datos adicionales para su Factura' | transloco }}</label>
@@ -306,7 +302,7 @@
             <ng-select [items]="banks" bindLabel="nombre" placeholder="{{ 'Seleccione un Banco' | transloco }}"
               [(ngModel)]="bankSelected" [multiple]="false" name="bankSelected" class="custom-ng-select"
               [clearable]="true" [searchable]="true" dropdownPosition="auto">
-            
+
             </ng-select>
           </div>
         </div>
