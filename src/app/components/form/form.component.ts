@@ -229,12 +229,13 @@ export class FormComponent {
 
 
   private translateWayPage(lang: any): void {
-    (this.translocoService.getTranslation(lang) as Observable<any>).subscribe(translations => {
-      this.translatedWayPage = this.wayPage.map(item => ({
-        ...item,
-        descripcion: translations[item.descripcion] || item.descripcion
-      }));
-    });
+    const translations = this.translocoService.getTranslation(lang);
+
+    this.translatedWayPage = this.wayPage.map(item => ({
+      ...item,
+      descripcion: translations[item.descripcion] || item.descripcion
+    }));
+
 
   }
 
