@@ -214,7 +214,7 @@ export class FormComponent {
     { "id": 21, "codigo": "31", "descripcion": "Intermediario pagos" },
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
-  public translatedWayPage = this.wayPage.map(item => ({
+  public translatedWayPage: any[] = this.wayPage.map(item => ({
     ...item,
   }));
   public translatedCfdi: any[] = this.use_cfdi.map(item => ({
