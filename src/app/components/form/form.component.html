@@ -44,14 +44,10 @@
 
         <div style="width: 100%; max-width: 400px; margin: auto;">
           <label for="">{{ '(Obligatorio)' | transloco }}<span style="color: red;">*</span></label>
-          <ng-select [items]="regimenes" bindLabel="nombre" placeholder="{{'Selecciona un régimen fiscal' | transloco}}"
+          <ng-select [items]="translatedRegimenes" bindLabel="nombre" placeholder="{{'Selecciona un régimen fiscal' | transloco}}"
             [(ngModel)]="regimenSeleccionado" name="regimenSeleccionado" class="custom-ng-select" [clearable]="true"
             [searchable]="true" dropdownPosition="auto">
-            <ng-template #ngOptionTemplate let-item="item">
-              <div class="custom-option">
-                <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
-              </div>
-            </ng-template>
+
           </ng-select>
         </div>
 
@@ -93,11 +89,7 @@
               <ng-select [items]="local" bindLabel="nombre" placeholder="{{ 'Seleccione el estado' | transloco }}"
                 [(ngModel)]="localSelected" [multiple]="false" name="localSelected" class="custom-ng-select"
                 [clearable]="true" [searchable]="true" dropdownPosition="auto">
-                <ng-template #ngOptionTemplate let-item="item">
-                  <div class="custom-option">
-                    <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
-                  </div>
-                </ng-template>
+                
               </ng-select>
             </div>
           </div>
@@ -225,14 +217,10 @@
         </div>
         <div>
           <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="use_cfdi" bindLabel="descripcion" placeholder="{{ 'Selecciona un CFDI' | transloco }}"
+            <ng-select [items]="translatedCfdi" bindLabel="descripcion" placeholder="{{ 'Selecciona un CFDI' | transloco }}"
               [(ngModel)]="cfdiSelected" [multiple]="false" name="cfdiSelected" class="custom-ng-select"
               [clearable]="true" [searchable]="true" dropdownPosition="auto">
-              <ng-template #ngOptionTemplate let-item="item">
-                <div class="custom-option">
-                  <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
-                </div>
-              </ng-template>
+            
             </ng-select>
           </div>
         </div>
@@ -241,9 +229,7 @@
             [(ngModel)]="wayPageSelected" placeholder="{{ 'Selecciona el Método de pago' | transloco }}"
             [multiple]="false" [clearable]="true" [searchable]="true" dropdownPosition="auto" name="wayPageSelected"
             class="custom-ng-select">
-            <ng-template ng-option-tmp let-item="item">
-              <span>{{ item.descripcion }}</span>
-            </ng-template>
+            
           </ng-select>
         </div>
         <div style="grid-column: 1 / span 2;">
@@ -512,11 +498,6 @@
               placeholder="{{ 'Selecciona uno o varios correos' | transloco }}" [(ngModel)]="emailSelected"
               [multiple]="true" name="emailSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
               dropdownPosition="auto">
-              <ng-template #ngOptionTemplate let-item="item">
-                <div class="custom-option">
-                  <span>{{ item.id }} - {{ item.nombre | transloco }}</span>
-                </div>
-              </ng-template>
             </ng-select>
           </div>
         </div>

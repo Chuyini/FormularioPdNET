@@ -214,7 +214,16 @@ export class FormComponent {
     { "id": 21, "codigo": "31", "descripcion": "Intermediario pagos" },
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
-  public translatedWayPage: any[] = [];
+  public translatedWayPage = this.wayPage.map(item => ({
+    ...item,
+    descripcion: this.translocoService.translate(item.descripcion)
+  }));
+  public translatedCfdi: any[] = this.use_cfdi.map(item => ({
+    ...item,
+  }));
+  public translatedRegimenes: any[] = this.regimenes.map(item => ({
+    ...item,
+  }));
 
 
 
@@ -223,12 +232,20 @@ export class FormComponent {
     this.translocoService.setActiveLang(lang);
 
 
-    
+
 
     setTimeout(() => {
       this.translatedWayPage = this.wayPage.map(item => ({
         ...item,
         descripcion: this.translocoService.translate(item.descripcion)
+      }));
+      this.translatedCfdi = this.use_cfdi.map(item => ({
+        ...item,
+        descripcion: this.translocoService.translate(item.descripcion)
+      }));
+      this.translatedRegimenes = this.regimenes.map(item => ({
+        ...item,
+        nombre: this.translocoService.translate(item.nombre)
       }));
     }, 300);
 
