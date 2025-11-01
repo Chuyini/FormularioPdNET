@@ -40,11 +40,11 @@ export class FormComponent {
   //************************DATOS FISCALES**********************************
 
   // Valores iniciales para los dropdowns
-  regimenSeleccionado: any = { id: 0, nombre: "No seleccionado" };
-  localSelected: any = { id: 0, nombre: "No seleccionado" };
-  cfdiSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
-  wayPageSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
-  bankSelected: any = { id: 0, nombre: "No seleccionado" };
+  regimenSeleccionado: any = {};
+  localSelected: any = {};
+  cfdiSelected: any = {};
+  wayPageSelected: any = {};
+  bankSelected: any = {};
 
   rasonName: any = ""; // nombre (Obligatorio)
   rfc: any = ""; // (Obligatorio)
@@ -214,6 +214,7 @@ export class FormComponent {
     { "id": 21, "codigo": "31", "descripcion": "Intermediario pagos" },
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
+  //Inicializamos para no modificar los datos originales
   public translatedWayPage: any[] = this.wayPage.map(item => ({
     ...item,
   }));
