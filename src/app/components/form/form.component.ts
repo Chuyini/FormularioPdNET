@@ -213,11 +213,7 @@ export class FormComponent {
     { "id": 21, "codigo": "31", "descripcion": "Intermediario pagos" },
     { "id": 22, "codigo": "99", "descripcion": "Por definir" }
   ]
-  public translatedWayPage = this.wayPage.map(item => ({
-    ...item,
-    label: this.translocoService.translate(item.descripcion)
-  }));
-
+  
 
 
   banks = [
