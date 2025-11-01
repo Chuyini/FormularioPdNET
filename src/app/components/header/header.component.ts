@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +8,7 @@ import { TranslocoModule } from '@ngneat/transloco';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
+  constructor(private translocoService: TranslocoService) { }
 
 }
