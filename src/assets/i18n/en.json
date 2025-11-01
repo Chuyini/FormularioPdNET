@@ -13,7 +13,7 @@
     "N° Int.": "Int. No.",
     "Colonia": "Neighborhood",
     "C.P.": "ZIP Code",
-    "Codigo Postal. Ejemplo: 785443": "Postal Code. Example: 785443",
+    "Código Postal. Ejemplo: 785443": "Postal Code. Example: 785443",
     "Municipio": "Municipality",
     "Seleccione el estado": "Select the state",
     "Población": "City/Town",
@@ -24,13 +24,13 @@
     "Correo Electrónico (Obligatorio)": "Email (Required)",
     "Página Web": "Website",
     "DOMICILIO DE INSTALACIÓN": "INSTALLATION ADDRESS",
-    "Llenar solo si la direccion es diferente a la de instalación": "Fill only if the address is different from the installation one",
+    "Llenar solo si la dirección es diferente a la de instalación": "Fill only if the address is different from the installation one",
     "INFORMACIÓN PARA FACTURACIÓN": "BILLING INFORMATION",
     "Nombre del Encargado(a)": "Person in charge",
     "Puesto": "Position",
     "Teléfono con lada": "Phone with area code",
     "Celular (Obligatorio)": "Mobile (Required)",
-    "Numero de celular con clave lada": "Mobile number with area code",
+    "Número de celular con clave lada": "Mobile number with area code",
     "Selecciona un CFDI": "Select a CFDI",
     "Selecciona el Método de pago": "Select the payment method",
     "Datos adicionales para su Factura": "Additional data for your invoice",
@@ -162,5 +162,4 @@
     "Derivado de la necesidad de comunicación del hombre...": "Derived from the need for human communication...",
     "y, siendo Internet el vehículo más vanguardista e innovador con un abanico de posibilidades tan amplio como el pensamiento mismo, surge PoderNet como respuesta a las necesidades de desarrollo.": "and, being the most avant-garde and innovative vehicle with a range of possibilities as broad as thought itself, PoderNet arises as a response to development needs.",
     "Página PoderNET": "PoderNET Page"  
-
 }
