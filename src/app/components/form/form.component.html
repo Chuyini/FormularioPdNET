@@ -49,7 +49,7 @@
             [searchable]="true" dropdownPosition="auto">
             <ng-template #ngOptionTemplate let-item="item">
               <div class="custom-option">
-                <span> {{ item.id }} - {{ item.nombre }}</span>
+                <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
               </div>
             </ng-template>
           </ng-select>
@@ -95,7 +95,7 @@
                 [clearable]="true" [searchable]="true" dropdownPosition="auto">
                 <ng-template #ngOptionTemplate let-item="item">
                   <div class="custom-option">
-                    <span> {{ item.id }} - {{ item.nombre }}</span>
+                    <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
                   </div>
                 </ng-template>
               </ng-select>
@@ -230,7 +230,7 @@
               [clearable]="true" [searchable]="true" dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
-                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                  <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
                 </div>
               </ng-template>
             </ng-select>
@@ -244,7 +244,7 @@
               dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
-                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                  <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
                 </div>
               </ng-template>
             </ng-select>
@@ -308,7 +308,7 @@
               [clearable]="true" [searchable]="true" dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
-                  <span> {{ item.id }} - {{ item.nombre }}</span>
+                  <span> {{ item.id }} - {{ item.nombre | transloco }}</span>
                 </div>
               </ng-template>
             </ng-select>
@@ -522,7 +522,7 @@
               dropdownPosition="auto">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
-                  <span>{{ item.id }} - {{ item.nombre }}</span>
+                  <span>{{ item.id }} - {{ item.nombre | transloco }}</span>
                 </div>
               </ng-template>
             </ng-select>
