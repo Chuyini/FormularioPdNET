@@ -1,11 +1,11 @@
 <div class="container">
   <h2 style="text-align: center; margin-bottom: 5%;">{{'ALTA PARA CLIENTES' | transloco}}</h2>
-  <select (change)="changeLang($event)">
+  <ng-select (change)="changeLang($event)">
     <option value="es">Español</option>
     <option value="en">English</option>
     <option value="zh">中文</option>
     <option value="ko">한국어</option>
-  </select>
+  </ng-select>
 
   <form>
     <!-- INFORMACION PREELIMINAR -->
