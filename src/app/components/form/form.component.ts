@@ -27,7 +27,11 @@ import { Observable } from 'rxjs';
 export class FormComponent {
 
   constructor(private snackBar: MatSnackBar, private router: Router, private translocoService: TranslocoService) {
-    this.translateWayPage(this.translocoService.getActiveLang());
+    
+    this.translocoService.setDefaultLang('es');
+    this.translatedWayPage = this.wayPage.map(item => ({
+      ...item,
+    }));
   }
 
 
@@ -219,23 +223,11 @@ export class FormComponent {
     this.translocoService.setActiveLang(lang);
 
 
-    this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
-      setTimeout(() => {
-        this.translateWayPage(lang);
-      }, 1);
-    });
-  }
-
-
-
-  private translateWayPage(lang: any): void {
-    const translations = this.translocoService.getTranslation(lang);
-
     this.translatedWayPage = this.wayPage.map(item => ({
       ...item,
-      descripcion: translations[item.descripcion] || item.descripcion
+      descripcion: this.translocoService.translate(item.descripcion)
     }));
-
+    window.location.reload(); 
 
   }
 
