@@ -243,7 +243,7 @@
               class="custom-ng-select" placeholder="{{ 'Selecciona el Método de pago' | transloco }}">
               <ng-template #ngOptionTemplate let-item="item">
                 <div class="custom-option">
-                  <span>{{ item.id }} - {{ item.descripcion | transloco }}</span>
+                  <span>{{ item.id }} - {{ item.nombre | transloco }}</span>
                 </div>
               </ng-template>
             </ng-select>
