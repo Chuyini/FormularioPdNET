@@ -11,7 +11,7 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
 import { TranslocoConfig, TranslocoModule, TranslocoService } from '@ngneat/transloco';
-
+import { take } from 'rxjs/operators';
 
 
 
@@ -218,7 +218,10 @@ export class FormComponent {
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
     this.translocoService.setActiveLang(lang);
-    setTimeout(() => this.translateWayPage(), 0);
+
+    this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
+      this.translateWayPage();
+    });
   }
 
   private translateWayPage(): void {
