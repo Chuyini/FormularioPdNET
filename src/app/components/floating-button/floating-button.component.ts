@@ -1,8 +1,9 @@
 import { Component, HostListener } from '@angular/core';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-floating-button',
-  imports: [],
+  imports: [TranslocoModule],
   templateUrl: './floating-button.component.html',
   styleUrl: './floating-button.component.css'
 })

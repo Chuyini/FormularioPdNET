@@ -10,9 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
-import { TranslocoConfig, TranslocoModule, TranslocoService } from '@ngneat/transloco';
-import { take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+
 
 
 
