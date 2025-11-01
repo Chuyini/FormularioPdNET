@@ -218,7 +218,9 @@ export class FormComponent {
 
 
     this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
-      this.translateWayPage(lang);
+      setTimeout(() => {
+        this.translateWayPage(lang);
+      }, 0);
     });
   }
 
