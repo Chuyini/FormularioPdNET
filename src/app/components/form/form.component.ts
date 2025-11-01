@@ -218,17 +218,14 @@ export class FormComponent {
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
     this.translocoService.setActiveLang(lang);
-    this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
-      const traduccion = this.translocoService.translate('ALTA PARA CLIENTES');
-      console.log(`Traducción de "Efectivo" en ${lang}:`, traduccion);
-    });
+    console.log("Lenguaje arreglo a: ", this.translocoService.translate('Efectivo', {}, 'en'));
 
     this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
       this.translateWayPage();
     });
   }
 
-
+  
 
   private translateWayPage(): void {
     this.translatedWayPage = this.wayPage.map(item => ({
