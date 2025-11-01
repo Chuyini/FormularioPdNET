@@ -230,7 +230,7 @@ export class FormComponent {
         ...item,
         descripcion: this.translocoService.translate(item.descripcion)
       }));
-    }, 3);
+    }, 300);
 
   }
 
