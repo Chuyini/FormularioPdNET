@@ -12,6 +12,7 @@ import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
 import { TranslocoConfig, TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 
@@ -221,17 +222,20 @@ export class FormComponent {
     this.translocoService.langChanges$.pipe(take(1)).subscribe(() => {
       setTimeout(() => {
         this.translateWayPage(lang);
-      }, 0);
+      }, 1);
     });
   }
 
 
 
   private translateWayPage(lang: any): void {
-    this.translatedWayPage = this.wayPage.map(item => ({
-      ...item,
-      descripcion: this.translocoService.translate(item.descripcion, {}, lang)
-    }));
+    (this.translocoService.getTranslation(lang) as Observable<any>).subscribe(translations => {
+      this.translatedWayPage = this.wayPage.map(item => ({
+        ...item,
+        descripcion: translations[item.descripcion] || item.descripcion
+      }));
+    });
+
   }
 
 
