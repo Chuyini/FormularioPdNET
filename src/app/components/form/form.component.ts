@@ -213,7 +213,7 @@ export class FormComponent {
   private translateWayPage(): void {
     this.translatedWayPage = this.wayPage.map(item => ({
       ...item,
-      descripcion: this.translocoService.translate(item.descripcion)
+      descripcion: this.translocoService.getTranslation(item.descripcion)
     }));
   }
   changeLang(event: Event): void {
