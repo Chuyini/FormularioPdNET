@@ -383,53 +383,7 @@
       </div>
     </fieldset>
 
-    <!-- DOCUMENTACION SOLICITADA -->
-    <fieldset>
-      <legend>{{ 'DOCUMENTACIÓN SOLICITADA' | transloco }}</legend>
-      <p>
-        {{ 'El presente formato deberá ser acompañado por la siguiente documentación como requisito de Alta (En copias o
-        correo electrónico proporcionado por el vendedor):' | transloco }}
-      </p>
-      <ul>
-        <li>
-          <strong>{{ 'Persona Física' | transloco }}</strong>
-          <ul>
-            <li>{{ 'Cédula Fiscal (En caso de requerir Factura)' | transloco }}</li>
-            <li>{{ 'Comprobante de domicilio' | transloco }}</li>
-            <li>{{ 'Identificación Oficial (INE)' | transloco }}</li>
-          </ul>
-        </li>
-        <li>
-          <strong>{{ 'Persona Moral' | transloco }}</strong>
-          <ul>
-            <li>{{ 'Acta Constitutiva' | transloco }}</li>
-            <li>{{ 'Protocolización de acta (En caso de haber)' | transloco }}</li>
-            <li>{{ 'Identificación del Representante Legal' | transloco }}</li>
-            <li>{{ 'Cédula Fiscal' | transloco }}</li>
-            <li>{{ 'Opinión de cumplimiento (Actual)' | transloco }}</li>
-            <li>{{ 'Carátula de Estado de Cuenta' | transloco }}</li>
-            <li>{{ 'Comprobante de domicilio (Menor a 3 meses)' | transloco }}</li>
-            <li>{{ 'Folio Mercantil' | transloco }}</li>
-          </ul>
-        </li>
-      </ul>
-
-      <div class="file-upload">
-        <small>{{ 'Adjunte los archivos en un folder y luego comprímalos' | transloco }}</small>
-        <small>
-          <p>{{ 'Solo formato .ZIP' | transloco }}</p>
-        </small>
-        <small>
-          <p>{{ 'Que no pase de 50 MegaBytes' | transloco }}</p>
-        </small>
-        <label for="zipInput" class="file-label">{{ 'Subir Archivo Comprimido' | transloco }}</label>
-        <input type="file" accept="zip" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
-        <span class="file-name" style="color: green" *ngIf="zipFileName">{{zipFileName}}</span>
-        <span class="file-name" style="color: red; font-size:medium;" *ngIf="zipFileName === ''">{{ '*Ningún archivo
-          seleccionado' | transloco }}</span>
-        <br>
-      </div>
-    </fieldset>
+  
 
     <!-- DOCUMENTACION SOLICITADA -->
     <fieldset>
