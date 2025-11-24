@@ -267,7 +267,7 @@ export class FormComponent {
 
   banks = [
     { "id": 1, "nombre": "ABC Capital" },
-    { "id": 2, "nombre": "American Express Bank (México)" },
+    //{ "id": 2, "nombre": "American Express Bank (México)" },
     { "id": 3, "nombre": "Banca Afirme" },
     { "id": 4, "nombre": "Banca Mifel" },
     { "id": 5, "nombre": "Banco Actinver" },
