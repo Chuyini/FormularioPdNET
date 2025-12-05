@@ -220,14 +220,14 @@ select {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
 
-    button{
+    button {
 
-        margin-left: 30px;
+        margin-left: 20px;
 
     }
-    
+
 }
 
 /* Estilos globales */
