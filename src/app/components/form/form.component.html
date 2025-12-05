@@ -186,10 +186,10 @@
     </fieldset>
 
     <!-- INFORMACION PARA FACTURACION -->
-    <button type="button" (click)="isFactu = !isFactu">
-      {{ (isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
+    <button type="button" (click)="isFactu = !isFactu" style="margin-bottom: 20px;">
+      {{ (!isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
     </button>
-    <fieldset *ngIf="!isFactu">
+    <fieldset *ngIf="isFactu">
       <legend>{{ 'INFORMACIÓN PARA FACTURACIÓN' | transloco }}</legend>
       <div class="two-columns">
         <div>
