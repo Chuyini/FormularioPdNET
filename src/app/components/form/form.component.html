@@ -186,8 +186,8 @@
     </fieldset>
 
     <!-- INFORMACION PARA FACTURACION -->
-    <button type="button" (click)="isFactu = true" class="btn-submit">
-      Quiero Facturar
+    <button type="button"  (click)="isFactu = !isFactu" class="ile-input">
+      {{isFactu ? "Quiero Facturar" | transloco : "Ocultar" | transloco}}
     </button>
     <fieldset *ngIf="!isFactu">
       <legend>{{ 'INFORMACIÓN PARA FACTURACIÓN' | transloco }}</legend>
