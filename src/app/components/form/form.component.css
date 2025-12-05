@@ -220,6 +220,16 @@ select {
     }
 }
 
+@media (max-width: 768px) {
+
+    button{
+
+        margin-left: 42%;
+
+    }
+    
+}
+
 /* Estilos globales */
 .pre {
     width: 100%;
