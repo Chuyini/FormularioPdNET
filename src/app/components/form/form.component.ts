@@ -233,7 +233,14 @@ export class FormComponent {
     this.emailCobra = this.emailPerson;
     console.log('Datos de contacto copiados a cobranza');
 
- 
+
+  }
+  public useDataPFactu() {
+    this.nameFact = this.rasonName;
+    this.telFact = this.telPerson;
+    this.celFact = this.telPerson;
+    this.emailFact = this.emailPerson;
+    console.log('Datos de contacto copiados a facturación');
   }
 
   changeLang(event: Event): void {
