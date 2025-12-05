@@ -96,6 +96,42 @@ label {
     color: #333;
 }
 
+/* Estilo general para botones */
+button {
+    background-color: #00327A;
+    /* Azul profundo */
+    color: #ffffff;
+    /* Texto blanco */
+    font-size: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Transición suave */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /* Sombra ligera */
+}
+
+/* Hover: efecto visual al pasar el mouse */
+button:hover {
+    background-color: #0056b3;
+    /* Azul más claro */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    /* Pequeño levantamiento */
+}
+
+/* Active: efecto al hacer clic */
+button:active {
+    background-color: #002a5c;
+    /* Azul más oscuro */
+    transform: translateY(0);
+    /* Regresa a su lugar */
+}
+
 
 
 .file-upload {

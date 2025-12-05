@@ -186,7 +186,7 @@
     </fieldset>
 
     <!-- INFORMACION PARA FACTURACION -->
-    <button type="button" (click)="isFactu = !isFactu" class="file-input">
+    <button type="button" (click)="isFactu = !isFactu">
       {{ (isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
     </button>
     <fieldset *ngIf="!isFactu">
