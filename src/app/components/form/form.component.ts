@@ -226,11 +226,12 @@ export class FormComponent {
   }));
 
   public useDataPCobra() {
-    
+
     this.nameCobra = this.rasonName;
     this.telCobra = this.telPerson;
     this.celCobra = this.telPerson;
     this.emailCobra = this.emailPerson;
+    console.log('Datos de contacto copiados a cobranza');
 
  
   }
