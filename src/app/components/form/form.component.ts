@@ -76,7 +76,7 @@ export class FormComponent {
 
   //***********************INFORMACION DE FACTURACION**************************
 
-  isFactu:boolean = false;  
+  isFactu: boolean = false;
   nameFact: any = "";
   puestoFact: any = "";
   telFact: any = "";
@@ -225,7 +225,15 @@ export class FormComponent {
     ...item,
   }));
 
+  public useDataPCobra() {
+    
+    this.nameCobra = this.rasonName;
+    this.telCobra = this.telPerson;
+    this.celCobra = this.telPerson;
+    this.emailCobra = this.emailPerson;
 
+ 
+  }
 
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
