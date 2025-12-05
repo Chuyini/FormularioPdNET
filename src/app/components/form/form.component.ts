@@ -76,6 +76,7 @@ export class FormComponent {
 
   //***********************INFORMACION DE FACTURACION**************************
 
+  isFactu:boolean = false;  
   nameFact: any = "";
   puestoFact: any = "";
   telFact: any = "";
@@ -752,8 +753,7 @@ export class FormComponent {
 
     if (this.rasonName == "" || this.regimenSeleccionado == ""
       || this.telPerson == ""
-      || this.emailPerson == "" || this.emailFact == "" ||
-      this.celFact == "" || this.celCobra == "" || this.emailCobra == "") {
+      || this.emailPerson == "" || this.celCobra == "" || this.emailCobra == "") {
 
       this.snackBar.open('Por favor, complete todos los campos obligatorios.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
