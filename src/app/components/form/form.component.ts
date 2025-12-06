@@ -39,7 +39,7 @@ export class FormComponent {
   //************************DATOS FISCALES**********************************
 
   // Valores iniciales para los dropdowns
-  regimenSeleccionado: any = { id: 0, nombre: "No seleccionado" };
+  regimenSeleccionado: any = { id: 616, nombre: "Sin obligaciones fiscales" };
   localSelected: any = { id: 0, nombre: "No seleccionado" };
   cfdiSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
   wayPageSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
@@ -242,14 +242,14 @@ export class FormComponent {
     this.emailFact = this.emailPerson;
     console.log('Datos de contacto copiados a facturación');
 
-    if (this.nameFact == '' && this.telFact == '' && 
-      this.celFact == '' && this.emailFact == '') { 
+    if (this.nameFact == '' && this.telFact == '' &&
+      this.celFact == '' && this.emailFact == '') {
       this.snackBar.open('No hay datos', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
         verticalPosition: 'top', // Posición vertical: 'top' o 'bottom'
         horizontalPosition: 'center' // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
       });
-      }
+    }
   }
   public triggerShake() {
     let fs = document.getElementById('facturacionFieldset');
@@ -900,7 +900,7 @@ export class FormComponent {
       doc.text(text, 10, y);
       y += space;
     };
-    
+
 
     // Sección: Encabezado
     doc.setFontSize(16);
