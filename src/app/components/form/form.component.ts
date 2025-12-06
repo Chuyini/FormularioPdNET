@@ -900,6 +900,7 @@ export class FormComponent {
       doc.text(text, 10, y);
       y += space;
     };
+    
 
     // Sección: Encabezado
     doc.setFontSize(16);
@@ -953,7 +954,9 @@ export class FormComponent {
     addLine(`Correos: ${this.emailSelected?.map(item => item.email).join(', ')}`);
     addLine(`Celular: ${this.celVen}`);
 
-    doc.save('Alta_Pdnt.pdf');
+    setTimeout(() => {
+      doc.save('Alta_Pdnt.pdf');
+    }, 10000); // Espera 10 segundos antes de guardar el PDF
   }
 
 }
