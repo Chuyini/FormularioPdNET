@@ -208,7 +208,10 @@ button:active {
     }
 }
 
-
+/* Clase que dispara la animación */
+fieldset.shake {
+    animation: shake 450ms ease-in-out;
+}
 
 .file-name {
     margin-top: 10px;
