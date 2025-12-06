@@ -241,6 +241,15 @@ export class FormComponent {
     this.celFact = this.telPerson;
     this.emailFact = this.emailPerson;
     console.log('Datos de contacto copiados a facturación');
+
+    if (this.nameFact == '' && this.telFact == '' && 
+      this.celFact == '' && this.emailFact == '') { 
+      this.snackBar.open('No hay datos', 'Cerrar', {
+        duration: 3000, // Duración en milisegundos
+        verticalPosition: 'top', // Posición vertical: 'top' o 'bottom'
+        horizontalPosition: 'center' // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
+      });
+      }
   }
   public triggerShake() {
     let fs = document.getElementById('facturacionFieldset');
