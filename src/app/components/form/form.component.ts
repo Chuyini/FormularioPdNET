@@ -242,6 +242,14 @@ export class FormComponent {
     this.emailFact = this.emailPerson;
     console.log('Datos de contacto copiados a facturación');
   }
+  public triggerShake() {
+    let fs = document.getElementById('facturacionFieldset');
+    if (!fs) return;
+    fs.classList.remove('shake');   // quitar si ya estaba
+    void fs.offsetWidth;            // forzar reflow
+    fs.classList.add('shake');      // volver a aplicar
+  }
+
 
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
