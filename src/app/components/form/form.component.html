@@ -189,7 +189,7 @@
     <button type="button" (click)="isFactu = !isFactu" style="margin-bottom: 20px;  margin-left: 44%;">
       {{ (!isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
     </button>
-    <fieldset *ngIf="isFactu" style="border-color: blue;">
+    <fieldset *ngIf="isFactu" class="shake" style="border-color: blue;">
       <button type="button" (click)="useDataPFactu()" style="margin-bottom: 20px;">
         {{ "Usar Datos de Contacto" | transloco }}
       </button>
