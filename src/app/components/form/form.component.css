@@ -345,3 +345,27 @@ td {
 ::placeholder {
     font-style: italic;
 }
+.jump-button {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+ 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  /* Animación siempre activa */
+  animation: jump 1.5s ease-in-out infinite;
+}
+
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-8px); /* sube */
+  }
+  60% {
+    transform: translateY(4px);  /* baja un poco */
+  }
+}
