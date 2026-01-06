@@ -429,7 +429,7 @@
         </li>
       </ul>
 
-      <div class="file-upload" *ngIf="personRegimen == 2">
+      <div class="file-upload" *ngIf="regimenSeleccionado.id != 616">
         <small>{{ 'Adjunte los archivos en un folder y luego comprímalos' | transloco }}</small>
         <small>
           <p>{{ 'Solo formato .ZIP' | transloco }}</p>
@@ -449,21 +449,10 @@
       </div>
 
 
-      <div class="file-upload">
 
-        <label for="zipInput" class="file-label">{{ 'Subir Archivo Comprimido' | transloco }}</label>
-        <input type="file" accept="zip" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
-
-        <span class="file-name" style="color: green" *ngIf="zipFileName">{{zipFileName}}</span>
-
-        <span class="file-name" style="color: red; font-size:medium;" *ngIf="zipFileName === ''">
-          {{ '*Ningún archivo seleccionado' | transloco }}
-        </span>
-        <br>
-      </div>
 
       <!-- Nota: UPLOADS DE CLIENTES CASEROS -->
-      <div class="file-upload" *ngIf="regimenSeleccionado.id != 616">
+      <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
         <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
         <label for="fileInputINE" class="file-label">{{'Subir INE' | transloco}}</label>
         <input type="file" accept="pdf, png, jpg" id="fileInputINE" class="file-input" (change)="onFileSelected($event, 'INEFile')">
