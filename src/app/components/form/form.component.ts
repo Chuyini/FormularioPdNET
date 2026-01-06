@@ -12,7 +12,7 @@ import jsPDF from 'jspdf';
 import { CommonModule, NgIf } from '@angular/common';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import JSZip from 'jszip';
-import { saveAs } from 'file-saver';
+
 
 
 @Component({
