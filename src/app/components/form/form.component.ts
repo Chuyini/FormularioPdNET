@@ -844,7 +844,7 @@ export class FormComponent {
 
     //Empaquetar los arhivos en ZIP si es casero y su tamaño no excede el límite
 
-     this.packHomemade();//<-- genera el ZIP casero
+     this.fileZip = await this.packHomemade(); //<-- genera el ZIP casero
 
 
 
@@ -929,7 +929,8 @@ export class FormComponent {
   }
 
 
-  packHomemade() {
+  async packHomemade(): Promise<File | null> {
+
     // 1. Tomamos las referencias de los archivos
     const INE = this.fileINE;
     const CEDU = this.fileCEDU;
@@ -938,39 +939,41 @@ export class FormComponent {
     // 2. Creamos un arreglo con los archivos que existan
     const files: File[] = [INE, CEDU, COMP].filter(Boolean) as File[];
 
-    if (files.length === 0 || files === undefined || files === null || this.regimenSeleccionado?.id === 610) {
+    // 3. Validamos condiciones especiales
+    if (files.length === 0 || this.regimenSeleccionado?.id === 610) {
       console.log("NO hay archivos de caseros para comprimir.");
-    } else {
-      console.log("SI hay archivos de caseros para comprimir.");
-      // 3. Instanciamos el ZIP
-      const zip = new JSZip();
-
-      // 4. Creamos promesas para leer cada archivo con FileReader
-      const promises = files.map(file => {
-        return new Promise<void>((resolve) => {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            // Agregamos el archivo al ZIP
-            zip.file(file.name, e.target.result);
-            resolve();
-          };
-          reader.readAsArrayBuffer(file);
-        });
-      });
-
-      // 5. Esperamos a que todas las lecturas terminen
-      Promise.all(promises).then(() => {
-        // 6. Generamos el ZIP (aunque esté vacío si no había archivos)
-        zip.generateAsync({ type: 'blob' }).then(content => {
-
-          this.fileZip = new File([content], 'archivo.zip', { type: 'application/zip' });
-
-          // ✅ Ahora tienes el ZIP guardado en la variable
-
-          console.log("ZIP generado correctamente", content);
-        });
-      });
+      return null; // devolvemos null pero no cortamos el flujo
     }
+
+    console.log("SI hay archivos de caseros para comprimir.");
+
+    // 4. Instanciamos el ZIP
+    const zip = new JSZip();
+
+    // 5. Creamos promesas para leer cada archivo con FileReader
+    const promises = files.map(file => {
+      return new Promise<void>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          zip.file(file.name, e.target.result);
+          resolve();
+        };
+        reader.readAsArrayBuffer(file);
+      });
+    });
+
+    // 6. Esperamos a que todas las lecturas terminen
+    await Promise.all(promises);
+
+    // 7. Generamos el ZIP
+    const content = await zip.generateAsync({ type: 'blob' });
+
+    // 8. Guardamos el ZIP en la variable
+    this.fileZip = new File([content], 'archivo.zip', { type: 'application/zip' });
+
+    console.log("ZIP generado correctamente:", this.fileZip);
+
+    return this.fileZip;
   }
 
 
