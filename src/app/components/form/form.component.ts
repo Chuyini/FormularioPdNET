@@ -844,7 +844,7 @@ export class FormComponent {
 
     //Empaquetar los arhivos en ZIP si es casero y su tamaño no excede el límite
 
-    this.packHomemade();//<-- genera el ZIP casero
+     this.packHomemade();//<-- genera el ZIP casero
 
 
 
@@ -938,7 +938,7 @@ export class FormComponent {
     // 2. Creamos un arreglo con los archivos que existan
     const files: File[] = [INE, CEDU, COMP].filter(Boolean) as File[];
 
-    if (files.length === 0) {
+    if (files.length === 0 || files === undefined || files === null || this.regimenSeleccionado?.id === 610) {
       console.log("NO hay archivos de caseros para comprimir.");
     } else {
       console.log("SI hay archivos de caseros para comprimir.");
