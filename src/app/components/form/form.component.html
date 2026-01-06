@@ -403,16 +403,20 @@
         correo electrónico proporcionado por el vendedor):' | transloco }}
       </p>
       <ul>
-        <li>
-          <strong>{{ 'Persona Física' | transloco }}</strong>
+        <li ngIf="regimenSeleccionado.id == 616">
+           <strong>{{ 'Persona Moral' | transloco }}</strong>
+         <!-- <button (click)="personRegimen = 1">{{ 'Persona Física' | transloco }}</button>
+          <small>{{'Seleccione' | transloco }}</small>-->
           <ul>
             <li>{{ 'Cédula Fiscal (En caso de requerir Factura)' | transloco }}</li>
             <li>{{ 'Comprobante de domicilio' | transloco }}</li>
             <li>{{ 'Identificación Oficial (INE)' | transloco }}</li>
           </ul>
         </li>
-        <li>
-          <strong>{{ 'Persona Moral' | transloco }}</strong>
+        <li ngIf="regimenSeleccionado.id != 616">
+           <strong>{{ 'Persona Moral' | transloco }}</strong>
+          <!-- Person Moral 
+          <small>{{'Seleccione' | transloco }}</small>-->
           <ul>
             <li>{{ 'Acta Constitutiva' | transloco }}</li>
             <li>{{ 'Protocolización de acta (En caso de haber)' | transloco }}</li>
@@ -426,7 +430,7 @@
         </li>
       </ul>
 
-      <div class="file-upload">
+      <div class="file-upload" *ngIf="personRegimen == 2">
         <small>{{ 'Adjunte los archivos en un folder y luego comprímalos' | transloco }}</small>
         <small>
           <p>{{ 'Solo formato .ZIP' | transloco }}</p>
@@ -444,6 +448,24 @@
         </span>
         <br>
       </div>
+
+
+      <div class="file-upload" *ngIf="personRegimen == 1">
+       
+        <label for="zipInput" class="file-label">{{ 'Subir Archivo Comprimido' | transloco }}</label>
+        <input type="file" accept="zip" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
+
+        <span class="file-name" style="color: green" *ngIf="zipFileName">{{zipFileName}}</span>
+
+        <span class="file-name" style="color: red; font-size:medium;" *ngIf="zipFileName === ''">
+          {{ '*Ningún archivo seleccionado' | transloco }}
+        </span>
+        <br>
+      </div>
+
+
+
+
     </fieldset>
 
     <!-- DATOS DEL VENDEDOR -->

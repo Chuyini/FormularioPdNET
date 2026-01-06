@@ -36,12 +36,16 @@ export class FormComponent {
 
 
 
+
+
   //************************DATOS FISCALES**********************************
+
+  personRegimen = 1; // o 'persona fisica' 1 es person física y 2 moral
 
   // Valores iniciales para los dropdowns
   regimenSeleccionado: any = { id: 616, nombre: "Sin obligaciones fiscales" };
   localSelected: any = { id: 0, nombre: "No seleccionado" };
-  cfdiSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
+  cfdiSelected: any = { "id": 22, "codigo": "S01", "descripcion": "Sin efectos fiscales." };
   wayPageSelected: any = { id: 0, codigo: "N/A", descripcion: "No seleccionado" };
   bankSelected: any = { id: 0, nombre: "No seleccionado" };
 
