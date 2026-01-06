@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import jsPDF from 'jspdf';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 
@@ -17,7 +17,7 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-form',
-  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, CommonModule, TranslocoModule],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, CommonModule, TranslocoModule, NgIf],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
