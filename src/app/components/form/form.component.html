@@ -407,9 +407,9 @@
           <!-- <button (click)="personRegimen = 1">{{ 'Persona Física' | transloco }}</button>
           <small>{{'Seleccione' | transloco }}</small>-->
           <ul>
+            <li>{{ 'Identificación Oficial (INE)' | transloco }}</li>
             <li>{{ 'Cédula Fiscal (En caso de requerir Factura)' | transloco }}</li>
             <li>{{ 'Comprobante de domicilio' | transloco }}</li>
-            <li>{{ 'Identificación Oficial (INE)' | transloco }}</li>
           </ul>
         </li>
         <li *ngIf="regimenSeleccionado.id != 616">
@@ -453,7 +453,7 @@
 
       <!-- Nota: UPLOADS DE CLIENTES CASEROS -->
       <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
-        <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
+        <small><i> {{'Usar .PDF, PNG, JPEG O JPG' | transloco }} </i></small>
         <label for="fileInputINE" class="file-label">{{'Subir INE' | transloco}}</label>
         <input type="file" accept="pdf, png, jpg" id="fileInputINE" class="file-input" (change)="onFileSelected($event, 'INEFile')">
         <span class="file-name" style="color: green" *ngIf="INEFileName">{{INEFileName}}</span>
@@ -477,7 +477,7 @@
       </div>
 
       <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
-        <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
+        <small><i> {{'Usar .PDF, PNG, JPEG O JPG' | transloco }} </i></small>
         <label for="fileInputCOMP" class="file-label">{{'Subir COMPROBANTE DE DOMICILIO' | transloco}}</label>
         <input type="file" accept="pdf, png, jpg" id="fileInputCOMP" class="file-input" (change)="onFileSelected($event, 'COMPFile')">
         <span class="file-name" style="color: green" *ngIf="COMPFileName">{{COMPFileName}}</span>

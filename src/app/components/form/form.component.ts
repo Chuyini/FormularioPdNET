@@ -11,8 +11,8 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import { CommonModule, NgIf } from '@angular/common';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
-
-
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 
 @Component({
@@ -596,7 +596,7 @@ export class FormComponent {
       } else if (fileType === 'zipFile') {
         this.zipFileName = input.files[0].name;
         this.fileZip = input.files[0];
-      }else if (fileType === 'INEFile') {
+      } else if (fileType === 'INEFile') {
         this.INEFileName = input.files[0].name;
         this.fileINE = input.files[0];
       } else if (fileType === 'CEDUFile') {
@@ -611,7 +611,7 @@ export class FormComponent {
         this.bankFileName = 'Ningún archivo seleccionado';
       } else if (fileType === 'zipFile') {
         this.zipFileName = 'Ningún archivo seleccionado';
-      }else if (fileType === 'INEFile') {
+      } else if (fileType === 'INEFile') {
         this.INEFileName = 'Ningún archivo seleccionado';
       } else if (fileType === 'CEDUFile') {
         this.CEDUFileName = 'Ningún archivo seleccionado';
@@ -826,6 +826,8 @@ export class FormComponent {
 
 
 
+
+
     // Validar extensión .pdf si fileBank está definido
     if (this.fileBank) {
       const pdfOk = this.fileBank.name.toLowerCase().endsWith('.pdf');
@@ -838,6 +840,13 @@ export class FormComponent {
         return;
       }
     }
+
+
+    //Empaquetar los arhivos en ZIP si es casero y su tamaño no excede el límite
+
+    this.packHomemade();//<-- genera el ZIP casero
+
+
 
     if ((this.fileZip?.size ?? 0) > 50 * 1048576) {
       this.snackBar.open('El archivo debe ser un PDF y el ZIP debe tener un tamaño máximo de 17MB.', 'Cerrar', {
@@ -918,6 +927,52 @@ export class FormComponent {
     console.log("No termina");
 
   }
+
+
+  packHomemade() {
+    // 1. Tomamos las referencias de los archivos
+    const INE = this.fileINE;
+    const CEDU = this.fileCEDU;
+    const COMP = this.fileCOMP;
+
+    // 2. Creamos un arreglo con los archivos que existan
+    const files: File[] = [INE, CEDU, COMP].filter(Boolean) as File[];
+
+    if (files.length === 0) {
+      console.log("NO hay archivos de caseros para comprimir.");
+    } else {
+      console.log("SI hay archivos de caseros para comprimir.");
+      // 3. Instanciamos el ZIP
+      const zip = new JSZip();
+
+      // 4. Creamos promesas para leer cada archivo con FileReader
+      const promises = files.map(file => {
+        return new Promise<void>((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+            // Agregamos el archivo al ZIP
+            zip.file(file.name, e.target.result);
+            resolve();
+          };
+          reader.readAsArrayBuffer(file);
+        });
+      });
+
+      // 5. Esperamos a que todas las lecturas terminen
+      Promise.all(promises).then(() => {
+        // 6. Generamos el ZIP (aunque esté vacío si no había archivos)
+        zip.generateAsync({ type: 'blob' }).then(content => {
+
+          this.fileZip = new File([content], 'archivo.zip', { type: 'application/zip' });
+
+          // ✅ Ahora tienes el ZIP guardado en la variable
+
+          console.log("ZIP generado correctamente", content);
+        });
+      });
+    }
+  }
+
 
   generatePDF() {
     const doc = new jsPDF();
