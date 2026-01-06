@@ -476,7 +476,7 @@
         <br>
       </div>
 
-      <div class="file-upload" *ngIf="regimenSeleccionado.id != 616">
+      <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
         <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
         <label for="fileInputCOMP" class="file-label">{{'Subir COMPROBANTE DE DOMICILIO' | transloco}}</label>
         <input type="file" accept="pdf, png, jpg" id="fileInputCOMP" class="file-input" (change)="onFileSelected($event, 'COMPFile')">
