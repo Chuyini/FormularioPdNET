@@ -403,7 +403,7 @@
         correo electrónico proporcionado por el vendedor):' | transloco }}
       </p>
       <ul>
-        <li ngIf="regimenSeleccionado.id == 616">
+        <li *ngIf="regimenSeleccionado.id == 616">
            <strong>{{ 'Persona Moral' | transloco }}</strong>
          <!-- <button (click)="personRegimen = 1">{{ 'Persona Física' | transloco }}</button>
           <small>{{'Seleccione' | transloco }}</small>-->
@@ -413,7 +413,7 @@
             <li>{{ 'Identificación Oficial (INE)' | transloco }}</li>
           </ul>
         </li>
-        <li ngIf="regimenSeleccionado.id != 616">
+        <li *ngIf="regimenSeleccionado.id != 616">
            <strong>{{ 'Persona Moral' | transloco }}</strong>
           <!-- Person Moral 
           <small>{{'Seleccione' | transloco }}</small>-->
