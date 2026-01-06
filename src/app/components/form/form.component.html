@@ -189,8 +189,7 @@
     <button type="button" (click)="isFactu = !isFactu" style="margin-bottom: 20px;  margin-left: 44%;">
       {{ (!isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
     </button>
-    <fieldset *ngIf="isFactu" class="shake" style="border-color: blue;"
-      id="facturacionFieldset">
+    <fieldset *ngIf="isFactu" class="shake" style="border-color: blue;" id="facturacionFieldset">
       <button type="button" (click)="useDataPFactu()" style="margin-bottom: 20px;">
         {{ "Usar Datos de Contacto" | transloco }}
       </button>
@@ -404,8 +403,8 @@
       </p>
       <ul>
         <li *ngIf="regimenSeleccionado.id == 616">
-           <strong>{{ 'Persona Moral' | transloco }}</strong>
-         <!-- <button (click)="personRegimen = 1">{{ 'Persona Física' | transloco }}</button>
+          <strong>{{ 'Persona Moral' | transloco }}</strong>
+          <!-- <button (click)="personRegimen = 1">{{ 'Persona Física' | transloco }}</button>
           <small>{{'Seleccione' | transloco }}</small>-->
           <ul>
             <li>{{ 'Cédula Fiscal (En caso de requerir Factura)' | transloco }}</li>
@@ -414,7 +413,7 @@
           </ul>
         </li>
         <li *ngIf="regimenSeleccionado.id != 616">
-           <strong>{{ 'Persona Moral' | transloco }}</strong>
+          <strong>{{ 'Persona Moral' | transloco }}</strong>
           <!-- Person Moral 
           <small>{{'Seleccione' | transloco }}</small>-->
           <ul>
@@ -450,8 +449,8 @@
       </div>
 
 
-      <div class="file-upload" *ngIf="personRegimen == 1">
-       
+      <div class="file-upload">
+
         <label for="zipInput" class="file-label">{{ 'Subir Archivo Comprimido' | transloco }}</label>
         <input type="file" accept="zip" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
 
@@ -463,6 +462,42 @@
         <br>
       </div>
 
+      <!-- Nota: UPLOADS DE CLIENTES CASEROS -->
+      <div class="file-upload" *ngIf="regimenSeleccionado.id != 616">
+        <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
+        <label for="fileInputINE" class="file-label">{{'Subir INE' | transloco}}</label>
+        <input type="file" accept="pdf, png, jpg" id="fileInputINE" class="file-input" (change)="onFileSelected($event, 'INEFile')">
+        <span class="file-name" style="color: green" *ngIf="INEFileName">{{INEFileName}}</span>
+
+
+        <span class="file-name" style="color: red; font-size:medium;" *ngIf="INEFileName === ''">{{'*Ningún archivo
+          seleccionado' | transloco }}</span>
+        <br>
+      </div>
+
+      <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
+        <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
+        <label for="fileInputCEDU" class="file-label">{{'Subir CEDULA PROFESIONAL' | transloco}}</label>
+        <input type="file" accept="pdf, png, jpg" id="fileInputCEDU" class="file-input" (change)="onFileSelected($event, 'CEDUFile')">
+        <span class="file-name" style="color: green" *ngIf="CEDUFileName">{{CEDUFileName}}</span>
+
+
+        <span class="file-name" style="color: red; font-size:medium;" *ngIf="CEDUFileName === ''">{{'*Ningún archivo
+          seleccionado' | transloco }}</span>
+        <br>
+      </div>
+
+      <div class="file-upload" *ngIf="regimenSeleccionado.id != 616">
+        <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
+        <label for="fileInputCOMP" class="file-label">{{'Subir COMPROBANTE DE DOMICILIO' | transloco}}</label>
+        <input type="file" accept="pdf, png, jpg" id="fileInputCOMP" class="file-input" (change)="onFileSelected($event, 'COMPFile')">
+        <span class="file-name" style="color: green" *ngIf="COMPFileName">{{COMPFileName}}</span>
+
+
+        <span class="file-name" style="color: red; font-size:medium;" *ngIf="COMPFileName === ''">{{'*Ningún archivo
+          seleccionado' | transloco }}</span>
+        <br>
+      </div>
 
 
 

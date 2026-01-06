@@ -128,6 +128,14 @@ export class FormComponent {
   fileBank: File | null = null;
   fileZip: File | null = null;
 
+  INEFileName: string = '';
+  CEDUFileName: string = '';
+  COMPFileName: string = '';
+
+  fileINE: File | null = null;
+  fileCEDU: File | null = null;
+  fileCOMP: File | null = null;
+
 
 
   regimenes = [
@@ -588,12 +596,27 @@ export class FormComponent {
       } else if (fileType === 'zipFile') {
         this.zipFileName = input.files[0].name;
         this.fileZip = input.files[0];
+      }else if (fileType === 'INEFile') {
+        this.INEFileName = input.files[0].name;
+        this.fileINE = input.files[0];
+      } else if (fileType === 'CEDUFile') {
+        this.CEDUFileName = input.files[0].name;
+        this.fileCEDU = input.files[0];
+      } else if (fileType === 'COMPFile') {
+        this.fileCOMP = input.files[0];
+        this.COMPFileName = input.files[0].name;
       }
     } else {
       if (fileType === 'bankFile') {
         this.bankFileName = 'Ningún archivo seleccionado';
       } else if (fileType === 'zipFile') {
         this.zipFileName = 'Ningún archivo seleccionado';
+      }else if (fileType === 'INEFile') {
+        this.INEFileName = 'Ningún archivo seleccionado';
+      } else if (fileType === 'CEDUFile') {
+        this.CEDUFileName = 'Ningún archivo seleccionado';
+      } else if (fileType === 'COMPFile') {
+        this.COMPFileName = 'Ningún archivo seleccionado';
       }
     }
   }
