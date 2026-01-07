@@ -186,11 +186,11 @@
     </fieldset>
 
     <!-- INFORMACION PARA FACTURACION -->
-    <button type="button" (click)="useDataPFactu()" class="jump-button">
+    <button type="button" (click)="useDataPFactu()" >
       {{ (!isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
     </button>
     <fieldset *ngIf="isFactu" class="shake" style="border-color: blue;" id="facturacionFieldset">
-      <button type="button" (click)="useDataPFactu()" style="margin-bottom: 20px;">
+      <button type="button" (click)="useDataPFactu()" class="jump-button">
         {{ "Usar Datos de Contacto" | transloco }}
       </button>
       <legend>{{ 'INFORMACIÓN PARA FACTURACIÓN' | transloco }}</legend>
@@ -248,7 +248,7 @@
     <!-- INFORMACION PARA COBRANZA -->
     <fieldset>
       <legend>{{ 'INFORMACIÓN PARA COBRANZA' | transloco }}</legend>
-      <button type="button" (click)="useDataPCobra()" style="margin-bottom: 20px;">
+      <button type="button" (click)="useDataPCobra()" class="jump-button">
         {{ "Usar Datos de Contacto" | transloco }}
       </button>
       <div class="two-columns">
