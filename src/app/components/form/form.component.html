@@ -465,7 +465,7 @@
       </div>
 
       <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
-        <small><i> {{'Usar .PDF, PNG O JPG' | transloco }} </i></small>
+        <small><i> {{'Usar .PDF, PNG, JPEG O JPG' | transloco }} </i></small>
         <label for="fileInputCEDU" class="file-label">{{'Subir CEDULA PROFESIONAL' | transloco}}</label>
         <input type="file" accept="pdf, png, jpg" id="fileInputCEDU" class="file-input" (change)="onFileSelected($event, 'CEDUFile')">
         <span class="file-name" style="color: green" *ngIf="CEDUFileName">{{CEDUFileName}}</span>
