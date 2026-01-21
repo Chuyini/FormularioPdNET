@@ -673,57 +673,57 @@ export class FormComponent {
       const body = {
         to: emails,
         subject: 'ALTA DE CLIENTES',
-        text: `¡Hola! te entrego el Alta de clientes: ${this.rasonName} 😊👌 ➡️`,
+        text: `¡Hola! te entrego el Alta de clientes: ${this.rasonName.toUpperCase()} 😊👌 ➡️`,
         attachments: attachmentsArray,
         variables: [
           {
             "datos_fiscales": {
-              "razon_social": this.rasonName,
+              "razon_social": this.rasonName.toUpperCase(),
               "regimen_fiscal": {
                 "id": this.regimenSeleccionado.id,
-                "nombre": this.regimenSeleccionado.nombre
+                "nombre": this.regimenSeleccionado.nombre.toUpperCase()
               },
-              "rfc": this.rfc,
-              "calle": this.callePerson,
+              "rfc": this.rfc.toUpperCase(),
+              "calle": this.callePerson.toUpperCase(),
               "numero_interior": this.no_intPerson,
               "numero_exterior": this.no_extPerson,
-              "colonia": this.coloniaPerson,
+              "colonia": this.coloniaPerson.toUpperCase(),
               "codigo_postal": this.cpPerson,
-              "municipio": this.municipioPerson,
-              "estado": this.localSelected.nombre,
+              "municipio": this.municipioPerson.toUpperCase(),
+              "estado": this.localSelected.nombre.toUpperCase(),
               "poblacion": this.poblationPerson,
-              "pais": this.countryPerson,
-              "zona": this.zone,
+              "pais": this.countryPerson.toUpperCase(),
+              "zona": this.zone.toUpperCase(),
               "telefono": this.telPerson,
               "correo_electronico": this.emailPerson,
               "pagina_web": this.webPage
             },
             "domicilio_instalacion": {
-              "calle": this.calleInst,
+              "calle": this.calleInst.toUpperCase(),
               "numero_exterior": this.no_extInst,
               "numero_interior": this.no_intInst,
-              "colonia": this.coloniaInst,
+              "colonia": this.coloniaInst.toUpperCase(),
               "codigo_postal": this.cpInst,
-              "municipio": this.municipioInst,
-              "estado": this.localInst,
+              "municipio": this.municipioInst.toUpperCase(),
+              "estado": this.localInst.toUpperCase(),
               "poblacion": this.poblationInst,
-              "pais": this.countryInst,
-              "zona": this.zoneInst,
+              "pais": this.countryInst.toUpperCase(),
+              "zona": this.zoneInst.toUpperCase(),
               "telefono": this.telInst
             },
             "informacion_facturacion": {
-              "nombre_encargado": this.nameFact,
-              "puesto": this.puestoFact,
+              "nombre_encargado": this.nameFact.toUpperCase(),
+              "puesto": this.puestoFact.toUpperCase(),
               "telefono": this.telFact,
               "celular": this.celFact,
               "correo_electronico": this.emailFact,
-              "cfdi": this.cfdiSelected.descripcion,
-              "metodo_pago": this.wayPageSelected.descripcion,
-              "datos_adicionales": this.aditionalData
+              "cfdi": this.cfdiSelected.descripcion.toUpperCase(),
+              "metodo_pago": this.wayPageSelected.descripcion.toUpperCase(),
+              "datos_adicionales": this.aditionalData.toUpperCase()
             },
             "informacion_cobranza": {
-              "nombre_encargado": this.nameCobra,
-              "puesto": this.puestoCobra,
+              "nombre_encargado": this.nameCobra.toUpperCase(),
+              "puesto": this.puestoCobra.toUpperCase(),
               "telefono": this.telCobra,
               "celular": this.celCobra,
               "correo_electronico": this.emailCobra
@@ -731,22 +731,22 @@ export class FormComponent {
             "informacion_bancaria": {
               "numero_cuenta": this.no_count,
               "numero_cuenta_clabe": this.no_clabe,
-              "banco": this.bankSelected.nombre
+              "banco": this.bankSelected.nombre.toUpperCase()
             },
             "contacto_sitio": {
-              "ubicacion": this.ubicationSite,
+              "ubicacion": this.ubicationSite.toUpperCase(),
               "coordenadas": this.coordenadasSite,
               "nombre_contacto_sitio": this.nameSite,
               "telefono": this.telSite,
               "celular": this.celSite,
-              "departamento": this.depSite,
+              "departamento": this.depSite.toUpperCase(),
               "horario_atencion": this.timeSite,
               "megas_aproximados": this.megasSite,
               "numero_enlaces": this.noEnlace_sit
             },
             "datos_vendedor": {
-              "nombre_vendedor": this.nameVen,
-              "oficina": this.oficinaVen,
+              "nombre_vendedor": this.nameVen.toUpperCase(),
+              "oficina": this.oficinaVen.toUpperCase(),
               "correos": this.emailSelected.map(item => item.email).join(", "),
               "celular_vendedor": this.celVen
             }
