@@ -760,8 +760,10 @@ export class FormComponent {
       this.generatePDF();
 
       //https://email-own.vercel.app/send-email
+      //https://emails.fly.dev/
+      //https://emailown.fly.dev/send-email
       try {
-        const response = await axios.post('https://emailown.fly.dev/send-email', body);
+        const response = await axios.post('https://emails.fly.dev/send-email', body);
         console.log('Archivos enviados exitosamente:', response);
 
         await this.router.navigate(['/gratitude']);
