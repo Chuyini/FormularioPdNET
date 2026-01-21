@@ -993,49 +993,49 @@ export class FormComponent {
     addLine('ALTA DE CLIENTES');
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
-    addLine(`Hola ${this.rasonName}`);
+    addLine(`CLIENTE ${this.rasonName.toUpperCase()}, a continuación se presentan los datos proporcionados:`);
 
     // Datos Fiscales
     addLine('Datos Fiscales', 12);
-    addLine(`Razón Social: ${this.rasonName}`);
-    addLine(`Régimen Fiscal: ${this.regimenSeleccionado?.nombre} (ID: ${this.regimenSeleccionado?.id})`);
-    addLine(`RFC: ${this.rfc}`);
-    addLine(`Domicilio: ${this.callePerson} ${this.no_extPerson || ''} ${this.no_intPerson || ''}, ${this.coloniaPerson}, ${this.municipioPerson}, ${this.localSelected?.nombre}, ${this.poblationPerson}, C.P. ${this.cpPerson}`);
+    addLine(`Razón Social: ${this.rasonName.toUpperCase()}`);
+    addLine(`Régimen Fiscal: ${this.regimenSeleccionado?.nombre.toUpperCase()} (ID: ${this.regimenSeleccionado?.id})`);
+    addLine(`RFC: ${this.rfc.toUpperCase()}`);
+    addLine(`Domicilio: ${this.callePerson.toUpperCase()} ${this.no_extPerson || ''} ${this.no_intPerson || ''}, ${this.coloniaPerson}, ${this.municipioPerson}, ${this.localSelected?.nombre}, ${this.poblationPerson}, C.P. ${this.cpPerson}`);
     addLine(`País: ${this.countryPerson}, Zona: ${this.zone}`);
     addLine(`Teléfono: ${this.telPerson}, Correo Electrónico: ${this.emailPerson}`);
 
     // Domicilio de Instalación
     addLine('Domicilio de Instalación', 12);
-    addLine(`Calle: ${this.calleInst}, No. Exterior: ${this.no_extInst}, No. Interior: ${this.no_intInst}`);
-    addLine(`Colonia: ${this.coloniaInst}, C.P. ${this.cpInst}, Municipio: ${this.municipioInst}, Estado: ${this.localInst}`);
+    addLine(`Calle: ${this.calleInst.toUpperCase()}, No. Exterior: ${this.no_extInst}, No. Interior: ${this.no_intInst}`);
+    addLine(`Colonia: ${this.coloniaInst}, C.P. ${this.cpInst}, Municipio: ${this.municipioInst.toUpperCase()}, Estado: ${this.localInst.toUpperCase()}`);
     addLine(`País: ${this.countryInst}, Zona: ${this.zoneInst}, Teléfono: ${this.telInst}`);
 
     // Información de Facturación
     addLine('Información de Facturación', 12);
-    addLine(`Nombre Encargado: ${this.nameFact}, Puesto: ${this.puestoFact}`);
+    addLine(`Nombre Encargado: ${this.nameFact.toUpperCase()}, Puesto: ${this.puestoFact.toUpperCase()}`);
     addLine(`Teléfono: ${this.telFact}, Celular: ${this.celFact}, Correo Electrónico: ${this.emailFact}`);
-    addLine(`CFDI: ${this.cfdiSelected?.descripcion}, Método de Pago: ${this.wayPageSelected?.descripcion}`);
-    addLine(`Datos Adicionales: ${this.aditionalData}`);
+    addLine(`CFDI: ${this.cfdiSelected?.descripcion.toUpperCase()}, Método de Pago: ${this.wayPageSelected?.descripcion.toUpperCase()}`);
+    addLine(`Datos Adicionales: ${this.aditionalData.toUpperCase()}`);
 
     // Información de Cobranza
     addLine('Información de Cobranza', 12);
-    addLine(`Nombre Encargado: ${this.nameCobra}, Puesto: ${this.puestoCobra}`);
+    addLine(`Nombre Encargado: ${this.nameCobra.toUpperCase()}, Puesto: ${this.puestoCobra.toUpperCase()}`);
     addLine(`Teléfono: ${this.telCobra}, Celular: ${this.celCobra}, Correo Electrónico: ${this.emailCobra}`);
 
     // Información Bancaria
     addLine('Información Bancaria', 12);
-    addLine(`Número de Cuenta: ${this.no_count}, CLABE: ${this.no_clabe}, Banco: ${this.bankSelected?.nombre}`);
+    addLine(`Número de Cuenta: ${this.no_count}, CLABE: ${this.no_clabe}, Banco: ${this.bankSelected?.nombre.toUpperCase()}`);
 
     // Contacto del Sitio
     addLine('Contacto del Sitio', 12);
-    addLine(`Ubicación: ${this.ubicationSite}, Coordenadas: ${this.coordenadasSite}`);
-    addLine(`Nombre Contacto: ${this.nameSite}, Teléfono: ${this.telSite}, Celular: ${this.celSite}`);
-    addLine(`Departamento: ${this.depSite}, Horario de Atención: ${this.timeSite}`);
+    addLine(`Ubicación: ${this.ubicationSite.toUpperCase()}, Coordenadas: ${this.coordenadasSite}`);
+    addLine(`Nombre Contacto: ${this.nameSite.toUpperCase()}, Teléfono: ${this.telSite}, Celular: ${this.celSite}`);
+    addLine(`Departamento: ${this.depSite.toUpperCase()}, Horario de Atención: ${this.timeSite}`);
     addLine(`Megas Aproximados: ${this.megasSite}, Número de Enlaces: ${this.noEnlace_sit}`);
 
     // Datos del Vendedor
     addLine('Datos del Vendedor', 12);
-    addLine(`Nombre Vendedor: ${this.nameVen}, Oficina: ${this.oficinaVen}`);
+    addLine(`Nombre Vendedor: ${this.nameVen.toUpperCase()}, Oficina: ${this.oficinaVen.toUpperCase()}`);
     addLine(`Correos: ${this.emailSelected?.map(item => item.email).join(', ')}`);
     addLine(`Celular: ${this.celVen}`);
 
