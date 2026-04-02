@@ -761,7 +761,7 @@ export class FormComponent {
 
       //https://email-own.vercel.app/send-email
       //https://emails.fly.dev/
-      
+
       try {
         const response = await axios.post('https://emailown.fly.dev/send-email', body);
         console.log('Archivos enviados exitosamente:', response);
@@ -812,6 +812,11 @@ export class FormComponent {
 
   public async submitAll(): Promise<void> {
 
+    // Quitar foco del input activo
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
 
     if (this.rasonName == "" || this.regimenSeleccionado == ""
       || this.telPerson == ""
@@ -825,6 +830,8 @@ export class FormComponent {
       return;
 
     }
+
+
 
 
 
@@ -846,7 +853,7 @@ export class FormComponent {
 
     //Empaquetar los arhivos en ZIP si es casero y su tamaño no excede el límite
 
-     this.fileZip = await this.packHomemade(); //<-- genera el ZIP casero
+    this.fileZip = await this.packHomemade(); //<-- genera el ZIP casero
 
 
 
