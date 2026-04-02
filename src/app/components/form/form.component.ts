@@ -258,7 +258,7 @@ export class FormComponent {
       this.celFact == '' && this.emailFact == '') {
       this.snackBar.open('No hay datos', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
-        verticalPosition: 'top', // Posición vertical: 'top' o 'bottom'
+        verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
         horizontalPosition: 'center' // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
       });
     }
@@ -819,7 +819,7 @@ export class FormComponent {
 
       this.snackBar.open('Por favor, complete todos los campos obligatorios.', 'Cerrar', {
         duration: 3000, // Duración en milisegundos
-        verticalPosition: 'top', // Posición vertical: 'top' o 'bottom'
+        verticalPosition: 'bottom', // Posición vertical: 'top' o 'bottom'
         horizontalPosition: 'center' // Posición horizontal: 'start', 'center', 'end', 'left', 'right'
       });
       return;
