@@ -521,6 +521,7 @@ export class FormComponent {
   
   INFORMACIÓN DE COBRANZA
   -----------------------------------------
+  
   Nombre Encargado: ${this.nameCobra}
   Puesto: ${this.puestoCobra}
   Teléfono: ${this.telCobra}
@@ -607,7 +608,7 @@ export class FormComponent {
         this.COMPFileName = input.files[0].name;
       }
     } else {
-      if (fileType === 'bankFile') {
+      if (fileType === 'bankFile') {    
         this.bankFileName = 'Ningún archivo seleccionado';
       } else if (fileType === 'zipFile') {
         this.zipFileName = 'Ningún archivo seleccionado';
@@ -765,12 +766,13 @@ export class FormComponent {
       try {
         const response = await axios.post('https://emailown.fly.dev/send-email', body);
         console.log('Archivos enviados exitosamente:', response);
-
         await this.router.navigate(['/gratitude']);
-      } catch (error) {
-        console.error('Error al enviar los archivos', error);
 
+      } catch (error) {
+
+        console.error('Error al enviar los archivos', error);
         await this.router.navigate(['/error']);
+        
       }
 
 
