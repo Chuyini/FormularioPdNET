@@ -354,7 +354,7 @@ export class FormComponent {
     { "id": 40, "nombre": "HSBC México" },
     { "id": 41, "nombre": "Intercam Banco" },
     { "id": 42, "nombre": "Investa Bank" },
-    { "id": 43, "nombre": "Scotiabank Inverlat" },
+    { "id": 43, "nombre": "Scotiabank Inverlat" }, 
     { "id": 44, "nombre": "UBS Bank México" },
     { "id": 45, "nombre": "Volkswagen Bank" }
   ]
