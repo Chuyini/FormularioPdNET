@@ -164,5 +164,10 @@
     "Página PoderNET": "PoderNET 페이지",
     "Quiero Facturar": "청구서 발행 원함",
     "Ocultar": "숨기기",
-    "Seleccione": "선택하세요"
+    "Seleccione": "선택하세요",
+    "INFORMACIÓN ADICIONAL PARA REALIZAR PAGOS": "결제 관련 추가 정보",
+    "Pagos en cajeros automáticos Banorte": "Banorte ATM 결제",
+    "Cuenta: 0807584141": "계좌: 0807584141",
+    "Cuenta Clabe: 072700008075841414": "CLABE 계좌: 072700008075841414",
+    "Referencia N° 1: ID cliente": "참조 번호 1: 고객 ID"
 }

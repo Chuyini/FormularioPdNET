@@ -329,11 +329,21 @@
       <h4>{{'Pago en Efectivo' | transloco }}</h4>
       <p>{{'Banco Mercantil del Norte S.A' | transloco}}</p>
       <p>{{'Se realiza directamente en ventanilla bancaria. Cuenta CEP: 2948' | transloco }}</p>
-      <p>{{'Referencia N° 1: Número de Cliente' | transloco }}</p>
+      <p>{{'Referencia N° 1: ID cliente' | transloco }}</p>
       <p>{{'Referencia N° 2: Nombre de Cliente' | transloco }}</p>
       <p>{{'Forma de Pago: 01 - Efectivo' | transloco }}</p>
       <p>{{'Nombre del banco' | transloco }}</p>
 
+
+      <h4 style="text-align:center; font-weight:bold;">
+        {{'Pagos en Cajeros Automáticos Banorte' | transloco }}
+      </h4>
+      <p>{{'Cuenta: 0807584141' | transloco }}</p>
+
+      <h4 style="text-align:center; font-weight:bold;">
+        {{'Pagos en Otros Establecimientos (farmacias y supermercado)' | transloco }}
+      </h4>
+      <p>{{'Cuenta Clabe: 072700008075841414' | transloco }}</p>
 
       <h4>{{'Pago por Transferencia Bancaria' | transloco }}</h4>
       <p>{{'Banco Mercantil del Norte S.A' | transloco }}</p>
@@ -455,7 +465,8 @@
       <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
         <small><i> {{'Usar .PDF, PNG, JPEG O JPG ' | transloco }} </i></small>
         <label for="fileInputINE" class="file-label">{{'Subir INE' | transloco}}</label>
-        <input type="file" accept="pdf, png, jpg" id="fileInputINE" class="file-input" (change)="onFileSelected($event, 'INEFile')">
+        <input type="file" accept="pdf, png, jpg" id="fileInputINE" class="file-input"
+          (change)="onFileSelected($event, 'INEFile')">
         <span class="file-name" style="color: green" *ngIf="INEFileName">{{INEFileName}}</span>
 
 
@@ -467,7 +478,8 @@
       <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
         <small><i> {{'Usar .PDF, PNG, JPEG O JPG ' | transloco }} </i></small>
         <label for="fileInputCEDU" class="file-label">{{'Subir CEDULA FISCAL' | transloco}}</label>
-        <input type="file" accept="pdf, png, jpg" id="fileInputCEDU" class="file-input" (change)="onFileSelected($event, 'CEDUFile')">
+        <input type="file" accept="pdf, png, jpg" id="fileInputCEDU" class="file-input"
+          (change)="onFileSelected($event, 'CEDUFile')">
         <span class="file-name" style="color: green" *ngIf="CEDUFileName">{{CEDUFileName}}</span>
 
 
@@ -479,7 +491,8 @@
       <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
         <small><i> {{'Usar .PDF, PNG, JPEG O JPG ' | transloco }} </i></small>
         <label for="fileInputCOMP" class="file-label">{{'Subir COMPROBANTE DE DOMICILIO' | transloco}}</label>
-        <input type="file" accept="pdf, png, jpg" id="fileInputCOMP" class="file-input" (change)="onFileSelected($event, 'COMPFile')">
+        <input type="file" accept="pdf, png, jpg" id="fileInputCOMP" class="file-input"
+          (change)="onFileSelected($event, 'COMPFile')">
         <span class="file-name" style="color: green" *ngIf="COMPFileName">{{COMPFileName}}</span>
 
 

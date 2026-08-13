@@ -164,5 +164,14 @@
     "Página PoderNET": "PoderNET 页面",
     "Quiero Facturar": "我想开具发票",
     "Ocultar": "隐藏",
-    "Seleccione": "选择"
+    "Seleccione": "选择",
+    "INFORMACIÓN ADICIONAL PARA REALIZAR PAGOS": "支付额外信息",
+    "Pagos en cajeros automáticos Banorte": "Banorte ATM 支付",
+    "Cuenta: 0807584141": "账户: 0807584141",
+    "Cuenta Clabe: 072700008075841414": "CLABE 账户: 072700008075841414",
+    "Referencia N° 1: ID cliente": "参考号 1: 客户 ID",
+    "Referencia N° 2: Nombre de Cliente": "参考号 2: 客户姓名",
+    "Forma de Pago: 03 - Transferencia electrónica de fondos": "支付方式: 03 - 电子资金转账",
+    "Pagos en Cajeros Automáticos Banorte": "在 Banorte 自动取款机支付",
+    "Pagos en Otros Establecimientos (farmacias y supermercado)": "在其他商户支付（药店和超市）"
 }

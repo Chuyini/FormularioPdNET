@@ -238,15 +238,13 @@ export class FormComponent {
   }));
 
   public useDataPCobra() {
-
     this.nameCobra = this.rasonName;
     this.telCobra = this.telPerson;
     this.celCobra = this.telPerson;
     this.emailCobra = this.emailPerson;
     console.log('Datos de contacto copiados a cobranza');
-
-
   }
+
   public useDataPFactu() {
     this.nameFact = this.rasonName;
     this.telFact = this.telPerson;
@@ -263,6 +261,7 @@ export class FormComponent {
       });
     }
   }
+
   public triggerShake() {
     let fs = document.getElementById('facturacionFieldset');
     if (!fs) return;
@@ -275,9 +274,6 @@ export class FormComponent {
   changeLang(event: Event): void {
     const lang = (event.target as HTMLSelectElement).value;
     this.translocoService.setActiveLang(lang);
-
-
-
 
     setTimeout(() => {
       this.translatedWayPage = this.wayPage.map(item => ({
@@ -303,12 +299,6 @@ export class FormComponent {
     }, 300);
 
   }
-
-
-
-
-
-
 
 
   banks = [
@@ -774,8 +764,7 @@ export class FormComponent {
         await this.router.navigate(['/error']);
         
       }
-
-
+      
     }
     if (this.fileBank) {
       readerPdf = new FileReader();
@@ -790,7 +779,7 @@ export class FormComponent {
     } else {
       pdfReady = true;
     }
-
+//Como nota , si no hay PDF ni ZIP, enviamos sin adjuntos
     if (this.fileZip) {
       readerZip = new FileReader();
       readerZip.onload = async () => {
@@ -809,7 +798,7 @@ export class FormComponent {
       await trySendEmail();
     }
   }
-
+//Otra nota importante, si no hay PDF ni ZIP, enviamos sin adjuntos
 
 
   public async submitAll(): Promise<void> {
@@ -939,8 +928,8 @@ export class FormComponent {
 
   }
 
-
   async packHomemade(): Promise<File | null> {
+    //Aquí empaquetamos los archivos caseros en un ZIP si es necesario  
 
     // 1. Tomamos las referencias de los archivos
     const INE = this.fileINE;
