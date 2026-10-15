@@ -1,66 +1,49 @@
 <div class="container">
-  <h2 style="text-align: center; margin-bottom: 5%;">{{'ALTA PARA CLIENTES' | transloco}}</h2>
-  <select (change)="changeLang($event)" class="language-select">
-    <option value="es">Español</option>
-    <option value="en">English</option>
-    <option value="zh">中文</option>
-    <option value="ko">한국어</option>
-  </select>
+  <div class="encabezado-form">
+    <h2>{{ 'ALTA PARA CLIENTES' | transloco }}</h2>
+    <app-language-switcher />
+  </div>
 
-
-  <form>
-    <!-- INFORMACION PREELIMINAR -->
-    <fieldset style="padding: 10px; border: 2px solid #ccc; border-radius: 8px;">
-      <legend>{{'INFORMACION PREELIMINAR' | transloco}}</legend>
-      <div style="display: flex; justify-content: space-between; width: 100%; font-size: smaller;">
-        <table class="pree">
-          <tr>
-            <td>
-              <h3>EL PODER DE INTERNET</h3>
-            </td>
-            <td>
-              <h3>PDI111104D92</h3>
-            </td>
-            <td>
-              <h3>pagos&#64;elpoderdeinternet.mx, facturas&#64;elpoderdeinternet.mx</h3>
-            </td>
-          </tr>
-        </table>
+  <form (ngSubmit)="submitAll()" novalidate>
+    <!-- INFORMACION PRELIMINAR -->
+    <fieldset class="preliminar">
+      <legend>{{ 'INFORMACION PREELIMINAR' | transloco }}</legend>
+      <div class="datos-pdnt">
+        <h3>EL PODER DE INTERNET</h3>
+        <h3>PDI111104D92</h3>
+        <h3>pagos&#64;elpoderdeinternet.mx, facturas&#64;elpoderdeinternet.mx</h3>
       </div>
     </fieldset>
 
-    <br>
-
     <!-- DATOS FISCALES PERSONA FISICA O MORAL -->
     <fieldset>
-      <legend>{{'DATOS FISCALES PERSONA FISICA O MORAL' | transloco }}</legend>
-      <br>
+      <legend>{{ 'DATOS FISCALES PERSONA FISICA O MORAL' | transloco }}</legend>
       <div class="two-columns">
         <div>
-          <label for="razonSocial">{{'Razón Social / Nombre (Obligatorio)'| transloco }}<span
-              style="color: red;">*</span></label>
+          <label for="razonSocial">{{ 'Razón Social / Nombre (Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
           <input maxlength="50" placeholder="{{ 'Puede poner el nombre o la razón social' | transloco }}" type="text"
-            id="razonSocial" name="rasonName" [(ngModel)]="rasonName" />
+            id="razonSocial" name="rasonName" [(ngModel)]="rasonName" [class.invalido]="invalidos.has('razonSocial')"
+            (input)="limpiar('razonSocial')" />
         </div>
 
-        <div style="width: 100%; max-width: 400px; margin: auto;">
-          <label for="">{{ '(Obligatorio)' | transloco }}<span style="color: red;">*</span></label>
-          <ng-select [items]="translatedRegimenes" bindLabel="nombre"
-            placeholder="{{'Selecciona un régimen fiscal' | transloco}}" [(ngModel)]="regimenSeleccionado"
-            name="regimenSeleccionado" class="custom-ng-select" [clearable]="true" [searchable]="true"
-            dropdownPosition="auto">
-
+        <div class="selector">
+          <label for="regimen">{{ 'Régimen fiscal' | transloco }} {{ '(Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
+          <ng-select id="regimen" labelForId="regimen" [items]="translatedRegimenes" bindLabel="nombre"
+            placeholder="{{ 'Selecciona un régimen fiscal' | transloco }}" [(ngModel)]="regimenSeleccionado"
+            name="regimenSeleccionado" class="custom-ng-select" [class.invalido]="invalidos.has('regimen')"
+            (change)="limpiar('regimen')" [clearable]="true" [searchable]="true" dropdownPosition="auto">
           </ng-select>
         </div>
 
         <div>
           <label for="rfc">{{ 'RFC' | transloco }}</label>
           <small><i>{{ 'Solo de requerir factura' | transloco }}</i></small>
-          <input maxlength="50" type="text" id="rfc" name="rfc" [(ngModel)]="rfc" />
+          <input maxlength="13" type="text" id="rfc" name="rfc" [(ngModel)]="rfc" [class.invalido]="invalidos.has('rfc')"
+            (input)="limpiar('rfc')" placeholder="XAXX010101000" />
         </div>
 
         <div>
-          <label for="calle" style="margin-top: 20px;">{{ 'Calle' | transloco }}</label>
+          <label for="calle">{{ 'Calle' | transloco }}</label>
           <input maxlength="50" type="text" id="calle" name="callePerson" [(ngModel)]="callePerson" />
         </div>
         <div>
@@ -77,23 +60,22 @@
         </div>
         <div>
           <label for="cp">{{ 'C.P.' | transloco }}</label>
-          <input maxlength="10" type="text" id="cp" name="cpPerson" [(ngModel)]="cpPerson"
-            placeholder="{{ 'Código Postal. Ejemplo: 785443' | transloco }}" />
+          <input maxlength="5" type="text" inputmode="numeric" id="cp" name="cpPerson" [(ngModel)]="cpPerson"
+            [class.invalido]="invalidos.has('cp')" (input)="limpiar('cp')"
+            placeholder="{{ 'Código Postal. Ejemplo: 78000' | transloco }}" />
         </div>
-        <div style="height: 75.67px;">
+        <div>
           <label for="municipio">{{ 'Municipio' | transloco }}</label>
           <input maxlength="50" type="text" id="municipio" name="municipioPerson" [(ngModel)]="municipioPerson" />
         </div>
+        <div class="selector">
+          <label for="estado">{{ 'Estado' | transloco }}</label>
+          <ng-select id="estado" labelForId="estado" [items]="local" bindLabel="nombre"
+            placeholder="{{ 'Seleccione el estado' | transloco }}" [(ngModel)]="localSelected" name="localSelected"
+            class="custom-ng-select" [clearable]="true" [searchable]="true" dropdownPosition="auto">
+          </ng-select>
+        </div>
         <div>
-          <div>
-            <div style="width: 100%; max-width: 400px; margin: auto;">
-              <ng-select [items]="local" bindLabel="nombre" placeholder="{{ 'Seleccione el estado' | transloco }}"
-                [(ngModel)]="localSelected" [multiple]="false" name="localSelected" class="custom-ng-select"
-                [clearable]="true" [searchable]="true" dropdownPosition="auto">
-
-              </ng-select>
-            </div>
-          </div>
           <label for="poblacion">{{ 'Población' | transloco }}</label>
           <input type="text" id="poblacion" name="poblationPerson" [(ngModel)]="poblationPerson" />
         </div>
@@ -101,25 +83,24 @@
           <label for="pais">{{ 'País' | transloco }}</label>
           <input type="text" id="pais" name="countryPerson" [(ngModel)]="countryPerson" />
         </div>
-
         <div>
           <label for="zona">{{ 'Zona' | transloco }}</label>
           <input maxlength="20" type="text" id="zona" name="zone" [(ngModel)]="zone" />
         </div>
         <div>
-          <label for="telefono">{{ 'Teléfono con lada (Obligatorio)' | transloco }}<span
-              style="color: red;">*</span></label>
-          <input type="tel" id="telefono" name="telPerson" [(ngModel)]="telPerson"
+          <label for="telefono">{{ 'Teléfono con lada (Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
+          <input type="tel" id="telefono" name="telPerson" [(ngModel)]="telPerson" maxlength="20"
+            [class.invalido]="invalidos.has('telefono')" (input)="limpiar('telefono')"
             placeholder="{{ 'Ejemplo:524443698521' | transloco }}" />
         </div>
         <div>
           <label for="ext">{{ 'Ext.' | transloco }}</label>
-          <input type="text" id="ext" name="ext" />
+          <input maxlength="10" type="text" id="ext" name="extPerson" [(ngModel)]="extPerson" />
         </div>
         <div>
-          <label for="correo">{{ 'Correo Electrónico (Obligatorio)' | transloco }}<span
-              style="color: red;">*</span></label>
-          <input type="email" id="correo" name="emailPerson" [(ngModel)]="emailPerson" />
+          <label for="correo">{{ 'Correo Electrónico (Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
+          <input type="email" id="correo" name="emailPerson" [(ngModel)]="emailPerson"
+            [class.invalido]="invalidos.has('correo')" (input)="limpiar('correo')" />
         </div>
         <div>
           <label for="paginaWeb">{{ 'Página Web' | transloco }}</label>
@@ -131,7 +112,7 @@
     <!-- DOMICILIO DE INSTALACION -->
     <fieldset>
       <legend>{{ 'DOMICILIO DE INSTALACIÓN' | transloco }}</legend>
-      <p><i><strong>{{ 'Llenar solo si la dirección es diferente a la de instalación' | transloco }}</strong></i></p>
+      <p class="nota"><i><strong>{{ 'Llenar solo si la dirección es diferente a la de instalación' | transloco }}</strong></i></p>
       <div class="two-columns">
         <div>
           <label for="calleInst">{{ 'Calle' | transloco }}</label>
@@ -151,7 +132,8 @@
         </div>
         <div>
           <label for="cpInst">{{ 'C.P.' | transloco }}</label>
-          <input maxlength="60" type="text" id="cpInst" name="cpInst" [(ngModel)]="cpInst" />
+          <input maxlength="5" type="text" inputmode="numeric" id="cpInst" name="cpInst" [(ngModel)]="cpInst"
+            [class.invalido]="invalidos.has('cpInst')" (input)="limpiar('cpInst')" />
         </div>
         <div>
           <label for="municipioInst">{{ 'Municipio' | transloco }}</label>
@@ -169,87 +151,89 @@
           <label for="paisInst">{{ 'País' | transloco }}</label>
           <input maxlength="60" type="text" id="paisInst" name="countryInst" [(ngModel)]="countryInst" />
         </div>
-
         <div>
           <label for="zonaInst">{{ 'Zona' | transloco }}</label>
           <input maxlength="60" type="text" id="zonaInst" name="zoneInst" [(ngModel)]="zoneInst" />
         </div>
         <div>
           <label for="telefonoInst">{{ 'Teléfono con lada' | transloco }}</label>
-          <input type="tel" id="telefonoInst" name="telInst" [(ngModel)]="telInst" />
+          <input type="tel" id="telefonoInst" name="telInst" [(ngModel)]="telInst" maxlength="20" />
         </div>
         <div>
           <label for="extInst">{{ 'Ext.' | transloco }}</label>
-          <input maxlength="30" type="text" id="extInst" name="extInst" />
+          <input maxlength="10" type="text" id="extInst" name="extInst" [(ngModel)]="extInst" />
         </div>
       </div>
     </fieldset>
 
     <!-- INFORMACION PARA FACTURACION -->
-    <button type="button" (click)="isFactu = !isFactu" style="margin-bottom: 20px;  margin-left: 44%;">
-      {{ (!isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
-    </button>
-    <fieldset *ngIf="isFactu" class="shake" style="border-color: blue;" id="facturacionFieldset">
-      <button type="button" (click)="useDataPFactu()" class="jump-button">
-        {{ "Usar Datos de Contacto" | transloco }}
+    <div class="centrado">
+      <button type="button" class="btn-secundario" (click)="isFactu = !isFactu" [attr.aria-expanded]="isFactu">
+        {{ (!isFactu ? 'Quiero Facturar' : 'Ocultar') | transloco }}
       </button>
-      <legend>{{ 'INFORMACIÓN PARA FACTURACIÓN' | transloco }}</legend>
-      <div class="two-columns">
-        <div>
-          <label for="encargadoFact">{{ 'Nombre del Encargado(a)' | transloco }}</label>
-          <input maxlength="100" type="text" id="encargadoFact" name="nameFact" [(ngModel)]="nameFact" />
-        </div>
-        <div>
-          <label for="puestoFact">{{ 'Puesto' | transloco }}</label>
-          <input maxlength="60" type="text" id="puestoFact" name="puestoFact" [(ngModel)]="puestoFact" />
-        </div>
-        <div>
-          <label for="telFact">{{ 'Teléfono con lada' | transloco }}</label>
-          <input type="tel" id="telFact" name="telFact" [(ngModel)]="telFact" />
-        </div>
-        <div>
-          <label for="extFact">{{ 'Ext.' | transloco }}</label>
-          <input maxlength="60" type="text" id="extFact" name="extFact" />
-        </div>
-        <div>
-          <label for="celFact">{{'Celular' | transloco }}</label>
-          <input type="tel" id="celFact" name="celFact" maxlength="12" [(ngModel)]="celFact"
-            placeholder="{{ 'Ejemplo: 524434623914321' | transloco }}" />
-          <small>{{ 'Número de celular con clave lada' | transloco }}</small>
-        </div>
-        <div>
-          <label for="correoFact">{{ 'Correo Electrónico' | transloco }}</label>
-          <input type="email" id="correoFact" name="emailFact" [(ngModel)]="emailFact" />
-        </div>
-        <div>
-          <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="translatedCfdi" bindLabel="descripcion"
-              placeholder="{{ 'Selecciona un CFDI' | transloco }}" [(ngModel)]="cfdiSelected" [multiple]="false"
-              name="cfdiSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
-              dropdownPosition="auto">
-
+    </div>
+    @if (isFactu) {
+      <fieldset class="shake facturacion" id="facturacionFieldset">
+        <legend>{{ 'INFORMACIÓN PARA FACTURACIÓN' | transloco }}</legend>
+        <button type="button" (click)="useDataPFactu()" class="jump-button">
+          {{ 'Usar Datos de Contacto' | transloco }}
+        </button>
+        <div class="two-columns">
+          <div>
+            <label for="encargadoFact">{{ 'Nombre del Encargado(a)' | transloco }}</label>
+            <input maxlength="100" type="text" id="encargadoFact" name="nameFact" [(ngModel)]="nameFact" />
+          </div>
+          <div>
+            <label for="puestoFact">{{ 'Puesto' | transloco }}</label>
+            <input maxlength="60" type="text" id="puestoFact" name="puestoFact" [(ngModel)]="puestoFact" />
+          </div>
+          <div>
+            <label for="telFact">{{ 'Teléfono con lada' | transloco }}</label>
+            <input type="tel" id="telFact" name="telFact" [(ngModel)]="telFact" maxlength="20" />
+          </div>
+          <div>
+            <label for="extFact">{{ 'Ext.' | transloco }}</label>
+            <input maxlength="10" type="text" id="extFact" name="extFact" [(ngModel)]="extFact" />
+          </div>
+          <div>
+            <label for="celFact">{{ 'Celular' | transloco }}</label>
+            <input type="tel" id="celFact" name="celFact" maxlength="15" [(ngModel)]="celFact"
+              placeholder="{{ 'Ejemplo: 524434623914321' | transloco }}" />
+            <small>{{ 'Número de celular con clave lada' | transloco }}</small>
+          </div>
+          <div>
+            <label for="correoFact">{{ 'Correo Electrónico' | transloco }}</label>
+            <input type="email" id="correoFact" name="emailFact" [(ngModel)]="emailFact"
+              [class.invalido]="invalidos.has('correoFact')" (input)="limpiar('correoFact')" />
+          </div>
+          <div class="selector">
+            <label for="cfdi">{{ 'CFDI' | transloco }}</label>
+            <ng-select id="cfdi" labelForId="cfdi" [items]="translatedCfdi" bindLabel="descripcion"
+              placeholder="{{ 'Selecciona un CFDI' | transloco }}" [(ngModel)]="cfdiSelected" name="cfdiSelected"
+              class="custom-ng-select" [clearable]="true" [searchable]="true" dropdownPosition="auto">
             </ng-select>
           </div>
+          <div class="selector">
+            <label for="metodoPago">{{ 'Método de pago' | transloco }}</label>
+            <ng-select id="metodoPago" labelForId="metodoPago" [items]="translatedWayPage" bindLabel="descripcion"
+              [(ngModel)]="wayPageSelected" placeholder="{{ 'Selecciona el Método de pago' | transloco }}"
+              [clearable]="true" [searchable]="true" dropdownPosition="auto" name="wayPageSelected"
+              class="custom-ng-select">
+            </ng-select>
+          </div>
+          <div class="ancho-completo">
+            <label for="datosAdicionalesFactura">{{ 'Datos adicionales para su Factura' | transloco }}</label>
+            <textarea id="datosAdicionalesFactura" name="aditionalData" [(ngModel)]="aditionalData" rows="3"></textarea>
+          </div>
         </div>
-        <div style="width: 100%; max-width: 400px; margin: auto;">
-          <ng-select [items]="translatedWayPage" bindLabel="descripcion" [(ngModel)]="wayPageSelected"
-            placeholder="{{ 'Selecciona el Método de pago' | transloco }}" [multiple]="false" [clearable]="true"
-            [searchable]="true" dropdownPosition="auto" name="wayPageSelected" class="custom-ng-select">
-
-          </ng-select>
-        </div>
-        <div style="grid-column: 1 / span 2;">
-          <label for="datosAdicionalesFactura">{{ 'Datos adicionales para su Factura' | transloco }}</label>
-          <textarea id="datosAdicionalesFactura" name="aditionalData" [(ngModel)]="aditionalData" rows="3"></textarea>
-        </div>
-      </div>
-    </fieldset>
+      </fieldset>
+    }
 
     <!-- INFORMACION PARA COBRANZA -->
     <fieldset>
       <legend>{{ 'INFORMACIÓN PARA COBRANZA' | transloco }}</legend>
       <button type="button" (click)="useDataPCobra()" class="jump-button">
-        {{ "Usar Datos de Contacto" | transloco }}
+        {{ 'Usar Datos de Contacto' | transloco }}
       </button>
       <div class="two-columns">
         <div>
@@ -262,20 +246,21 @@
         </div>
         <div>
           <label for="telCob">{{ 'Teléfono con lada' | transloco }}</label>
-          <input type="text" id="telCob" name="telCobra" [(ngModel)]="telCobra" maxlength="12" />
+          <input type="tel" id="telCob" name="telCobra" [(ngModel)]="telCobra" maxlength="20" />
         </div>
         <div>
           <label for="extCob">{{ 'Ext.' | transloco }}</label>
-          <input maxlength="60" type="text" id="extCob" name="extCob" />
+          <input maxlength="10" type="text" id="extCob" name="extCob" [(ngModel)]="extCob" />
         </div>
         <div>
-          <label for="celCob">{{ 'Celular (Obligatorio)' | transloco }}<span style="color: red;">*</span></label>
-          <input type="tel" id="celCob" maxlength="12" name="celCobra" [(ngModel)]="celCobra" />
+          <label for="celCob">{{ 'Celular (Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
+          <input type="tel" id="celCob" maxlength="20" name="celCobra" [(ngModel)]="celCobra"
+            [class.invalido]="invalidos.has('celCob')" (input)="limpiar('celCob')" />
         </div>
         <div>
-          <label for="correoCob">{{ 'Correo Electrónico (Obligatorio)' | transloco }}<span
-              style="color: red;">*</span></label>
-          <input type="email" id="correoCob" name="emailCobra" [(ngModel)]="emailCobra" />
+          <label for="correoCob">{{ 'Correo Electrónico (Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
+          <input type="email" id="correoCob" name="emailCobra" [(ngModel)]="emailCobra"
+            [class.invalido]="invalidos.has('correoCob')" (input)="limpiar('correoCob')" />
         </div>
       </div>
     </fieldset>
@@ -286,73 +271,60 @@
       <div class="two-columns">
         <div>
           <label for="numCuenta">{{ 'Número de Cuenta' | transloco }}</label>
-          <input maxlength="50" type="text" id="numCuenta" name="no_count" [(ngModel)]="no_count" />
+          <input maxlength="20" type="text" inputmode="numeric" id="numCuenta" name="no_count" [(ngModel)]="no_count" />
         </div>
         <div>
           <label for="numClabe">{{ 'Número de Cuenta Clabe' | transloco }}</label>
-          <input maxlength="50" type="text" id="numClabe" name="no_clabe" [(ngModel)]="no_clabe" />
+          <input maxlength="22" type="text" inputmode="numeric" id="numClabe" name="no_clabe" [(ngModel)]="no_clabe"
+            [class.invalido]="invalidos.has('numClabe')" (input)="limpiar('numClabe')" placeholder="18 dígitos" />
         </div>
-        <div>
-          <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="banks" bindLabel="nombre" placeholder="{{ 'Seleccione un Banco' | transloco }}"
-              [(ngModel)]="bankSelected" [multiple]="false" name="bankSelected" class="custom-ng-select"
-              [clearable]="true" [searchable]="true" dropdownPosition="auto">
-
-            </ng-select>
-          </div>
+        <div class="selector">
+          <label for="banco">{{ 'Banco' | transloco }}</label>
+          <ng-select id="banco" labelForId="banco" [items]="banks" bindLabel="nombre"
+            placeholder="{{ 'Seleccione un Banco' | transloco }}" [(ngModel)]="bankSelected" name="bankSelected"
+            class="custom-ng-select" [clearable]="true" [searchable]="true" dropdownPosition="auto">
+          </ng-select>
         </div>
       </div>
-      <p><em>{{'NOTA: Favor de anexar copia de carátula bancaria' | transloco }}</em></p>
+      <p class="nota"><em>{{ 'NOTA: Favor de anexar copia de carátula bancaria' | transloco }}</em></p>
 
-      <div class="file-upload">
-        <small><i> {{'Usar .PDF' | transloco }} </i></small>
-        <label for="fileInput" class="file-label">{{'Subir Carátula Bancaria' | transloco}}</label>
-        <input type="file" accept="pdf" id="fileInput" class="file-input" (change)="onFileSelected($event, 'bankFile')">
-        <span class="file-name" style="color: green" *ngIf="bankFileName">{{bankFileName}}</span>
-
-
-        <span class="file-name" style="color: red; font-size:medium;" *ngIf="bankFileName === ''">{{'*Ningún archivo
-          seleccionado' | transloco }}</span>
-        <br>
-
+      <div class="file-upload" id="bankFile" [class.invalido]="invalidos.has('bankFile')">
+        <small><i>{{ 'Usar .PDF' | transloco }}</i></small>
+        <label for="fileInput" class="file-label">{{ 'Subir Carátula Bancaria' | transloco }}</label>
+        <input type="file" accept=".pdf,application/pdf" id="fileInput" class="file-input"
+          (change)="onFileSelected($event, 'bankFile')">
+        @if (fileBank) {
+          <span class="file-name ok">{{ fileBank.name }}</span>
+        } @else {
+          <span class="file-name vacio">{{ '*Ningún archivo seleccionado' | transloco }}</span>
+        }
       </div>
-
-
-
-
-
     </fieldset>
 
     <!-- INFORMACION ADICIONAL PARA REALIZAR PAGOS -->
     <fieldset>
-      <legend>{{'INFORMACIÓN ADICIONAL PARA REALIZAR PAGOS' | transloco }}</legend>
-      <h4>{{'Pago en Efectivo' | transloco }}</h4>
-      <p>{{'Banco Mercantil del Norte S.A' | transloco}}</p>
-      <p>{{'Se realiza directamente en ventanilla bancaria. Cuenta CEP: 2948' | transloco }}</p>
-      <p>{{'Referencia N° 1: ID cliente' | transloco }}</p>
-      <p>{{'Referencia N° 2: Nombre de Cliente' | transloco }}</p>
-      <p>{{'Forma de Pago: 01 - Efectivo' | transloco }}</p>
-      <p>{{'Nombre del banco' | transloco }}</p>
+      <legend>{{ 'INFORMACIÓN ADICIONAL PARA REALIZAR PAGOS' | transloco }}</legend>
+      <h4>{{ 'Pago en Efectivo' | transloco }}</h4>
+      <p>{{ 'Banco Mercantil del Norte S.A' | transloco }}</p>
+      <p>{{ 'Se realiza directamente en ventanilla bancaria. Cuenta CEP: 2948' | transloco }}</p>
+      <p>{{ 'Referencia N° 1: ID cliente' | transloco }}</p>
+      <p>{{ 'Referencia N° 2: Nombre de Cliente' | transloco }}</p>
+      <p>{{ 'Forma de Pago: 01 - Efectivo' | transloco }}</p>
+      <p>{{ 'Nombre del banco' | transloco }}</p>
 
+      <h4 class="centrado">{{ 'Pagos en Cajeros Automáticos Banorte' | transloco }}</h4>
+      <p>{{ 'Cuenta: 0807584141' | transloco }}</p>
 
-      <h4 style="text-align:center; font-weight:bold;">
-        {{'Pagos en Cajeros Automáticos Banorte' | transloco }}
-      </h4>
-      <p>{{'Cuenta: 0807584141' | transloco }}</p>
+      <h4 class="centrado">{{ 'Pagos en Otros Establecimientos (farmacias y supermercado)' | transloco }}</h4>
+      <p>{{ 'Cuenta Clabe: 072700008075841414' | transloco }}</p>
 
-      <h4 style="text-align:center; font-weight:bold;">
-        {{'Pagos en Otros Establecimientos (farmacias y supermercado)' | transloco }}
-      </h4>
-      <p>{{'Cuenta Clabe: 072700008075841414' | transloco }}</p>
+      <h4>{{ 'Pago por Transferencia Bancaria' | transloco }}</h4>
+      <p>{{ 'Banco Mercantil del Norte S.A' | transloco }}</p>
+      <p>{{ 'Número de Cuenta: 0807 58 4141' | transloco }}</p>
+      <p>{{ 'Cuenta Clabe: 072 700 00807584141 4' | transloco }}</p>
 
-      <h4>{{'Pago por Transferencia Bancaria' | transloco }}</h4>
-      <p>{{'Banco Mercantil del Norte S.A' | transloco }}</p>
-      <p>{{'Número de Cuenta: 0807 58 4141' | transloco }}</p>
-      <p>{{'Cuenta Clabe: 072 700 00807584141 4' | transloco }}</p>
-
-      <p>
-        <strong>Estimado cliente:</strong> {{'Recuerde que para brindar un mejor servicio y evitar cortes, es
-        indispensable referenciar sus pagos.' | transloco}}
+      <p class="recordatorio">
+        {{ 'Estimado cliente: Recuerde que para brindar un mejor servicio y evitar cortes, es indispensable referenciar sus pagos.' | transloco }}
       </p>
     </fieldset>
 
@@ -375,11 +347,11 @@
         </div>
         <div>
           <label for="telSitio">{{ 'Teléfono con lada' | transloco }}</label>
-          <input type="text" id="telSitio" name="telSite" [(ngModel)]="telSite" maxlength="12" />
+          <input type="tel" id="telSitio" name="telSite" [(ngModel)]="telSite" maxlength="20" />
         </div>
         <div>
           <label for="celSitio">{{ 'Celular' | transloco }}</label>
-          <input type="tel" maxlength="12" id="celSitio" name="celSite" [(ngModel)]="celSite" />
+          <input type="tel" maxlength="20" id="celSitio" name="celSite" [(ngModel)]="celSite" />
         </div>
         <div>
           <label for="departamentoSitio">{{ 'Departamento (Ingeniero encargado)' | transloco }}</label>
@@ -388,8 +360,7 @@
         <div>
           <label for="horarioAtencion">{{ 'Horario de atención' | transloco }}</label>
           <input type="time" id="horarioAtencion" name="timeSite" [(ngModel)]="timeSite" />
-          <small><i>{{ 'Seleccione el horario en que desea que esta disponible para la atención' | transloco
-              }}</i></small>
+          <small><i>{{ 'Seleccione el horario en que desea que esta disponible para la atención' | transloco }}</i></small>
         </div>
         <div>
           <label for="megasAprox">{{ 'Megas Aproximados' | transloco }}</label>
@@ -402,107 +373,72 @@
       </div>
     </fieldset>
 
-
-
     <!-- DOCUMENTACION SOLICITADA -->
     <fieldset>
       <legend>{{ 'DOCUMENTACIÓN SOLICITADA' | transloco }}</legend>
       <p>
-        {{ 'El presente formato deberá ser acompañado por la siguiente documentación como requisito de Alta (En copias o
-        correo electrónico proporcionado por el vendedor):' | transloco }}
+        {{ 'El presente formato deberá ser acompañado por la siguiente documentación como requisito de Alta (En copias o correo electrónico proporcionado por el vendedor):' | transloco }}
       </p>
       <ul>
-        <li *ngIf="regimenSeleccionado.id == 616">
-          <strong>{{ 'Persona Física' | transloco }}</strong>
-          <!-- <button (click)="personRegimen = 1">{{ 'Persona Física' | transloco }}</button>
-          <small>{{'Seleccione' | transloco }}</small>-->
-          <ul>
-            <li>{{ 'Identificación Oficial (INE)' | transloco }}</li>
-            <li>{{ 'Cédula Fiscal (En caso de requerir Factura)' | transloco }}</li>
-            <li>{{ 'Comprobante de domicilio' | transloco }}</li>
-          </ul>
-        </li>
-        <li *ngIf="regimenSeleccionado.id != 616">
-          <strong>{{ 'Persona Moral' | transloco }}</strong>
-          <!-- Person Moral 
-          <small>{{'Seleccione' | transloco }}</small>-->
-          <ul>
-            <li>{{ 'Acta Constitutiva' | transloco }}</li>
-            <li>{{ 'Protocolización de acta (En caso de haber)' | transloco }}</li>
-            <li>{{ 'Identificación del Representante Legal' | transloco }}</li>
-            <li>{{ 'Cédula Fiscal' | transloco }}</li>
-            <li>{{ 'Opinión de cumplimiento (Actual)' | transloco }}</li>
-            <li>{{ 'Carátula de Estado de Cuenta' | transloco }}</li>
-            <li>{{ 'Comprobante de domicilio (Menor a 3 meses)' | transloco }}</li>
-            <li>{{ 'Folio Mercantil' | transloco }}</li>
-          </ul>
-        </li>
+        @if (esPersonaFisica) {
+          <li>
+            <strong>{{ 'Persona Física' | transloco }}</strong>
+            <ul>
+              <li>{{ 'Identificación Oficial (INE)' | transloco }}</li>
+              <li>{{ 'Cédula Fiscal (En caso de requerir Factura)' | transloco }}</li>
+              <li>{{ 'Comprobante de domicilio' | transloco }}</li>
+            </ul>
+          </li>
+        } @else {
+          <li>
+            <strong>{{ 'Persona Moral' | transloco }}</strong>
+            <ul>
+              <li>{{ 'Acta Constitutiva' | transloco }}</li>
+              <li>{{ 'Protocolización de acta (En caso de haber)' | transloco }}</li>
+              <li>{{ 'Identificación del Representante Legal' | transloco }}</li>
+              <li>{{ 'Cédula Fiscal' | transloco }}</li>
+              <li>{{ 'Opinión de cumplimiento (Actual)' | transloco }}</li>
+              <li>{{ 'Carátula de Estado de Cuenta' | transloco }}</li>
+              <li>{{ 'Comprobante de domicilio (Menor a 3 meses)' | transloco }}</li>
+              <li>{{ 'Folio Mercantil' | transloco }}</li>
+            </ul>
+          </li>
+        }
       </ul>
 
-      <div class="file-upload" *ngIf="regimenSeleccionado.id != 616">
-        <small>{{ 'Adjunte los archivos en un folder y luego comprímalos' | transloco }}</small>
-        <small>
-          <p>{{ 'Solo formato .ZIP' | transloco }}</p>
-        </small>
-        <small>
-          <p>{{ 'Que no pase de 50 MegaBytes' | transloco }}</p>
-        </small>
-        <label for="zipInput" class="file-label">{{ 'Subir Archivo Comprimido' | transloco }}</label>
-        <input type="file" accept="zip" id="zipInput" class="file-input" (change)="onFileSelected($event, 'zipFile')">
-
-        <span class="file-name" style="color: green" *ngIf="zipFileName">{{zipFileName}}</span>
-
-        <span class="file-name" style="color: red; font-size:medium;" *ngIf="zipFileName === ''">
-          {{ '*Ningún archivo seleccionado' | transloco }}
-        </span>
-        <br>
-      </div>
-
-
-
-
-      <!-- Nota: UPLOADS DE CLIENTES CASEROS -->
-      <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
-        <small><i> {{'Usar .PDF, PNG, JPEG O JPG ' | transloco }} </i></small>
-        <label for="fileInputINE" class="file-label">{{'Subir INE' | transloco}}</label>
-        <input type="file" accept="pdf, png, jpg" id="fileInputINE" class="file-input"
-          (change)="onFileSelected($event, 'INEFile')">
-        <span class="file-name" style="color: green" *ngIf="INEFileName">{{INEFileName}}</span>
-
-
-        <span class="file-name" style="color: red; font-size:medium;" *ngIf="INEFileName === ''">{{'*Ningún archivo
-          seleccionado' | transloco }}</span>
-        <br>
-      </div>
-
-      <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
-        <small><i> {{'Usar .PDF, PNG, JPEG O JPG ' | transloco }} </i></small>
-        <label for="fileInputCEDU" class="file-label">{{'Subir CEDULA FISCAL' | transloco}}</label>
-        <input type="file" accept="pdf, png, jpg" id="fileInputCEDU" class="file-input"
-          (change)="onFileSelected($event, 'CEDUFile')">
-        <span class="file-name" style="color: green" *ngIf="CEDUFileName">{{CEDUFileName}}</span>
-
-
-        <span class="file-name" style="color: red; font-size:medium;" *ngIf="CEDUFileName === ''">{{'*Ningún archivo
-          seleccionado' | transloco }}</span>
-        <br>
-      </div>
-
-      <div class="file-upload" *ngIf="regimenSeleccionado.id == 616">
-        <small><i> {{'Usar .PDF, PNG, JPEG O JPG ' | transloco }} </i></small>
-        <label for="fileInputCOMP" class="file-label">{{'Subir COMPROBANTE DE DOMICILIO' | transloco}}</label>
-        <input type="file" accept="pdf, png, jpg" id="fileInputCOMP" class="file-input"
-          (change)="onFileSelected($event, 'COMPFile')">
-        <span class="file-name" style="color: green" *ngIf="COMPFileName">{{COMPFileName}}</span>
-
-
-        <span class="file-name" style="color: red; font-size:medium;" *ngIf="COMPFileName === ''">{{'*Ningún archivo
-          seleccionado' | transloco }}</span>
-        <br>
-      </div>
-
-
-
+      @if (!esPersonaFisica) {
+        <div class="file-upload" id="zipFile" [class.invalido]="invalidos.has('zipFile')">
+          <small>{{ 'Adjunte los archivos en un folder y luego comprímalos' | transloco }}</small>
+          <small>{{ 'Solo formato .ZIP' | transloco }} · {{ 'Que no pase de 50 MegaBytes' | transloco }}</small>
+          <label for="zipInput" class="file-label">{{ 'Subir Archivo Comprimido' | transloco }}</label>
+          <input type="file" accept=".zip,application/zip,application/x-zip-compressed" id="zipInput" class="file-input"
+            (change)="onFileSelected($event, 'zipFile')">
+          @if (fileZip) {
+            <span class="file-name ok">{{ fileZip.name }}</span>
+          } @else {
+            <span class="file-name vacio">{{ '*Ningún archivo seleccionado' | transloco }}</span>
+          }
+        </div>
+      } @else {
+        <!-- Persona física: se suben por separado y se comprimen al enviar -->
+        @for (doc of [
+          { id: 'INEFile', input: 'fileInputINE', etiqueta: 'Subir INE', archivo: fileINE },
+          { id: 'CEDUFile', input: 'fileInputCEDU', etiqueta: 'Subir CEDULA FISCAL', archivo: fileCEDU },
+          { id: 'COMPFile', input: 'fileInputCOMP', etiqueta: 'Subir COMPROBANTE DE DOMICILIO', archivo: fileCOMP }
+        ]; track doc.id) {
+          <div class="file-upload" [id]="doc.id" [class.invalido]="invalidos.has(doc.id)">
+            <small><i>{{ 'Usar .PDF, PNG, JPEG O JPG ' | transloco }}</i></small>
+            <label [for]="doc.input" class="file-label">{{ doc.etiqueta | transloco }}</label>
+            <input type="file" accept=".pdf,.png,.jpg,.jpeg" [id]="doc.input" class="file-input"
+              (change)="onFileSelected($event, $any(doc.id))">
+            @if (doc.archivo) {
+              <span class="file-name ok">{{ doc.archivo.name }}</span>
+            } @else {
+              <span class="file-name vacio">{{ '*Ningún archivo seleccionado' | transloco }}</span>
+            }
+          </div>
+        }
+      }
     </fieldset>
 
     <!-- DATOS DEL VENDEDOR -->
@@ -517,27 +453,46 @@
           <label for="oficina">{{ 'Oficina' | transloco }}</label>
           <input type="text" id="oficina" name="oficinaVen" [(ngModel)]="oficinaVen" maxlength="70" />
         </div>
-        <div>
-          <div style="width: 100%; max-width: 400px; margin: auto;">
-            <ng-select [items]="emailsPdnt" bindLabel="email"
-              placeholder="{{ 'Selecciona uno o varios correos' | transloco }}" [(ngModel)]="emailSelected"
-              [multiple]="true" name="emailSelected" class="custom-ng-select" [clearable]="true" [searchable]="true"
-              dropdownPosition="auto">
-            </ng-select>
-          </div>
+        <div class="selector">
+          <label for="correosVendedor">{{ 'Enviar a' | transloco }}<span class="obligatorio">*</span></label>
+          <ng-select id="correosVendedor" labelForId="correosVendedor" [items]="emailsPdnt" bindLabel="email"
+            placeholder="{{ 'Selecciona uno o varios correos' | transloco }}" [(ngModel)]="emailSelected"
+            [multiple]="true" name="emailSelected" class="custom-ng-select"
+            [class.invalido]="invalidos.has('correosVendedor')" (change)="limpiar('correosVendedor')"
+            [clearable]="true" [searchable]="true" dropdownPosition="auto">
+          </ng-select>
         </div>
         <div>
           <label for="celVendedor">{{ 'Celular' | transloco }}</label>
-          <input type="tel" id="celVendedor" maxlength="12" name="celVen" [(ngModel)]="celVen" />
+          <input type="tel" id="celVendedor" maxlength="20" name="celVen" [(ngModel)]="celVen" />
         </div>
       </div>
     </fieldset>
 
-
-    <!-- Botón de envío -->
-    <button type="button" (click)="submitAll()" class="btn-submit">
-
-      {{'Enviar' | transloco }}
+    <button type="submit" class="btn-submit" [disabled]="enviando">
+      {{ 'Enviar' | transloco }}
     </button>
   </form>
 </div>
+
+<!-- Panel de envío: el formulario queda debajo, así que si falla no se pierde nada -->
+@if (enviando) {
+  <div class="velo" role="dialog" aria-modal="true" aria-live="polite">
+    <div class="panel">
+      @if (!errorEnvio) {
+        <div class="girando" aria-hidden="true"></div>
+        <h3>{{ 'Enviando, no cierre la ventana...' | transloco }}</h3>
+        <p>{{ 'Esto puede tomar unos minutos o segundos dependiendo del tamaño de los archivos.' | transloco }}</p>
+      } @else {
+        <div class="icono-error" aria-hidden="true">!</div>
+        <h3>{{ 'No se pudo enviar el formulario' | transloco }}</h3>
+        <p class="detalle">{{ errorEnvio | transloco }}</p>
+        <p>{{ 'Sus datos siguen capturados. Puede intentarlo de nuevo.' | transloco }}</p>
+        <div class="acciones">
+          <button type="button" class="btn-secundario" (click)="cerrarError()">{{ 'Revisar datos' | transloco }}</button>
+          <button type="button" class="btn-submit" (click)="enviar()">{{ 'Reintentar' | transloco }}</button>
+        </div>
+      }
+    </div>
+  </div>
+}

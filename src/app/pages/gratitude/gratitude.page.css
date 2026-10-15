@@ -1,71 +1,164 @@
-/* Estilos para la página de "Gracias" */
+:host {
+  --azul: #00327a;
+  --azul-oscuro: #00008b;
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef2f8 0%, #f0f0f0 60%);
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: #333;
+}
 
-/* Reset / estilos base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Gris claro */
-    color: #333;
-  }
-  
-  /* Contenedor principal centrado vertical y horizontalmente */
-  .thank-you-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Ocupa toda la altura de la ventana */
-  }
-  
-  /* Tarjeta o contenedor del mensaje de agradecimiento */
-  .thank-you-message {
-    background-color: #fafafa; /* Gris muy claro */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 40px;
-    text-align: center;
-    max-width: 500px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Título principal */
-  .thank-you-message h1 {
-    color: #00008b; /* Azul oscuro */
-    margin-bottom: 20px;
-    font-size: 2rem;
-  }
-  
-  /* Párrafo descriptivo */
-  .thank-you-message p {
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
-  
-  /* Botón de regreso */
-  .thank-you-message button {
-    background-color: #00008b; /* Azul oscuro / negro */
-    color: #fff;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /* Efecto hover en el botón */
-  .thank-you-message button:hover {
-    background-color: #333; /* Oscurecer un poco */
-  }
-  
-  /* Si agregas un ícono de confirmación, puedes darle estilo así:
-  .thank-you-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
-  }
-  */
-  
+.pagina {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 16px 48px;
+  box-sizing: border-box;
+}
+
+.arriba {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.tarjeta {
+  background: #fff;
+  border: 1px solid #e1e5ec;
+  border-radius: 14px;
+  padding: 28px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  text-align: center;
+  animation: subir 0.5s ease-out both;
+}
+.encuesta { animation-delay: 0.15s; }
+
+@keyframes subir {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+h1 { margin: 10px 0 6px; color: var(--azul-oscuro); font-size: 2rem; }
+h2 { margin: 0 0 4px; color: #1f2937; font-size: 1.3rem; }
+h3 { margin: 0 0 12px; font-size: 1rem; color: #374151; }
+p { margin: 0 0 8px; }
+.cliente { font-weight: 600; color: #4b5563; }
+.sub { color: #6b7280; margin-bottom: 20px; }
+
+/* Palomita animada */
+.palomita svg { width: 64px; height: 64px; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.palomita circle { stroke: #2e7d32; stroke-dasharray: 151; stroke-dashoffset: 151; animation: trazar 0.6s ease-out forwards; }
+.palomita path { stroke: #2e7d32; stroke-dasharray: 36; stroke-dashoffset: 36; animation: trazar 0.35s 0.5s ease-out forwards; }
+@keyframes trazar { to { stroke-dashoffset: 0; } }
+
+/* Botones generales */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+button, .boton {
+  font: 600 15px 'Segoe UI', Roboto, sans-serif;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+.boton, .principal {
+  display: inline-block;
+  padding: 11px 22px;
+  border: none;
+  background: var(--azul-oscuro);
+  color: #fff;
+  text-decoration: none;
+}
+.boton:hover, .principal:hover:not(:disabled) { background: #333; }
+.secundario {
+  padding: 10px 20px;
+  border: 2px solid var(--azul);
+  background: #fff;
+  color: var(--azul);
+}
+.secundario:hover { background: var(--azul); color: #fff; }
+.enlace { padding: 11px 16px; border: none; background: none; color: #6b7280; }
+.enlace:hover { color: #111; text-decoration: underline; }
+button:disabled { opacity: 0.45; cursor: default; }
+button:focus-visible, .boton:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 2px; }
+
+/* Preguntas */
+.pregunta { margin-bottom: 24px; }
+.pregunta label { display: block; font-weight: 600; margin-bottom: 8px; color: #374151; }
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d5d9e0;
+  border-radius: 8px;
+  font: 14px 'Segoe UI', Roboto, sans-serif;
+  resize: vertical;
+}
+textarea:focus { outline: none; border-color: #0056b3; box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15); }
+
+/* 1. Caritas */
+.caras { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.caras button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 92px;
+  padding: 10px 4px;
+  border: 2px solid #e5e7eb;
+  background: #fafafa;
+}
+.caras .emoji { font-size: 30px; line-height: 1; filter: grayscale(0.6); transition: filter 0.2s, transform 0.2s; }
+.caras .texto { font-size: 12px; font-weight: 500; color: #6b7280; }
+.caras button:hover .emoji { filter: none; transform: scale(1.12); }
+.caras button.elegida { border-color: var(--azul); background: #eef3fb; }
+.caras button.elegida .emoji { filter: none; transform: scale(1.15); }
+.caras button.elegida .texto { color: var(--azul); }
+
+/* 2. Estrellas */
+.estrellas { display: flex; justify-content: center; gap: 4px; }
+.estrellas button { padding: 4px; border: none; background: none; }
+.estrellas svg { width: 40px; height: 40px; fill: #e5e7eb; stroke: #d1d5db; stroke-width: 1; transition: fill 0.15s, transform 0.15s; }
+.estrellas button.llena svg { fill: #f5b301; stroke: #e0a100; }
+.estrellas button:hover svg { transform: scale(1.15); }
+
+/* 3. Escala 0-10 */
+.escala { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+.escala button {
+  padding: 9px 0;
+  border: 2px solid transparent;
+  font-size: 14px;
+  color: #374151;
+}
+.escala .bajo { background: #fdecec; }
+.escala .medio { background: #fff4d6; }
+.escala .alto { background: #e6f4ea; }
+.escala button:hover { transform: translateY(-2px); }
+.escala button.elegida { color: #fff; transform: scale(1.08); }
+.escala .bajo.elegida { background: #c62828; }
+.escala .medio.elegida { background: #d48806; }
+.escala .alto.elegida { background: #2e7d32; }
+.extremos { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: #6b7280; }
+
+.error { color: #b91c1c; background: #fdecec; padding: 8px; border-radius: 6px; }
+
+.cierre { padding: 10px 0; animation: subir 0.4s ease-out both; }
+.corazon { font-size: 42px; margin-bottom: 6px; }
+
+@media (max-width: 480px) {
+  .caras { gap: 5px; }
+  .caras button { width: 50px; padding: 8px 2px; }
+  .caras .emoji { font-size: 26px; }
+  .caras .texto { display: none; }
+  .escala { grid-template-columns: repeat(6, 1fr); }
+  .arriba { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .palomita circle, .palomita path { stroke-dashoffset: 0; }
+}

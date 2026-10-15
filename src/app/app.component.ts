@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomePage } from './pages/home/home.page';
-import { GratitudePage } from './pages/gratitude/gratitude.page';
+import { TranslocoService } from '@ngneat/transloco';
+import { cambiarIdioma, idiomaInicial } from './idioma';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,9 @@ import { GratitudePage } from './pages/gratitude/gratitude.page';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-
 export class AppComponent {
-  title = 'Alta de clientes'; 
+  constructor() {
+    // Abre en el último idioma elegido (o el del navegador)
+    cambiarIdioma(inject(TranslocoService), idiomaInicial());
+  }
 }
