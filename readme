@@ -1,0 +1,3 @@
+Para subir a produccion en el servidor de podernet es:
+
+MSYS_NO_PATHCONV=1 ng build --configuration production --base-href /altadeclientes/
