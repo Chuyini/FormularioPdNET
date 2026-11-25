@@ -441,7 +441,8 @@
       }
     </fieldset>
 
-    <!-- DATOS DEL VENDEDOR -->
+    <!-- DATOS DEL VENDEDOR (con enlace privado ?v= no se muestra: se manda solo) -->
+    @if (!vendedorFijo) {
     <fieldset>
       <legend>{{ 'DATOS DEL VENDEDOR' | transloco }}</legend>
       <div class="two-columns">
@@ -468,6 +469,7 @@
         </div>
       </div>
     </fieldset>
+    }
 
     <button type="submit" class="btn-submit" [disabled]="enviando">
       {{ 'Enviar' | transloco }}

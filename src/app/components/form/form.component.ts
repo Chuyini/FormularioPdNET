@@ -13,6 +13,22 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
 /** Siempre recibe copia del alta, además de los correos que elija el vendedor */
 const DESTINATARIO_FIJO = 'Isai.ortiz@elpoderdeinternet.mx';
 
+/**
+ * Enlaces privados de vendedores: <url>/?v=<código>. Con un código válido la sección del vendedor no se
+ * muestra y sus datos se mandan solos. shortcut: el código solo se revisa en el navegador (como el resto
+ * del formulario); si se agregan muchos vendedores con enlace, validarlo también en EmailOwn.
+ */
+const VENDEDORES_EXTERNOS: Record<string, { nombre: string; correo: string }> = {
+  'qi-3xwjfpxy': { nombre: 'Jesús Manuel Lara Vázquez', correo: 'jesus.lara@elpoderdeinternet.mx' }
+};
+
+/**
+ * Solo cuenta la dirección EXACTA "/?v=<código>", leída al cargar la página (antes de que el router
+ * mande una ruta desconocida al inicio). Cualquier otra ruta o parámetro = formulario normal.
+ */
+const codigoEnlace = location.pathname === '/' && location.search.startsWith('?v=') ? location.search.slice(3) : '';
+const VENDEDOR_DEL_ENLACE = Object.hasOwn(VENDEDORES_EXTERNOS, codigoEnlace) ? VENDEDORES_EXTERNOS[codigoEnlace] : null;
+
 const MB = 1024 * 1024;
 const MAX_ZIP_MB = 50;
 const MAX_PDF_MB = 10;
@@ -53,7 +69,15 @@ export class FormComponent {
       .selectTranslation()
       .pipe(takeUntilDestroyed(inject(DestroyRef)))
       .subscribe(() => this.traducirCatalogos());
+
+    if (this.vendedorFijo) {
+      this.nameVen = this.vendedorFijo.nombre;
+      this.emailSelected = [{ id: 0, email: this.vendedorFijo.correo }];
+    }
   }
+
+  /** Vendedor del enlace privado (?v=), o null en el formulario normal */
+  readonly vendedorFijo = VENDEDOR_DEL_ENLACE;
 
   //************************ DATOS FISCALES **********************************
 
