@@ -394,6 +394,28 @@
       </div>
     </fieldset>
 
+    <!-- ANTICIPO (solo enlace residencial especial: el monto se acuerda por WhatsApp) -->
+    @if (pideAnticipo) {
+    <fieldset>
+      <legend>{{ 'ANTICIPO PARA AGENDAR TU INSTALACIÓN' | transloco }}</legend>
+      <p>{{ 'Deposita el anticipo que acordaste con tu asesor y sube el comprobante para agendar tu instalación.' | transloco }}</p>
+      <p><strong>{{ 'Transferencia a Banco Mercantil del Norte (Banorte)' | transloco }}</strong></p>
+      <p>{{ 'Cuenta Clabe: 072 700 00807584141 4' | transloco }}</p>
+      <p>{{ 'En el concepto escribe tu nombre.' | transloco }}</p>
+      <div class="file-upload" id="PAGOFile" [class.invalido]="invalidos.has('PAGOFile')">
+        <small><i>{{ 'Usar .PDF, PNG, JPEG O JPG ' | transloco }}</i></small>
+        <label for="fileInputPAGO" class="file-label">{{ 'Subir COMPROBANTE DE PAGO' | transloco }}<span class="obligatorio">*</span></label>
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg" id="fileInputPAGO" class="file-input"
+          (change)="onFileSelected($event, 'PAGOFile')">
+        @if (filePAGO) {
+          <span class="file-name ok">{{ filePAGO.name }}</span>
+        } @else {
+          <span class="file-name vacio">{{ '*Ningún archivo seleccionado' | transloco }}</span>
+        }
+      </div>
+    </fieldset>
+    }
+
     <!-- DOCUMENTACION SOLICITADA -->
     <fieldset>
       <legend>{{ 'DOCUMENTACIÓN SOLICITADA' | transloco }}</legend>

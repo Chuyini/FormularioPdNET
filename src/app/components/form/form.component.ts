@@ -84,6 +84,8 @@ export class FormComponent {
   /** Vendedor del enlace privado (?v=), o null en el formulario normal */
   readonly vendedorFijo = VENDEDOR_DEL_ENLACE;
   readonly esResidencial = ES_RESIDENCIAL;
+  /** Enlace residencial especial: el cliente ya habló con el vendedor y deja un anticipo para agendar */
+  readonly pideAnticipo = ES_RESIDENCIAL && VENDEDOR_DEL_ENLACE !== null;
 
   //************************ DATOS FISCALES **********************************
 
@@ -175,6 +177,7 @@ export class FormComponent {
   fileINE: File | null = null;
   fileCEDU: File | null = null;
   fileCOMP: File | null = null;
+  filePAGO: File | null = null; // anticipo: solo en el enlace residencial especial
 
   //************************ ESTADO DEL ENVIO ********************************
 
@@ -421,13 +424,14 @@ export class FormComponent {
     if (!this.rasonName && !this.telPerson && !this.emailPerson) this.aviso('No hay datos');
   }
 
-  onFileSelected(event: Event, tipo: 'bankFile' | 'zipFile' | 'INEFile' | 'CEDUFile' | 'COMPFile'): void {
+  onFileSelected(event: Event, tipo: 'bankFile' | 'zipFile' | 'INEFile' | 'CEDUFile' | 'COMPFile' | 'PAGOFile'): void {
     const archivo = (event.target as HTMLInputElement).files?.[0] ?? null;
     if (tipo === 'bankFile') this.fileBank = archivo;
     if (tipo === 'zipFile') this.fileZip = archivo;
     if (tipo === 'INEFile') this.fileINE = archivo;
     if (tipo === 'CEDUFile') this.fileCEDU = archivo;
     if (tipo === 'COMPFile') this.fileCOMP = archivo;
+    if (tipo === 'PAGOFile') this.filePAGO = archivo;
     this.invalidos.delete(tipo);
   }
 
@@ -466,10 +470,11 @@ export class FormComponent {
     }
     if (this.esPersonaFisica) {
       const permitido = /\.(pdf|png|jpe?g)$/i;
-      for (const [id, archivo] of [['INEFile', this.fileINE], ['CEDUFile', this.fileCEDU], ['COMPFile', this.fileCOMP]] as const) {
+      for (const [id, archivo] of [['INEFile', this.fileINE], ['CEDUFile', this.fileCEDU], ['COMPFile', this.fileCOMP], ['PAGOFile', this.filePAGO]] as const) {
         if (archivo && !permitido.test(archivo.name)) agregar(id, 'Use archivos PDF, PNG o JPG.');
       }
     }
+    if (this.pideAnticipo && !this.filePAGO) agregar('PAGOFile', 'Sube el comprobante de tu anticipo.');
     if (this.emailSelected.length === 0) agregar('correosVendedor', 'Seleccione al menos un correo.');
 
     return errores;
@@ -549,12 +554,15 @@ export class FormComponent {
   }
 
   private async empaquetarDocumentos(): Promise<File | null> {
-    const archivos = [this.fileINE, this.fileCEDU, this.fileCOMP].filter((a): a is File => !!a);
+    // El prefijo evita que dos fotos con el mismo nombre (p. ej. del celular) se pisen dentro del ZIP
+    const pares: [string, File | null][] = [['INE', this.fileINE], ['CedulaFiscal', this.fileCEDU],
+      ['ComprobanteDomicilio', this.fileCOMP], ['ComprobantePago', this.filePAGO]];
+    const archivos = pares.filter((par): par is [string, File] => par[1] !== null);
     if (archivos.length === 0) return null;
 
     const { default: JSZip } = await import('jszip'); // se carga solo cuando hay documentos que comprimir
     const zip = new JSZip();
-    for (const archivo of archivos) zip.file(archivo.name, await archivo.arrayBuffer());
+    for (const [tipo, archivo] of archivos) zip.file(`${tipo}-${archivo.name}`, await archivo.arrayBuffer());
     const contenido = await zip.generateAsync({ type: 'blob' });
     return new File([contenido], 'archivo.zip', { type: 'application/zip' });
   }
