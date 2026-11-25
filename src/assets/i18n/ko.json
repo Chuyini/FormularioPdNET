@@ -223,5 +223,7 @@
     "No se pudo enviar la encuesta. Intente de nuevo.": "설문을 보낼 수 없습니다. 다시 시도하세요.",
     "¡Gracias por tu opinión!": "의견 감사합니다!",
     "Nos ayuda a mejorar nuestro servicio.": "서비스 개선에 도움이 됩니다.",
-    "Puedes cerrar esta ventana.": "이 창을 닫으셔도 됩니다."
+    "Puedes cerrar esta ventana.": "이 창을 닫으셔도 됩니다.",
+    "Usar mi ubicación actual": "현재 위치 사용",
+    "No se pudo obtener tu ubicación. Escribe una referencia de tu domicilio.": "위치를 가져올 수 없습니다. 주소 참고 사항을 입력해 주세요."
 }

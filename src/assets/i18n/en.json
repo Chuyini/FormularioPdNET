@@ -224,5 +224,7 @@
     "No se pudo enviar la encuesta. Intente de nuevo.": "The survey could not be sent. Please try again.",
     "¡Gracias por tu opinión!": "Thank you for your feedback!",
     "Nos ayuda a mejorar nuestro servicio.": "It helps us improve our service.",
-    "Puedes cerrar esta ventana.": "You can close this window."
+    "Puedes cerrar esta ventana.": "You can close this window.",
+    "Usar mi ubicación actual": "Use my current location",
+    "No se pudo obtener tu ubicación. Escribe una referencia de tu domicilio.": "We couldn't get your location. Please write a reference for your address."
 }

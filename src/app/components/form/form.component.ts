@@ -14,20 +14,24 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
 const DESTINATARIO_FIJO = 'Isai.ortiz@elpoderdeinternet.mx';
 
 /**
- * Enlaces privados de vendedores: <url>/?v=<código>. Con un código válido la sección del vendedor no se
- * muestra y sus datos se mandan solos. shortcut: el código solo se revisa en el navegador (como el resto
- * del formulario); si se agregan muchos vendedores con enlace, validarlo también en EmailOwn.
+ * Enlaces privados de vendedores. Solo cuenta la dirección EXACTA (ruta + parámetro), leída al cargar la
+ * página, antes de que el router mande una ruta desconocida al inicio; cualquier otra = formulario normal.
+ * Con un enlace válido la sección del vendedor no se muestra y sus datos se mandan solos.
+ * shortcut: se revisa solo en el navegador (como el resto del formulario); con muchos vendedores, validarlo en EmailOwn.
  */
-const VENDEDORES_EXTERNOS: Record<string, { nombre: string; correo: string }> = {
-  'qi-3xwjfpxy': { nombre: 'Jesús Manuel Lara Vázquez', correo: 'jesus.lara@elpoderdeinternet.mx' }
+const JESUS_LARA = { nombre: 'Jesús Manuel Lara Vázquez', correo: 'jesus.lara@elpoderdeinternet.mx' };
+const ENLACES_DE_VENDEDOR: Record<string, { nombre: string; correo: string }> = {
+  '/?v=qi-3xwjfpxy': JESUS_LARA, // empresarial
+  '/residencial?v=qi-4442j0h0': JESUS_LARA // residencial
 };
+const enlace = location.pathname + location.search;
+const VENDEDOR_DEL_ENLACE = Object.hasOwn(ENLACES_DE_VENDEDOR, enlace) ? ENLACES_DE_VENDEDOR[enlace] : null;
 
 /**
- * Solo cuenta la dirección EXACTA "/?v=<código>", leída al cargar la página (antes de que el router
- * mande una ruta desconocida al inicio). Cualquier otra ruta o parámetro = formulario normal.
+ * Alta para casa: solo existe con un enlace especial en /residencial (el formulario normal sigue siendo el
+ * empresarial). Menos secciones; lo que se oculta se llena solo con los datos de contacto.
  */
-const codigoEnlace = location.pathname === '/' && location.search.startsWith('?v=') ? location.search.slice(3) : '';
-const VENDEDOR_DEL_ENLACE = Object.hasOwn(VENDEDORES_EXTERNOS, codigoEnlace) ? VENDEDORES_EXTERNOS[codigoEnlace] : null;
+export const ES_RESIDENCIAL = VENDEDOR_DEL_ENLACE !== null && location.pathname === '/residencial';
 
 const MB = 1024 * 1024;
 const MAX_ZIP_MB = 50;
@@ -78,6 +82,7 @@ export class FormComponent {
 
   /** Vendedor del enlace privado (?v=), o null en el formulario normal */
   readonly vendedorFijo = VENDEDOR_DEL_ENLACE;
+  readonly esResidencial = ES_RESIDENCIAL;
 
   //************************ DATOS FISCALES **********************************
 
@@ -352,7 +357,29 @@ export class FormComponent {
 
   /** El régimen 616 (sin obligaciones fiscales) se trata como persona física / casero */
   get esPersonaFisica(): boolean {
-    return this.regimenSeleccionado?.id === 616;
+    return this.esResidencial || this.regimenSeleccionado?.id === 616;
+  }
+
+  /** Residencial: cobranza y contacto de sitio son el mismo cliente; se llenan solos antes de validar */
+  private completarResidencial(): void {
+    this.nameCobra ||= this.rasonName;
+    this.telCobra ||= this.telPerson;
+    this.celCobra ||= this.telPerson;
+    this.emailCobra ||= this.emailPerson;
+    this.nameSite ||= this.rasonName;
+    this.celSite ||= this.telPerson;
+  }
+
+  usarMiUbicacion(): void {
+    if (!navigator.geolocation) {
+      this.aviso('No se pudo obtener tu ubicación. Escribe una referencia de tu domicilio.', 5000);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (p) => (this.coordenadasSite = `${p.coords.latitude.toFixed(6)},${p.coords.longitude.toFixed(6)}`),
+      () => this.aviso('No se pudo obtener tu ubicación. Escribe una referencia de tu domicilio.', 5000),
+      { enableHighAccuracy: true, timeout: 15000 }
+    );
   }
 
   private traducirCatalogos(): void {
@@ -451,6 +478,7 @@ export class FormComponent {
 
   async submitAll(): Promise<void> {
     (document.activeElement as HTMLElement | null)?.blur();
+    if (this.esResidencial) this.completarResidencial();
 
     const errores = this.validar();
     this.invalidos = new Set(errores.map((e) => e.id));

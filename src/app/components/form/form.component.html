@@ -26,6 +26,8 @@
             (input)="limpiar('razonSocial')" />
         </div>
 
+        <!-- Residencial: régimen y RFC solo si pide factura -->
+        @if (!esResidencial || isFactu) {
         <div class="selector">
           <label for="regimen">{{ 'Régimen fiscal' | transloco }} {{ '(Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
           <ng-select id="regimen" labelForId="regimen" [items]="translatedRegimenes" bindLabel="nombre"
@@ -41,6 +43,7 @@
           <input maxlength="13" type="text" id="rfc" name="rfc" [(ngModel)]="rfc" [class.invalido]="invalidos.has('rfc')"
             (input)="limpiar('rfc')" placeholder="XAXX010101000" />
         </div>
+        }
 
         <div>
           <label for="calle">{{ 'Calle' | transloco }}</label>
@@ -75,6 +78,7 @@
             class="custom-ng-select" [clearable]="true" [searchable]="true" dropdownPosition="auto">
           </ng-select>
         </div>
+        @if (!esResidencial) {
         <div>
           <label for="poblacion">{{ 'Población' | transloco }}</label>
           <input type="text" id="poblacion" name="poblationPerson" [(ngModel)]="poblationPerson" />
@@ -87,29 +91,35 @@
           <label for="zona">{{ 'Zona' | transloco }}</label>
           <input maxlength="20" type="text" id="zona" name="zone" [(ngModel)]="zone" />
         </div>
+        }
         <div>
           <label for="telefono">{{ 'Teléfono con lada (Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
           <input type="tel" id="telefono" name="telPerson" [(ngModel)]="telPerson" maxlength="20"
             [class.invalido]="invalidos.has('telefono')" (input)="limpiar('telefono')"
             placeholder="{{ 'Ejemplo:524443698521' | transloco }}" />
         </div>
+        @if (!esResidencial) {
         <div>
           <label for="ext">{{ 'Ext.' | transloco }}</label>
           <input maxlength="10" type="text" id="ext" name="extPerson" [(ngModel)]="extPerson" />
         </div>
+        }
         <div>
           <label for="correo">{{ 'Correo Electrónico (Obligatorio)' | transloco }}<span class="obligatorio">*</span></label>
           <input type="email" id="correo" name="emailPerson" [(ngModel)]="emailPerson"
             [class.invalido]="invalidos.has('correo')" (input)="limpiar('correo')" />
         </div>
+        @if (!esResidencial) {
         <div>
           <label for="paginaWeb">{{ 'Página Web' | transloco }}</label>
           <input type="text" id="paginaWeb" name="webPage" [(ngModel)]="webPage" />
         </div>
+        }
       </div>
     </fieldset>
 
-    <!-- DOMICILIO DE INSTALACION -->
+    <!-- DOMICILIO DE INSTALACION (residencial: es el mismo domicilio) -->
+    @if (!esResidencial) {
     <fieldset>
       <legend>{{ 'DOMICILIO DE INSTALACIÓN' | transloco }}</legend>
       <p class="nota"><i><strong>{{ 'Llenar solo si la dirección es diferente a la de instalación' | transloco }}</strong></i></p>
@@ -165,6 +175,7 @@
         </div>
       </div>
     </fieldset>
+    }
 
     <!-- INFORMACION PARA FACTURACION -->
     <div class="centrado">
@@ -229,6 +240,8 @@
       </fieldset>
     }
 
+    <!-- COBRANZA, BANCARIA Y PAGOS (residencial: cobranza se llena sola con sus datos; lo demás no aplica) -->
+    @if (!esResidencial) {
     <!-- INFORMACION PARA COBRANZA -->
     <fieldset>
       <legend>{{ 'INFORMACIÓN PARA COBRANZA' | transloco }}</legend>
@@ -327,6 +340,7 @@
         {{ 'Estimado cliente: Recuerde que para brindar un mejor servicio y evitar cortes, es indispensable referenciar sus pagos.' | transloco }}
       </p>
     </fieldset>
+    }
 
     <!-- CONTACTO DE SITIO -->
     <fieldset>
@@ -340,7 +354,13 @@
           <label for="coordenadas">{{ 'Coordenadas' | transloco }}</label>
           <input type="text" id="coordenadas" name="coordenadasSite" [(ngModel)]="coordenadasSite" maxlength="40"
             placeholder="{{ 'Ejemplo: 20.1823,-16.834' | transloco }}" />
+          @if (esResidencial) {
+            <button type="button" class="jump-button" (click)="usarMiUbicacion()">
+              {{ 'Usar mi ubicación actual' | transloco }}
+            </button>
+          }
         </div>
+        @if (!esResidencial) {
         <div>
           <label for="contactoSitio">{{ 'Nombre del Contacto en Sitio' | transloco }}</label>
           <input type="text" id="contactoSitio" name="nameSite" [(ngModel)]="nameSite" maxlength="200" />
@@ -370,6 +390,7 @@
           <label for="numEnlaces">{{ 'Número de Enlaces' | transloco }}</label>
           <input type="text" id="numEnlaces" name="noEnlace_sit" [(ngModel)]="noEnlace_sit" maxlength="10" />
         </div>
+        }
       </div>
     </fieldset>
 
@@ -426,6 +447,8 @@
           { id: 'CEDUFile', input: 'fileInputCEDU', etiqueta: 'Subir CEDULA FISCAL', archivo: fileCEDU },
           { id: 'COMPFile', input: 'fileInputCOMP', etiqueta: 'Subir COMPROBANTE DE DOMICILIO', archivo: fileCOMP }
         ]; track doc.id) {
+          <!-- Residencial: la cédula fiscal solo si pide factura -->
+          @if (doc.id !== 'CEDUFile' || !esResidencial || isFactu) {
           <div class="file-upload" [id]="doc.id" [class.invalido]="invalidos.has(doc.id)">
             <small><i>{{ 'Usar .PDF, PNG, JPEG O JPG ' | transloco }}</i></small>
             <label [for]="doc.input" class="file-label">{{ doc.etiqueta | transloco }}</label>
@@ -437,6 +460,7 @@
               <span class="file-name vacio">{{ '*Ningún archivo seleccionado' | transloco }}</span>
             }
           </div>
+          }
         }
       }
     </fieldset>

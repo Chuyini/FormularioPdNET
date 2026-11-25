@@ -226,5 +226,7 @@
     "No se pudo enviar la encuesta. Intente de nuevo.": "调查无法发送，请重试。",
     "¡Gracias por tu opinión!": "感谢您的反馈！",
     "Nos ayuda a mejorar nuestro servicio.": "这有助于我们改进服务。",
-    "Puedes cerrar esta ventana.": "您可以关闭此窗口。"
+    "Puedes cerrar esta ventana.": "您可以关闭此窗口。",
+    "Usar mi ubicación actual": "使用我当前的位置",
+    "No se pudo obtener tu ubicación. Escribe una referencia de tu domicilio.": "无法获取您的位置。请填写您住址的参考信息。"
 }
