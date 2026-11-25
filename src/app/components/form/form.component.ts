@@ -28,10 +28,11 @@ const enlace = location.pathname + location.search;
 const VENDEDOR_DEL_ENLACE = Object.hasOwn(ENLACES_DE_VENDEDOR, enlace) ? ENLACES_DE_VENDEDOR[enlace] : null;
 
 /**
- * Alta para casa: solo existe con un enlace especial en /residencial (el formulario normal sigue siendo el
- * empresarial). Menos secciones; lo que se oculta se llena solo con los datos de contacto.
+ * Alta para casa: "/residencial" exacto (cualquier vendedor, con su sección) o su enlace especial. Otra
+ * variante de /residencial va al inicio (empresarial). Menos secciones; lo oculto se llena solo.
  */
-export const ES_RESIDENCIAL = VENDEDOR_DEL_ENLACE !== null && location.pathname === '/residencial';
+export const ES_RESIDENCIAL =
+  location.pathname === '/residencial' && (location.search === '' || VENDEDOR_DEL_ENLACE !== null);
 
 const MB = 1024 * 1024;
 const MAX_ZIP_MB = 50;
